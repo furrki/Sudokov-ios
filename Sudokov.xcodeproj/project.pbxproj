@@ -7,8 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66C096F51089F92C0E3E624E /* Pods_Sudokov_SudokovUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0004DCA2CEE1E4DE792930C0 /* Pods_Sudokov_SudokovUITests.framework */; };
+		6F59AAB5E2E2D83BD9AC35C3 /* Pods_Sudokov.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF7AF98213C87136B41A8D32 /* Pods_Sudokov.framework */; };
+		CFCA58BD3E1F2FBFFD749322 /* Pods_SudokovTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE249D45209134A61B456B7D /* Pods_SudokovTests.framework */; };
+		FB3C9715287F0FEA002104F0 /* TableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9714287F0FEA002104F0 /* TableBuilder.swift */; };
+		FB3C9717287F1008002104F0 /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9716287F1008002104F0 /* TypeAlias.swift */; };
+		FB3C9719287F11B1002104F0 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9718287F11B1002104F0 /* GameManager.swift */; };
+		FB3C971B28802F39002104F0 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB3C971A28802F39002104F0 /* Colors.xcassets */; };
 		FB5347BA285A83F800E94F65 /* EdgeBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5347B9285A83F800E94F65 /* EdgeBorder.swift */; };
 		FB5347BC285A841600E94F65 /* View+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5347BB285A841600E94F65 /* View+Border.swift */; };
+		FB7BC71C28803A1000E8C5F1 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC71B28803A1000E8C5F1 /* R.generated.swift */; };
+		FB7BC71F28803EC500E8C5F1 /* GameSquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC71E28803EC500E8C5F1 /* GameSquareView.swift */; };
+		FB7BC72128803EE400E8C5F1 /* GameSquareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC72028803EE400E8C5F1 /* GameSquareViewModel.swift */; };
+		FB7BC72328815E9000E8C5F1 /* NumberPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC72228815E9000E8C5F1 /* NumberPickerView.swift */; };
+		FB7BC7252882154B00E8C5F1 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC7242882154B00E8C5F1 /* ControlsView.swift */; };
+		FB7BC7282882BC9B00E8C5F1 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC7272882BC9B00E8C5F1 /* Move.swift */; };
 		FBBDE994285522100078A73E /* SudokovApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBDE993285522100078A73E /* SudokovApp.swift */; };
 		FBBDE996285522100078A73E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBDE995285522100078A73E /* ContentView.swift */; };
 		FBBDE998285522140078A73E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBBDE997285522140078A73E /* Assets.xcassets */; };
@@ -39,8 +52,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0004DCA2CEE1E4DE792930C0 /* Pods_Sudokov_SudokovUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sudokov_SudokovUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B9DEB6C2FD81A5636656284 /* Pods-Sudokov.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sudokov.debug.xcconfig"; path = "Target Support Files/Pods-Sudokov/Pods-Sudokov.debug.xcconfig"; sourceTree = "<group>"; };
+		6C8C06BFD23D9868FBD41750 /* Pods-SudokovTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudokovTests.debug.xcconfig"; path = "Target Support Files/Pods-SudokovTests/Pods-SudokovTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BF6C1CEA8E6EF5FA1518234A /* Pods-Sudokov-SudokovUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sudokov-SudokovUITests.release.xcconfig"; path = "Target Support Files/Pods-Sudokov-SudokovUITests/Pods-Sudokov-SudokovUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C3E97FEEDA6DA6E1A5A8BE8A /* Pods-SudokovTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudokovTests.release.xcconfig"; path = "Target Support Files/Pods-SudokovTests/Pods-SudokovTests.release.xcconfig"; sourceTree = "<group>"; };
+		CF7AF98213C87136B41A8D32 /* Pods_Sudokov.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sudokov.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7487A7FCD1C4181F9ABC9D2 /* Pods-Sudokov-SudokovUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sudokov-SudokovUITests.debug.xcconfig"; path = "Target Support Files/Pods-Sudokov-SudokovUITests/Pods-Sudokov-SudokovUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E82434A63DA51F03BEB052A6 /* Pods-Sudokov.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sudokov.release.xcconfig"; path = "Target Support Files/Pods-Sudokov/Pods-Sudokov.release.xcconfig"; sourceTree = "<group>"; };
+		FB3C9714287F0FEA002104F0 /* TableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBuilder.swift; sourceTree = "<group>"; };
+		FB3C9716287F1008002104F0 /* TypeAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAlias.swift; sourceTree = "<group>"; };
+		FB3C9718287F11B1002104F0 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		FB3C971A28802F39002104F0 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		FB5347B9285A83F800E94F65 /* EdgeBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeBorder.swift; sourceTree = "<group>"; };
 		FB5347BB285A841600E94F65 /* View+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Border.swift"; sourceTree = "<group>"; };
+		FB7BC71B28803A1000E8C5F1 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		FB7BC71E28803EC500E8C5F1 /* GameSquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSquareView.swift; sourceTree = "<group>"; };
+		FB7BC72028803EE400E8C5F1 /* GameSquareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSquareViewModel.swift; sourceTree = "<group>"; };
+		FB7BC72228815E9000E8C5F1 /* NumberPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPickerView.swift; sourceTree = "<group>"; };
+		FB7BC7242882154B00E8C5F1 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
+		FB7BC7272882BC9B00E8C5F1 /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		FBBDE990285522100078A73E /* Sudokov.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sudokov.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBBDE993285522100078A73E /* SudokovApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokovApp.swift; sourceTree = "<group>"; };
 		FBBDE995285522100078A73E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +85,7 @@
 		FBBDE9C0285522740078A73E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FBBDE9C3285522CE0078A73E /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		FBBDE9C5285523D30078A73E /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		FE249D45209134A61B456B7D /* Pods_SudokovTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SudokovTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F59AAB5E2E2D83BD9AC35C3 /* Pods_Sudokov.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFCA58BD3E1F2FBFFD749322 /* Pods_SudokovTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,18 +109,59 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66C096F51089F92C0E3E624E /* Pods_Sudokov_SudokovUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B7C526E0E0E11D34681AE74 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6B9DEB6C2FD81A5636656284 /* Pods-Sudokov.debug.xcconfig */,
+				E82434A63DA51F03BEB052A6 /* Pods-Sudokov.release.xcconfig */,
+				D7487A7FCD1C4181F9ABC9D2 /* Pods-Sudokov-SudokovUITests.debug.xcconfig */,
+				BF6C1CEA8E6EF5FA1518234A /* Pods-Sudokov-SudokovUITests.release.xcconfig */,
+				6C8C06BFD23D9868FBD41750 /* Pods-SudokovTests.debug.xcconfig */,
+				C3E97FEEDA6DA6E1A5A8BE8A /* Pods-SudokovTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D01E2C221860B87E170875F2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CF7AF98213C87136B41A8D32 /* Pods_Sudokov.framework */,
+				0004DCA2CEE1E4DE792930C0 /* Pods_Sudokov_SudokovUITests.framework */,
+				FE249D45209134A61B456B7D /* Pods_SudokovTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FB5347B8285A83E900E94F65 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				FB5347BB285A841600E94F65 /* View+Border.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FB7BC71D28803EB800E8C5F1 /* GameSquare */ = {
+			isa = PBXGroup;
+			children = (
+				FB7BC71E28803EC500E8C5F1 /* GameSquareView.swift */,
+				FB7BC72028803EE400E8C5F1 /* GameSquareViewModel.swift */,
+			);
+			path = GameSquare;
+			sourceTree = "<group>";
+		};
+		FB7BC7262882BC9000E8C5F1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FB7BC7272882BC9B00E8C5F1 /* Move.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		FBBDE987285522100078A73E = {
@@ -96,6 +171,8 @@
 				FBBDE9A3285522140078A73E /* SudokovTests */,
 				FBBDE9AD285522140078A73E /* SudokovUITests */,
 				FBBDE991285522100078A73E /* Products */,
+				9B7C526E0E0E11D34681AE74 /* Pods */,
+				D01E2C221860B87E170875F2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,12 +190,14 @@
 			isa = PBXGroup;
 			children = (
 				FBBDE9C2285522C20078A73E /* Components */,
+				FB7BC7262882BC9000E8C5F1 /* Model */,
 				FBBDE9BE285522470078A73E /* Utils */,
 				FBBDE9BD285522400078A73E /* View */,
 				FBBDE993285522100078A73E /* SudokovApp.swift */,
 				FBBDE995285522100078A73E /* ContentView.swift */,
 				FBBDE9BF2855224B0078A73E /* Resources */,
 				FBBDE999285522140078A73E /* Preview Content */,
+				FB7BC71B28803A1000E8C5F1 /* R.generated.swift */,
 			);
 			path = Sudokov;
 			sourceTree = "<group>";
@@ -151,8 +230,11 @@
 		FBBDE9BD285522400078A73E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FB7BC71D28803EB800E8C5F1 /* GameSquare */,
 				FBBDE9C0285522740078A73E /* HomeView.swift */,
 				FBBDE9C5285523D30078A73E /* GameView.swift */,
+				FB7BC72228815E9000E8C5F1 /* NumberPickerView.swift */,
+				FB7BC7242882154B00E8C5F1 /* ControlsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -161,6 +243,9 @@
 			isa = PBXGroup;
 			children = (
 				FB5347B8285A83E900E94F65 /* Extensions */,
+				FB3C9714287F0FEA002104F0 /* TableBuilder.swift */,
+				FB3C9716287F1008002104F0 /* TypeAlias.swift */,
+				FB3C9718287F11B1002104F0 /* GameManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -169,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				FBBDE997285522140078A73E /* Assets.xcassets */,
+				FB3C971A28802F39002104F0 /* Colors.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -189,9 +275,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FBBDE9B4285522140078A73E /* Build configuration list for PBXNativeTarget "Sudokov" */;
 			buildPhases = (
+				77BD7BA371FF961AB1C8C179 /* [CP] Check Pods Manifest.lock */,
+				FB7BC71A2880398400E8C5F1 /* ShellScript */,
 				FBBDE98C285522100078A73E /* Sources */,
 				FBBDE98D285522100078A73E /* Frameworks */,
 				FBBDE98E285522100078A73E /* Resources */,
+				9ABC9241FB5A6F5703126DC3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -206,6 +295,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FBBDE9B7285522140078A73E /* Build configuration list for PBXNativeTarget "SudokovTests" */;
 			buildPhases = (
+				AB9EA0BDF8CE7702D18DE38A /* [CP] Check Pods Manifest.lock */,
 				FBBDE99C285522140078A73E /* Sources */,
 				FBBDE99D285522140078A73E /* Frameworks */,
 				FBBDE99E285522140078A73E /* Resources */,
@@ -224,9 +314,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FBBDE9BA285522140078A73E /* Build configuration list for PBXNativeTarget "SudokovUITests" */;
 			buildPhases = (
+				A6B1EFF13B3E98205687F7E7 /* [CP] Check Pods Manifest.lock */,
 				FBBDE9A6285522140078A73E /* Sources */,
 				FBBDE9A7285522140078A73E /* Frameworks */,
 				FBBDE9A8285522140078A73E /* Resources */,
+				0A0BC02232341DF4D663A995 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -286,6 +378,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB3C971B28802F39002104F0 /* Colors.xcassets in Resources */,
 				FBBDE99B285522140078A73E /* Preview Assets.xcassets in Resources */,
 				FBBDE998285522140078A73E /* Assets.xcassets in Resources */,
 			);
@@ -307,18 +400,149 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0A0BC02232341DF4D663A995 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Sudokov-SudokovUITests/Pods-Sudokov-SudokovUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Sudokov-SudokovUITests/Pods-Sudokov-SudokovUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Sudokov-SudokovUITests/Pods-Sudokov-SudokovUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		77BD7BA371FF961AB1C8C179 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Sudokov-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9ABC9241FB5A6F5703126DC3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Sudokov/Pods-Sudokov-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Sudokov/Pods-Sudokov-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Sudokov/Pods-Sudokov-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A6B1EFF13B3E98205687F7E7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Sudokov-SudokovUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB9EA0BDF8CE7702D18DE38A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SudokovTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB7BC71A2880398400E8C5F1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FBBDE98C285522100078A73E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				FB5347BC285A841600E94F65 /* View+Border.swift in Sources */,
+				FB3C9715287F0FEA002104F0 /* TableBuilder.swift in Sources */,
 				FBBDE9C4285522CE0078A73E /* MenuButton.swift in Sources */,
+				FB3C9717287F1008002104F0 /* TypeAlias.swift in Sources */,
 				FBBDE9C1285522740078A73E /* HomeView.swift in Sources */,
 				FBBDE996285522100078A73E /* ContentView.swift in Sources */,
 				FBBDE994285522100078A73E /* SudokovApp.swift in Sources */,
 				FB5347BA285A83F800E94F65 /* EdgeBorder.swift in Sources */,
 				FBBDE9C6285523D30078A73E /* GameView.swift in Sources */,
+				FB7BC71F28803EC500E8C5F1 /* GameSquareView.swift in Sources */,
+				FB7BC71C28803A1000E8C5F1 /* R.generated.swift in Sources */,
+				FB7BC72328815E9000E8C5F1 /* NumberPickerView.swift in Sources */,
+				FB7BC7282882BC9B00E8C5F1 /* Move.swift in Sources */,
+				FB7BC72128803EE400E8C5F1 /* GameSquareViewModel.swift in Sources */,
+				FB7BC7252882154B00E8C5F1 /* ControlsView.swift in Sources */,
+				FB3C9719287F11B1002104F0 /* GameManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +695,7 @@
 		};
 		FBBDE9B5285522140078A73E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B9DEB6C2FD81A5636656284 /* Pods-Sudokov.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -500,6 +725,7 @@
 		};
 		FBBDE9B6285522140078A73E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E82434A63DA51F03BEB052A6 /* Pods-Sudokov.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -529,6 +755,7 @@
 		};
 		FBBDE9B8285522140078A73E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C8C06BFD23D9868FBD41750 /* Pods-SudokovTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -549,6 +776,7 @@
 		};
 		FBBDE9B9285522140078A73E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3E97FEEDA6DA6E1A5A8BE8A /* Pods-SudokovTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -569,6 +797,7 @@
 		};
 		FBBDE9BB285522140078A73E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7487A7FCD1C4181F9ABC9D2 /* Pods-Sudokov-SudokovUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -587,6 +816,7 @@
 		};
 		FBBDE9BC285522140078A73E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF6C1CEA8E6EF5FA1518234A /* Pods-Sudokov-SudokovUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
