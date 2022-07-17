@@ -28,6 +28,7 @@ struct GameSquareViewModel {
 
     // MARK: - Properties
     let selectionType: SelectionType
+    let isAlerting: Bool
     let squareText: String
     let row: Int
     let col: Int
@@ -49,23 +50,35 @@ struct GameSquareViewModel {
     let foregroundColor: Color
 
     var backgroundColor: Color {
-        switch selectionType {
-        case .none:
-            return Color(R.color.noneSquareBackground.name)
-        case .primary:
-            return Color(R.color.primarySquareBackground.name)
-        case .secondary:
-            return Color(R.color.secondarySquareBackground.name)
-        case .selection:
-            return Color(R.color.selectedSquareBackground.name)
+        if configuration.featureFlags.tableHighlighting {
+            switch selectionType {
+            case .none:
+                return Color(R.color.noneSquareBackground.name)
+            case .primary:
+                return Color(R.color.primarySquareBackground.name)
+            case .secondary:
+                return Color(R.color.secondarySquareBackground.name)
+            case .selection:
+                return Color(R.color.selectedSquareBackground.name)
+            }
+        } else {
+            switch selectionType {
+            case .none, .primary, .secondary:
+                return Color(R.color.noneSquareBackground.name)
+            case .selection:
+                return Color(R.color.selectedSquareBackground.name)
+            }
         }
     }
 
     let contentType: ContentType
+    let configuration: GameConfiguration
 
     // MARK: - Initializer
     init(selectionType: SelectionType,
          contentType: ContentType,
+         configuration: GameConfiguration = GameConfiguration.shared,
+         isAlerting: Bool,
          content: Int,
          drafts: [Int],
          row: Int,
@@ -74,13 +87,14 @@ struct GameSquareViewModel {
          boldNumber: Int? = nil) {
         self.selectionType = selectionType
         self.contentType = contentType
+        self.configuration = configuration
 
         self.squareText = (1...9).contains(content) ? "\(content)" : ""
         self.content = content
         self.row = row
         self.col = col
         self.squareSize = squareSize
-        self.boldNumber = boldNumber
+
         self.leadingBorderWidth = col % 3 == 0 ? Constants.borderWidth : 0
         self.topBorderWidth = row % 3 == 0 ? Constants.borderWidth : 0
         self.trailingBorderWidth = col == squareSize - 1 ? Constants.borderWidth : 0
@@ -90,12 +104,24 @@ struct GameSquareViewModel {
         self.trailingBorderColor = col == squareSize - 1 ? Color(R.color.greatBorder.name) : Color(R.color.subBorder.name)
         self.bottomBorderColor = row == squareSize - 1 ? Color(R.color.greatBorder.name) : Color(R.color.subBorder.name)
         self.drafts = drafts
+        self.isAlerting = isAlerting
 
-        switch contentType {
-        case .userAddedValue:
-            foregroundColor = Color(R.color.userSquareText.name)
-        case .levelGeneratedValue, .draft:
-            foregroundColor = Color(R.color.levelSquareText.name)
+        if isAlerting {
+            foregroundColor = Color(R.color.conflictText.name)
+        } else {
+            switch contentType {
+            case .userAddedValue:
+                foregroundColor = Color(R.color.userSquareText.name)
+            case .levelGeneratedValue, .draft:
+                foregroundColor = Color(R.color.levelSquareText.name)
+            }
+        }
+
+
+        if configuration.featureFlags.tableHighlighting {
+            self.boldNumber = boldNumber
+        } else {
+            self.boldNumber = nil
         }
     }
 }

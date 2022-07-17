@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ControlsView: View {
     @EnvironmentObject var gameManager: GameManager
+    let configuration: GameConfiguration
 
     var body: some View {
         HStack {
@@ -20,14 +21,16 @@ struct ControlsView: View {
                     .frame(width: 25, height: 25)
                     .frame(maxWidth: .infinity)
             }
-
-            Button {
-                gameManager.revertMove()
-            } label: {
-                Image(systemName: "arrowshape.turn.up.backward")
-                    .resizable()
-                    .frame(width: 25, height: 25)
-                    .frame(maxWidth: .infinity)
+            
+            if configuration.featureFlags.backButton {
+                Button {
+                    gameManager.revertMove()
+                } label: {
+                    Image(systemName: "arrowshape.turn.up.backward")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .frame(maxWidth: .infinity)
+                }
             }
 
             Button {
