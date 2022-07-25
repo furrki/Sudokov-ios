@@ -1,0 +1,46 @@
+//
+//  Difficulty.swift
+//  Sudokov
+//
+//  Created by furrki on 24.07.2022.
+//
+
+import Foundation
+
+enum Difficulty {
+    case veryEasy
+    case easy
+    case normal
+    case hard
+    case extreme
+
+    var name: String {
+        switch self {
+        case .veryEasy:
+            return "Very Easy"
+        case .easy:
+            return "Easy"
+        case .normal:
+            return "Normal"
+        case .hard:
+            return "Hard"
+        case .extreme:
+            return "Extreme"
+        }
+    }
+
+    var fileName: String {
+        switch self {
+        case .veryEasy:
+            return "veryEasy"
+        case .easy:
+            return "easy"
+        case .normal:
+            return "normal"
+        case .hard:
+            return "hard"
+        case .extreme:
+            return "extreme"
+        }
+    }
+}

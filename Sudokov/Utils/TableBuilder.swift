@@ -8,24 +8,12 @@
 import Foundation
 
 class TableBuilder: ObservableObject {
-    // MARK: - Constants and Structures
-    struct Cell: Hashable {
-        let row: Int
-        let col: Int
-    }
-
     // MARK: - Properties
     var table: TableMatrix {
         return tableState
-//        if tableStates.isEmpty || index < 0 || index >= tableStates.count {
-//            return tableState
-//        } else {
-//            return tableStates[index]
-//        }
     }
 
     @Published private(set) var tableState: TableMatrix
-    @Published private(set) var tableStates: [TableMatrix] = []
     @Published var index = 0
 
     // MARK: - Methods
@@ -35,17 +23,13 @@ class TableBuilder: ObservableObject {
     }
 
     func generateLevel() {
-        tableStates.removeAll()
         tableState = Array(repeating: Array(repeating: 0, count: 9), count: 9)
         for i in 0...8 {
             for j in 0...8 {
                 if tableState[i][j] == 0 {
                     let numbers = availableNumbers(row: i, col: j)
                     if numbers.isEmpty {
-                        tableStates.append(tableState)
                         backTrace(row: i, col: j)
-                        tableStates.append(tableState)
-
                     } else {
                         tableState[i][j] = numbers.randomElement() ?? 0
                     }
@@ -116,11 +100,11 @@ class TableBuilder: ObservableObject {
 
     func removeCells(tableState: TableMatrix,
                      depth: Int) -> TableMatrix {
-        var cellsToHide = Set<Cell>()
+        var cellsToHide = Set<Coordinate>()
         var newTableState = tableState
 
         while cellsToHide.count < (81 - depth) {
-            cellsToHide.insert(Cell(row: Int.random(in: 0...8), col: Int.random(in: 0...8)))
+            cellsToHide.insert(Coordinate(row: Int.random(in: 0...8), col: Int.random(in: 0...8)))
         }
 
         for cell in cellsToHide {
@@ -133,7 +117,6 @@ class TableBuilder: ObservableObject {
     // MARK: - Private Methods
     private func backTrace(row: Int, col: Int) {
         tableState[row][col] = 0
-        tableStates.append(tableState)
         var i = row
         while i >= 0 {
             var j = col
@@ -142,9 +125,7 @@ class TableBuilder: ObservableObject {
 
                 if !hasConflict(row: row, col: col, i: i, j: j) {
                     tableState[row][col] = tableState[i][j]
-                    tableStates.append(tableState)
                     tableState[i][j] = availableNumbers(row: i, col: j).randomElement() ?? 0
-                    tableStates.append(tableState)
                     j = 0
                     i = -1
                 }

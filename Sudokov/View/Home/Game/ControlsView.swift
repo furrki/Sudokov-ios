@@ -18,7 +18,7 @@ struct ControlsView: View {
             } label: {
                 Image(systemName: "trash")
                     .resizable()
-                    .frame(width: 25, height: 25)
+                    .frame(width: 20, height: 20)
                     .frame(maxWidth: .infinity)
             }
             
@@ -28,7 +28,7 @@ struct ControlsView: View {
                 } label: {
                     Image(systemName: "arrowshape.turn.up.backward")
                         .resizable()
-                        .frame(width: 25, height: 25)
+                        .frame(width: 20, height: 20)
                         .frame(maxWidth: .infinity)
                 }
             }
@@ -38,7 +38,7 @@ struct ControlsView: View {
             } label: {
                 Image(systemName: gameManager.fillContentMode == .text ? "pencil.circle" : "pencil.circle.fill")
                     .resizable()
-                    .frame(width: 25, height: 25)
+                    .frame(width: 20, height: 20)
                     .frame(maxWidth: .infinity)
             }
         }

@@ -18,18 +18,15 @@ class GameManager: ObservableObject {
         case draft
         case text
     }
-
-    struct Coordinate: Hashable {
-        let row: Int
-        let col: Int
-    }
-
+    
     // MARK: - Properties
     let tableBuilder = TableBuilder()
+    private let storageManager: StorageManager
     private let tableFirstState: TableMatrix
     private let solution: TableMatrix
     private let configuration: GameConfiguration
     private var bag = Set<AnyCancellable>()
+    private var objectDidChange = ObservableObjectPublisher()
     private var moves: [Move] = []
     private var conflicts: [Coordinate] = []
     private var unmatches: [Coordinate] = []
@@ -39,7 +36,8 @@ class GameManager: ObservableObject {
         }
     }
 
-    @Published private(set) var livesText = "Lives: \(Constants.startingLives)/\(Constants.startingLives)"
+    @Published private(set) var isAbandoned: Bool = false
+    @Published private(set) var livesText: String
     @Published private(set) var options: [Int] = []
     @Published private(set) var tableState: TableMatrix
     @Published private(set) var drafts: Dictionary<Coordinate, [Int]> = [:]
@@ -47,13 +45,59 @@ class GameManager: ObservableObject {
     @Published var selectedCell: Coordinate?
 
     // MARK: - Methods
-    init(configuration: GameConfiguration = GameConfiguration.shared) {
-        solution = tableBuilder.tableState
-        let builtTable = tableBuilder.removeCells(tableState: tableBuilder.tableState, depth: 38)
+    init(level: Level,
+         configuration: GameConfiguration = GameConfiguration.shared,
+         storageManager: StorageManager = DependencyManager.storageManager) {
+        solution = level.table
+
+        let builtTable = level.table.enumerated().compactMap { rowIndex, row in
+            row.enumerated().compactMap { colIndex, value -> Int in
+                if level.cellsToHide.contains(Coordinate(row: rowIndex, col: colIndex)) {
+                    return 0
+                } else {
+                    return value
+                }
+            }
+        }
+
         tableState = builtTable
         tableFirstState = builtTable
         self.configuration = configuration
+        self.storageManager = storageManager
+        self.livesText = "Lives: \(Constants.startingLives)/\(Constants.startingLives)"
         addBinders()
+    }
+
+    init(levelInfo: LevelInfo,
+         configuration: GameConfiguration = GameConfiguration.shared,
+         storageManager: StorageManager = DependencyManager.storageManager) {
+        self.tableFirstState = levelInfo.tableFirstState
+        self.solution = levelInfo.solution
+        self.drafts = levelInfo.drafts
+        self.moves = levelInfo.moves
+        self.conflicts = levelInfo.conflicts
+        self.unmatches = levelInfo.unmatches
+        self.lives = levelInfo.lives
+        self.options = levelInfo.options
+        self.tableState = levelInfo.tableState
+        self.configuration = configuration
+        self.storageManager = storageManager
+        self.livesText = "Lives: \(levelInfo.lives)/\(Constants.startingLives)"
+        addBinders()
+        objectWillChange.send()
+    }
+
+    func saveState() {
+        let levelInfo = LevelInfo(tableFirstState: tableFirstState,
+                                  solution: solution,
+                                  drafts: drafts,
+                                  moves: moves,
+                                  conflicts: conflicts,
+                                  unmatches: unmatches,
+                                  lives: lives,
+                                  options: options,
+                                  tableState: tableState)
+        storageManager.currentLevelInfo = levelInfo
     }
 
     func addBinders() {
@@ -119,6 +163,11 @@ class GameManager: ObservableObject {
         }
     }
 
+    func abandonGame() {
+        storageManager.currentLevelInfo = nil
+        isAbandoned = true
+    }
+
     func setValue(_ value: Int) {
         guard let selectedCell = selectedCell,
               tableFirstState[selectedCell.row][selectedCell.col] == 0 else {
@@ -174,7 +223,9 @@ class GameManager: ObservableObject {
                 updateConflicts(coordinate: selectedCell)
             }
         }
+
         objectWillChange.send()
+        saveState()
     }
 
     func removeValue() {
@@ -200,10 +251,10 @@ class GameManager: ObservableObject {
 
         tableState[selectedCell.row][selectedCell.col] = 0
         updateConflicts(coordinate: selectedCell)
+        saveState()
     }
 
-    func availableNumbers(row: Int,
-                          col: Int) -> [Int] {
+    func availableNumbers(row: Int, col: Int) -> [Int] {
         tableBuilder.availableNumbers(tableState: tableState, row: row, col: col)
     }
 
@@ -230,6 +281,7 @@ class GameManager: ObservableObject {
         }
 
         updateConflicts(coordinate: Coordinate(row: lastMove.row, col: lastMove.col))
+        saveState()
     }
 
     private func contentType(row: Int, col: Int) -> GameSquareViewModel.ContentType {

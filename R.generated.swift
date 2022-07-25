@@ -322,6 +322,52 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
+  /// This `R.file` struct is generated, and contains static references to 5 files.
+  struct file {
+    /// Resource file `easy.data`.
+    static let easyData = Rswift.FileResource(bundle: R.hostingBundle, name: "easy", pathExtension: "data")
+    /// Resource file `extreme.data`.
+    static let extremeData = Rswift.FileResource(bundle: R.hostingBundle, name: "extreme", pathExtension: "data")
+    /// Resource file `hard.data`.
+    static let hardData = Rswift.FileResource(bundle: R.hostingBundle, name: "hard", pathExtension: "data")
+    /// Resource file `medium.data`.
+    static let mediumData = Rswift.FileResource(bundle: R.hostingBundle, name: "medium", pathExtension: "data")
+    /// Resource file `veryEasy.data`.
+    static let veryEasyData = Rswift.FileResource(bundle: R.hostingBundle, name: "veryEasy", pathExtension: "data")
+
+    /// `bundle.url(forResource: "easy", withExtension: "data")`
+    static func easyData(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.easyData
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "extreme", withExtension: "data")`
+    static func extremeData(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.extremeData
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "hard", withExtension: "data")`
+    static func hardData(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.hardData
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "medium", withExtension: "data")`
+    static func mediumData(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mediumData
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "veryEasy", withExtension: "data")`
+    static func veryEasyData(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.veryEasyData
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    fileprivate init() {}
+  }
+
   fileprivate struct intern: Rswift.Validatable {
     fileprivate static func validate() throws {
       // There are no resources to validate

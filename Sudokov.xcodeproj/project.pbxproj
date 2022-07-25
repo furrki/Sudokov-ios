@@ -10,6 +10,9 @@
 		66C096F51089F92C0E3E624E /* Pods_Sudokov_SudokovUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0004DCA2CEE1E4DE792930C0 /* Pods_Sudokov_SudokovUITests.framework */; };
 		6F59AAB5E2E2D83BD9AC35C3 /* Pods_Sudokov.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF7AF98213C87136B41A8D32 /* Pods_Sudokov.framework */; };
 		CFCA58BD3E1F2FBFFD749322 /* Pods_SudokovTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE249D45209134A61B456B7D /* Pods_SudokovTests.framework */; };
+		FB0DC6B0288F05B500E02521 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0DC6AF288F05B500E02521 /* Storage.swift */; };
+		FB0DC6B2288F05E400E02521 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0DC6B1288F05E400E02521 /* DiskStorage.swift */; };
+		FB0DC6B4288F072F00E02521 /* CodableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0DC6B3288F072F00E02521 /* CodableStorage.swift */; };
 		FB3C9715287F0FEA002104F0 /* TableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9714287F0FEA002104F0 /* TableBuilder.swift */; };
 		FB3C9717287F1008002104F0 /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9716287F1008002104F0 /* TypeAlias.swift */; };
 		FB3C9719287F11B1002104F0 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9718287F11B1002104F0 /* GameManager.swift */; };
@@ -22,6 +25,19 @@
 		FB7BC72328815E9000E8C5F1 /* NumberPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC72228815E9000E8C5F1 /* NumberPickerView.swift */; };
 		FB7BC7252882154B00E8C5F1 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC7242882154B00E8C5F1 /* ControlsView.swift */; };
 		FB7BC7282882BC9B00E8C5F1 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC7272882BC9B00E8C5F1 /* Move.swift */; };
+		FB897488288F31DD00D7C982 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB897487288F31DD00D7C982 /* StorageManager.swift */; };
+		FBA23907288CA414006AE3A4 /* medium.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA23902288CA413006AE3A4 /* medium.data */; };
+		FBA23908288CA414006AE3A4 /* extreme.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA23903288CA414006AE3A4 /* extreme.data */; };
+		FBA23909288CA414006AE3A4 /* easy.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA23904288CA414006AE3A4 /* easy.data */; };
+		FBA2390A288CA414006AE3A4 /* hard.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA23905288CA414006AE3A4 /* hard.data */; };
+		FBA2390B288CA414006AE3A4 /* veryEasy.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA23906288CA414006AE3A4 /* veryEasy.data */; };
+		FBA2390D288CA616006AE3A4 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA2390C288CA616006AE3A4 /* Level.swift */; };
+		FBA2390F288CA68F006AE3A4 /* LocalLevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */; };
+		FBA23911288CA6A7006AE3A4 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA23910288CA6A7006AE3A4 /* Difficulty.swift */; };
+		FBBBE58F288DA7F500AC809A /* DependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBBE58E288DA7F500AC809A /* DependencyManager.swift */; };
+		FBBBE591288DA96F00AC809A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBBE590288DA96F00AC809A /* Coordinator.swift */; };
+		FBBBE595288DAA8200AC809A /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBBE594288DAA8200AC809A /* HomeCoordinator.swift */; };
+		FBBBE597288DAD9A00AC809A /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBBE596288DAD9A00AC809A /* UserDefaultsManager.swift */; };
 		FBBDE994285522100078A73E /* SudokovApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBDE993285522100078A73E /* SudokovApp.swift */; };
 		FBBDE996285522100078A73E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBDE995285522100078A73E /* ContentView.swift */; };
 		FBBDE998285522140078A73E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBBDE997285522140078A73E /* Assets.xcassets */; };
@@ -35,6 +51,9 @@
 		FBDB28AF288365B000A372E7 /* FeatureFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDB28AE288365B000A372E7 /* FeatureFlags.swift */; };
 		FBDB28B12883667F00A372E7 /* GameConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDB28B02883667F00A372E7 /* GameConfiguration.swift */; };
 		FBDB28B328849C3B00A372E7 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDB28B228849C3B00A372E7 /* TableView.swift */; };
+		FBDB28B52884B31000A372E7 /* LevelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDB28B42884B31000A372E7 /* LevelInfo.swift */; };
+		FBDB28B72884B33C00A372E7 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDB28B62884B33C00A372E7 /* Coordinate.swift */; };
+		FBFFF13E288F26DD0038F3D8 /* GameInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFFF13D288F26DD0038F3D8 /* GameInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +82,9 @@
 		CF7AF98213C87136B41A8D32 /* Pods_Sudokov.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sudokov.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7487A7FCD1C4181F9ABC9D2 /* Pods-Sudokov-SudokovUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sudokov-SudokovUITests.debug.xcconfig"; path = "Target Support Files/Pods-Sudokov-SudokovUITests/Pods-Sudokov-SudokovUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E82434A63DA51F03BEB052A6 /* Pods-Sudokov.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sudokov.release.xcconfig"; path = "Target Support Files/Pods-Sudokov/Pods-Sudokov.release.xcconfig"; sourceTree = "<group>"; };
+		FB0DC6AF288F05B500E02521 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		FB0DC6B1288F05E400E02521 /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
+		FB0DC6B3288F072F00E02521 /* CodableStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableStorage.swift; sourceTree = "<group>"; };
 		FB3C9714287F0FEA002104F0 /* TableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBuilder.swift; sourceTree = "<group>"; };
 		FB3C9716287F1008002104F0 /* TypeAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAlias.swift; sourceTree = "<group>"; };
 		FB3C9718287F11B1002104F0 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
@@ -75,6 +97,19 @@
 		FB7BC72228815E9000E8C5F1 /* NumberPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPickerView.swift; sourceTree = "<group>"; };
 		FB7BC7242882154B00E8C5F1 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
 		FB7BC7272882BC9B00E8C5F1 /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
+		FB897487288F31DD00D7C982 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		FBA23902288CA413006AE3A4 /* medium.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medium.data; sourceTree = "<group>"; };
+		FBA23903288CA414006AE3A4 /* extreme.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = extreme.data; sourceTree = "<group>"; };
+		FBA23904288CA414006AE3A4 /* easy.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = easy.data; sourceTree = "<group>"; };
+		FBA23905288CA414006AE3A4 /* hard.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hard.data; sourceTree = "<group>"; };
+		FBA23906288CA414006AE3A4 /* veryEasy.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = veryEasy.data; sourceTree = "<group>"; };
+		FBA2390C288CA616006AE3A4 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
+		FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLevelManager.swift; sourceTree = "<group>"; };
+		FBA23910288CA6A7006AE3A4 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
+		FBBBE58E288DA7F500AC809A /* DependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
+		FBBBE590288DA96F00AC809A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		FBBBE594288DAA8200AC809A /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		FBBBE596288DAD9A00AC809A /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		FBBDE990285522100078A73E /* Sudokov.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sudokov.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBBDE993285522100078A73E /* SudokovApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokovApp.swift; sourceTree = "<group>"; };
 		FBBDE995285522100078A73E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -91,6 +126,9 @@
 		FBDB28AE288365B000A372E7 /* FeatureFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlags.swift; sourceTree = "<group>"; };
 		FBDB28B02883667F00A372E7 /* GameConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfiguration.swift; sourceTree = "<group>"; };
 		FBDB28B228849C3B00A372E7 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
+		FBDB28B42884B31000A372E7 /* LevelInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelInfo.swift; sourceTree = "<group>"; };
+		FBDB28B62884B33C00A372E7 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		FBFFF13D288F26DD0038F3D8 /* GameInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoView.swift; sourceTree = "<group>"; };
 		FE249D45209134A61B456B7D /* Pods_SudokovTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SudokovTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -145,6 +183,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FB0DC6AE288F05A800E02521 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				FB0DC6AF288F05B500E02521 /* Storage.swift */,
+				FB0DC6B1288F05E400E02521 /* DiskStorage.swift */,
+				FB0DC6B3288F072F00E02521 /* CodableStorage.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		FB5347B8285A83E900E94F65 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,8 +214,47 @@
 			isa = PBXGroup;
 			children = (
 				FB7BC7272882BC9B00E8C5F1 /* Move.swift */,
+				FBDB28B42884B31000A372E7 /* LevelInfo.swift */,
+				FBDB28B62884B33C00A372E7 /* Coordinate.swift */,
+				FBA2390C288CA616006AE3A4 /* Level.swift */,
+				FBA23910288CA6A7006AE3A4 /* Difficulty.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		FBA23901288CA401006AE3A4 /* Levels */ = {
+			isa = PBXGroup;
+			children = (
+				FBA23906288CA414006AE3A4 /* veryEasy.data */,
+				FBA23904288CA414006AE3A4 /* easy.data */,
+				FBA23902288CA413006AE3A4 /* medium.data */,
+				FBA23905288CA414006AE3A4 /* hard.data */,
+				FBA23903288CA414006AE3A4 /* extreme.data */,
+			);
+			path = Levels;
+			sourceTree = "<group>";
+		};
+		FBBBE592288DAA3300AC809A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				FBBBE593288DAA6C00AC809A /* Game */,
+				FBBBE594288DAA8200AC809A /* HomeCoordinator.swift */,
+				FBBDE9C0285522740078A73E /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		FBBBE593288DAA6C00AC809A /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				FB7BC71D28803EB800E8C5F1 /* GameSquare */,
+				FBBDE9C5285523D30078A73E /* GameView.swift */,
+				FB7BC72228815E9000E8C5F1 /* NumberPickerView.swift */,
+				FB7BC7242882154B00E8C5F1 /* ControlsView.swift */,
+				FBDB28B228849C3B00A372E7 /* TableView.swift */,
+				FBFFF13D288F26DD0038F3D8 /* GameInfoView.swift */,
+			);
+			path = Game;
 			sourceTree = "<group>";
 		};
 		FBBDE987285522100078A73E = {
@@ -236,12 +323,7 @@
 		FBBDE9BD285522400078A73E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FB7BC71D28803EB800E8C5F1 /* GameSquare */,
-				FBBDE9C0285522740078A73E /* HomeView.swift */,
-				FBBDE9C5285523D30078A73E /* GameView.swift */,
-				FB7BC72228815E9000E8C5F1 /* NumberPickerView.swift */,
-				FB7BC7242882154B00E8C5F1 /* ControlsView.swift */,
-				FBDB28B228849C3B00A372E7 /* TableView.swift */,
+				FBBBE592288DAA3300AC809A /* Home */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -249,12 +331,18 @@
 		FBBDE9BE285522470078A73E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FB0DC6AE288F05A800E02521 /* Storage */,
 				FB5347B8285A83E900E94F65 /* Extensions */,
 				FB3C9714287F0FEA002104F0 /* TableBuilder.swift */,
 				FB3C9716287F1008002104F0 /* TypeAlias.swift */,
 				FB3C9718287F11B1002104F0 /* GameManager.swift */,
 				FBDB28AE288365B000A372E7 /* FeatureFlags.swift */,
 				FBDB28B02883667F00A372E7 /* GameConfiguration.swift */,
+				FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */,
+				FBBBE58E288DA7F500AC809A /* DependencyManager.swift */,
+				FBBBE590288DA96F00AC809A /* Coordinator.swift */,
+				FBBBE596288DAD9A00AC809A /* UserDefaultsManager.swift */,
+				FB897487288F31DD00D7C982 /* StorageManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -262,6 +350,7 @@
 		FBBDE9BF2855224B0078A73E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FBA23901288CA401006AE3A4 /* Levels */,
 				FBBDE997285522140078A73E /* Assets.xcassets */,
 				FB3C971A28802F39002104F0 /* Colors.xcassets */,
 			);
@@ -387,9 +476,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBA2390A288CA414006AE3A4 /* hard.data in Resources */,
+				FBA23907288CA414006AE3A4 /* medium.data in Resources */,
+				FBA23908288CA414006AE3A4 /* extreme.data in Resources */,
 				FB3C971B28802F39002104F0 /* Colors.xcassets in Resources */,
 				FBBDE99B285522140078A73E /* Preview Assets.xcassets in Resources */,
+				FBA2390B288CA414006AE3A4 /* veryEasy.data in Resources */,
 				FBBDE998285522140078A73E /* Assets.xcassets in Resources */,
+				FBA23909288CA414006AE3A4 /* easy.data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,23 +632,37 @@
 			files = (
 				FBDB28AF288365B000A372E7 /* FeatureFlags.swift in Sources */,
 				FB5347BC285A841600E94F65 /* View+Border.swift in Sources */,
+				FBBBE591288DA96F00AC809A /* Coordinator.swift in Sources */,
+				FBBBE58F288DA7F500AC809A /* DependencyManager.swift in Sources */,
 				FB3C9715287F0FEA002104F0 /* TableBuilder.swift in Sources */,
 				FBBDE9C4285522CE0078A73E /* MenuButton.swift in Sources */,
 				FB3C9717287F1008002104F0 /* TypeAlias.swift in Sources */,
 				FBBDE9C1285522740078A73E /* HomeView.swift in Sources */,
+				FB0DC6B2288F05E400E02521 /* DiskStorage.swift in Sources */,
 				FBBDE996285522100078A73E /* ContentView.swift in Sources */,
 				FBBDE994285522100078A73E /* SudokovApp.swift in Sources */,
+				FB0DC6B4288F072F00E02521 /* CodableStorage.swift in Sources */,
+				FBBBE597288DAD9A00AC809A /* UserDefaultsManager.swift in Sources */,
 				FB5347BA285A83F800E94F65 /* EdgeBorder.swift in Sources */,
+				FBFFF13E288F26DD0038F3D8 /* GameInfoView.swift in Sources */,
 				FBBDE9C6285523D30078A73E /* GameView.swift in Sources */,
+				FBDB28B52884B31000A372E7 /* LevelInfo.swift in Sources */,
 				FB7BC71F28803EC500E8C5F1 /* GameSquareView.swift in Sources */,
+				FBA2390D288CA616006AE3A4 /* Level.swift in Sources */,
 				FB7BC71C28803A1000E8C5F1 /* R.generated.swift in Sources */,
+				FBA23911288CA6A7006AE3A4 /* Difficulty.swift in Sources */,
 				FBDB28B12883667F00A372E7 /* GameConfiguration.swift in Sources */,
+				FBDB28B72884B33C00A372E7 /* Coordinate.swift in Sources */,
 				FB7BC72328815E9000E8C5F1 /* NumberPickerView.swift in Sources */,
+				FB897488288F31DD00D7C982 /* StorageManager.swift in Sources */,
+				FBBBE595288DAA8200AC809A /* HomeCoordinator.swift in Sources */,
 				FB7BC7282882BC9B00E8C5F1 /* Move.swift in Sources */,
 				FB7BC72128803EE400E8C5F1 /* GameSquareViewModel.swift in Sources */,
 				FB7BC7252882154B00E8C5F1 /* ControlsView.swift in Sources */,
 				FB3C9719287F11B1002104F0 /* GameManager.swift in Sources */,
 				FBDB28B328849C3B00A372E7 /* TableView.swift in Sources */,
+				FB0DC6B0288F05B500E02521 /* Storage.swift in Sources */,
+				FBA2390F288CA68F006AE3A4 /* LocalLevelManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

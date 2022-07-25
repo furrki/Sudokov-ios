@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Move {
-    enum MoveType {
+struct Move: Codable {
+    enum MoveType: Codable {
         case text
         case draft
         case draftProgramatically
