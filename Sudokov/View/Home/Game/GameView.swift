@@ -20,11 +20,10 @@ struct GameView: View {
 
             GeometryReader { geometry in
                 VStack(alignment: .center, spacing: 20) {
-                    Spacer()
-
                     GameInfoView()
                         .environmentObject(gameManager)
                         .environmentObject(coordinator)
+                        .padding(.top, 20)
 
                     TableView(geometry: geometry)
                         .environmentObject(gameManager)

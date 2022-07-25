@@ -26,6 +26,7 @@
 		FB7BC7252882154B00E8C5F1 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC7242882154B00E8C5F1 /* ControlsView.swift */; };
 		FB7BC7282882BC9B00E8C5F1 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC7272882BC9B00E8C5F1 /* Move.swift */; };
 		FB897488288F31DD00D7C982 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB897487288F31DD00D7C982 /* StorageManager.swift */; };
+		FB89748A288F424B00D7C982 /* Transitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB897489288F424B00D7C982 /* Transitions.swift */; };
 		FBA23907288CA414006AE3A4 /* medium.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA23902288CA413006AE3A4 /* medium.data */; };
 		FBA23908288CA414006AE3A4 /* extreme.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA23903288CA414006AE3A4 /* extreme.data */; };
 		FBA23909288CA414006AE3A4 /* easy.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA23904288CA414006AE3A4 /* easy.data */; };
@@ -98,6 +99,7 @@
 		FB7BC7242882154B00E8C5F1 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
 		FB7BC7272882BC9B00E8C5F1 /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		FB897487288F31DD00D7C982 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		FB897489288F424B00D7C982 /* Transitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitions.swift; sourceTree = "<group>"; };
 		FBA23902288CA413006AE3A4 /* medium.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medium.data; sourceTree = "<group>"; };
 		FBA23903288CA414006AE3A4 /* extreme.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = extreme.data; sourceTree = "<group>"; };
 		FBA23904288CA414006AE3A4 /* easy.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = easy.data; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				FB5347BB285A841600E94F65 /* View+Border.swift */,
+				FB897489288F424B00D7C982 /* Transitions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -640,6 +643,7 @@
 				FBBDE9C1285522740078A73E /* HomeView.swift in Sources */,
 				FB0DC6B2288F05E400E02521 /* DiskStorage.swift in Sources */,
 				FBBDE996285522100078A73E /* ContentView.swift in Sources */,
+				FB89748A288F424B00D7C982 /* Transitions.swift in Sources */,
 				FBBDE994285522100078A73E /* SudokovApp.swift in Sources */,
 				FB0DC6B4288F072F00E02521 /* CodableStorage.swift in Sources */,
 				FBBBE597288DAD9A00AC809A /* UserDefaultsManager.swift in Sources */,

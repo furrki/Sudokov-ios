@@ -3,6 +3,7 @@
 //  Sudokov
 //
 //  Created by furrki on 25.07.2022.
+//  From: https://swiftwithmajid.com/2019/05/22/storing-codable-structs-on-the-disk/
 //
 
 import Foundation

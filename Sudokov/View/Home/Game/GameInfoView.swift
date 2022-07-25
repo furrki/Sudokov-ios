@@ -37,7 +37,10 @@ struct GameInfoView: View {
                 primaryButton: .cancel(),
                 secondaryButton: .destructive(Text("Abandon")) {
                     gameManager.abandonGame()
-                    coordinator.popBack()
+
+                    withAnimation {
+                        coordinator.popBack()
+                    }
                 }
             )
         }

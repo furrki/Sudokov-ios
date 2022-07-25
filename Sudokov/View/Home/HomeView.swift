@@ -24,13 +24,16 @@ struct HomeView: View {
                 if let gameManager = gameManager {
                     GameView(gameManager: gameManager)
                         .environmentObject(coordinator)
+                        .transition(.moveAndScale)
                 }
             case .none:
                 VStack {
                     Button("Start Game") {
-                        if let level = localLevelManager.getLevel(difficulty: .easy, level: 1) {
+                        if let level = localLevelManager.getLevel(difficulty: .extreme, level: 1) {
                             gameManager = GameManager(level: level)
-                            coordinator.currentScreen = .game
+                            withAnimation {
+                                coordinator.currentScreen = .game
+                            }
                         }
                     }
                     .buttonStyle(MenuButton())
