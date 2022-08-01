@@ -27,6 +27,7 @@ struct NumberPickerView: View {
                                 .cornerRadius(4.0)
                         )
                         .opacity(shouldHide(number: number) ? 0 : 1)
+                        .disabled(shouldHide(number: number))
                 })
                 .disabled(shouldHide(number: number))
             }
@@ -38,10 +39,6 @@ struct NumberPickerView: View {
             return false
         }
 
-        if gameManager.options.contains(number) {
-            return false
-        }
-
-        return true
+        return !gameManager.options.contains(number)
     }
 }

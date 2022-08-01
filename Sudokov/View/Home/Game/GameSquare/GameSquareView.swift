@@ -10,6 +10,7 @@ import SwiftUI
 struct GameSquareView: View {
     let viewModel: GameSquareViewModel
     let tableWidth: CGFloat
+    @State var shouldAnimate = true
 
     var body: some View {
         VStack {

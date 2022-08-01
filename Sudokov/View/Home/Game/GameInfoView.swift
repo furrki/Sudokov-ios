@@ -21,6 +21,20 @@ struct GameInfoView: View {
                     .resizable()
                     .frame(width: 25, height: 25)
             }
+            .alert(isPresented: $isAbandoning) {
+                Alert(
+                    title: Text("Abandon game?"),
+                    message: nil,
+                    primaryButton: .cancel(),
+                    secondaryButton: .destructive(Text("Abandon")) {
+                        gameManager.abandonGame()
+
+                        withAnimation {
+                            coordinator.popBack()
+                        }
+                    }
+                )
+            }
 
             Spacer()
 
@@ -30,19 +44,5 @@ struct GameInfoView: View {
             }
         }
         .padding(.horizontal, 20)
-        .alert(isPresented: $isAbandoning) {
-            Alert(
-                title: Text("Abandon game?"),
-                message: nil,
-                primaryButton: .cancel(),
-                secondaryButton: .destructive(Text("Abandon")) {
-                    gameManager.abandonGame()
-
-                    withAnimation {
-                        coordinator.popBack()
-                    }
-                }
-            )
-        }
     }
 }

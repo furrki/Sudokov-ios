@@ -11,7 +11,7 @@ struct MenuButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(.all, 20)
-            .background(.cyan)
+            .background(.yellow)
             .foregroundColor(.black)
             .clipShape(Capsule())
     }

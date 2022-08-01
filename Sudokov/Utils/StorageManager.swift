@@ -11,10 +11,11 @@ class StorageManager {
     // MARK: - Constants
     private enum Keys {
         static let levelInfo = "LevelInfo"
+        static let solvedLevels = "SolvedLevels"
     }
 
     // MARK: - Properties
-    let storage: CodableStorage
+    private let storage: CodableStorage
 
     // MARK: - Methods
     init(storage: CodableStorage = DependencyManager.storage) {
@@ -32,7 +33,17 @@ class StorageManager {
         }
     }
 
-    func fetchFromFile<D: Decodable>(key: String) -> D? {
+    var solvedLevels: [TemplateLevel] {
+        get {
+            fetchFromFile(key: Keys.solvedLevels) ?? []
+        }
+
+        set {
+            try? storage.save(newValue, for: Keys.solvedLevels)
+        }
+    }
+
+    private func fetchFromFile<D: Decodable>(key: String) -> D? {
         do {
             let data: D = try storage.fetch(for: key)
             return data

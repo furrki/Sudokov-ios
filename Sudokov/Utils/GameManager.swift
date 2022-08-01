@@ -26,13 +26,16 @@ class GameManager: ObservableObject {
     private let solution: TableMatrix
     private let configuration: GameConfiguration
     private var bag = Set<AnyCancellable>()
-    private var objectDidChange = ObservableObjectPublisher()
     private var moves: [Move] = []
     private var conflicts: [Coordinate] = []
     private var unmatches: [Coordinate] = []
+
+    let level: TemplateLevel?
+
     private(set) var lives: Int = Constants.startingLives {
         didSet {
-            livesText = "Lives: \(lives)/\(Constants.startingLives)"
+            let livesToShow = lives >= 0 ? lives : 0
+            livesText = "Lives: \(livesToShow)/\(Constants.startingLives)"
         }
     }
 
@@ -43,9 +46,16 @@ class GameManager: ObservableObject {
     @Published private(set) var drafts: Dictionary<Coordinate, [Int]> = [:]
     @Published private(set) var fillContentMode: FillContentMode = .text
     @Published var selectedCell: Coordinate?
+    @Published var levelState: LevelState
 
+    // MARK: - Computed Properties
+    var isGameActive: Bool {
+        levelState == .solving
+    }
+    
     // MARK: - Methods
     init(level: Level,
+         templateLevel: TemplateLevel,
          configuration: GameConfiguration = GameConfiguration.shared,
          storageManager: StorageManager = DependencyManager.storageManager) {
         solution = level.table
@@ -64,7 +74,11 @@ class GameManager: ObservableObject {
         tableFirstState = builtTable
         self.configuration = configuration
         self.storageManager = storageManager
-        self.livesText = "Lives: \(Constants.startingLives)/\(Constants.startingLives)"
+        self.level = templateLevel
+
+        let livesToShow = lives >= 0 ? lives : 0
+        self.livesText = "Lives: \(livesToShow)/\(Constants.startingLives)"
+        self.levelState = .solving
         addBinders()
     }
 
@@ -82,7 +96,11 @@ class GameManager: ObservableObject {
         self.tableState = levelInfo.tableState
         self.configuration = configuration
         self.storageManager = storageManager
-        self.livesText = "Lives: \(levelInfo.lives)/\(Constants.startingLives)"
+
+        let livesToShow = lives >= 0 ? lives : 0
+        self.livesText = "Lives: \(livesToShow)/\(Constants.startingLives)"
+        self.level = levelInfo.level
+        self.levelState = levelInfo.levelState
         addBinders()
         objectWillChange.send()
     }
@@ -96,11 +114,13 @@ class GameManager: ObservableObject {
                                   unmatches: unmatches,
                                   lives: lives,
                                   options: options,
-                                  tableState: tableState)
+                                  tableState: tableState,
+                                  level: level,
+                                  levelState: levelState)
         storageManager.currentLevelInfo = levelInfo
     }
 
-    func addBinders() {
+    private func addBinders() {
         if configuration.featureFlags.hideNotNeededNumberButtons {
             $tableState
                 .map { rows in
@@ -155,6 +175,10 @@ class GameManager: ObservableObject {
     }
 
     func switchFillContentMode() {
+        guard isGameActive else {
+            return
+        }
+
         switch fillContentMode {
         case .draft:
             fillContentMode = .text
@@ -170,7 +194,8 @@ class GameManager: ObservableObject {
 
     func setValue(_ value: Int) {
         guard let selectedCell = selectedCell,
-              tableFirstState[selectedCell.row][selectedCell.col] == 0 else {
+              tableFirstState[selectedCell.row][selectedCell.col] == 0,
+              isGameActive else {
             return
         }
 
@@ -222,6 +247,8 @@ class GameManager: ObservableObject {
                 tableState[selectedCell.row][selectedCell.col] = value
                 updateConflicts(coordinate: selectedCell)
             }
+
+            checkWin()
         }
 
         objectWillChange.send()
@@ -230,6 +257,7 @@ class GameManager: ObservableObject {
 
     func removeValue() {
         guard let selectedCell = selectedCell,
+              isGameActive,
               tableFirstState[selectedCell.row][selectedCell.col] == 0 else {
             return
         }
@@ -259,7 +287,8 @@ class GameManager: ObservableObject {
     }
 
     func revertMove() {
-        guard let lastMove = moves.last else {
+        guard let lastMove = moves.last,
+              isGameActive else {
             return
         }
 
@@ -282,6 +311,26 @@ class GameManager: ObservableObject {
 
         updateConflicts(coordinate: Coordinate(row: lastMove.row, col: lastMove.col))
         saveState()
+    }
+
+    private func checkWin() {
+        if tableState.allSatisfy({ row in
+            row.allSatisfy { col in
+                col != 0
+            }
+        }) && conflicts.isEmpty {
+            self.levelState = .justWon
+            selectedCell = nil
+        }
+    }
+
+    private func checkLose() {
+        guard configuration.featureFlags.lives, lives < 0 else {
+            return
+        }
+
+        self.levelState = .justLost
+        selectedCell = nil
     }
 
     private func contentType(row: Int, col: Int) -> GameSquareViewModel.ContentType {
@@ -333,7 +382,8 @@ class GameManager: ObservableObject {
     private func removeConcerningDrafts(coordinate: Coordinate, value: Int) {
         drafts
             .filter { draft in
-                draft.value.contains(value) && (draft.key.row == coordinate.row || draft.key.col == coordinate.col)
+                draft.value.contains(value) && (draft.key.row == coordinate.row || draft.key.col == coordinate.col ||
+                    (coordinate.row / 3 == draft.key.row / 3 && coordinate.col / 3 == draft.key.col / 3))
             }
             .forEach { draft in
                 moves.append(Move(row: draft.key.row, col: draft.key.col, moveType: .draftProgramatically, content: drafts[draft.key] ?? []))
@@ -350,6 +400,7 @@ class GameManager: ObservableObject {
 
             if shouldLoseLifeByConflict || shouldLoseLifeByUnmatch {
                 lives -= 1
+                checkLose()
             }
         }
     }

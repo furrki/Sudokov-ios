@@ -10,6 +10,7 @@
 		66C096F51089F92C0E3E624E /* Pods_Sudokov_SudokovUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0004DCA2CEE1E4DE792930C0 /* Pods_Sudokov_SudokovUITests.framework */; };
 		6F59AAB5E2E2D83BD9AC35C3 /* Pods_Sudokov.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF7AF98213C87136B41A8D32 /* Pods_Sudokov.framework */; };
 		CFCA58BD3E1F2FBFFD749322 /* Pods_SudokovTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE249D45209134A61B456B7D /* Pods_SudokovTests.framework */; };
+		DCC3040F2897F4CE00EEB26E /* LevelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3040E2897F4CE00EEB26E /* LevelState.swift */; };
 		FB0DC6B0288F05B500E02521 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0DC6AF288F05B500E02521 /* Storage.swift */; };
 		FB0DC6B2288F05E400E02521 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0DC6B1288F05E400E02521 /* DiskStorage.swift */; };
 		FB0DC6B4288F072F00E02521 /* CodableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0DC6B3288F072F00E02521 /* CodableStorage.swift */; };
@@ -17,8 +18,11 @@
 		FB3C9717287F1008002104F0 /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9716287F1008002104F0 /* TypeAlias.swift */; };
 		FB3C9719287F11B1002104F0 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9718287F11B1002104F0 /* GameManager.swift */; };
 		FB3C971B28802F39002104F0 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB3C971A28802F39002104F0 /* Colors.xcassets */; };
+		FB4D359128955BE600C643A1 /* TemplateLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4D359028955BE600C643A1 /* TemplateLevel.swift */; };
 		FB5347BA285A83F800E94F65 /* EdgeBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5347B9285A83F800E94F65 /* EdgeBorder.swift */; };
 		FB5347BC285A841600E94F65 /* View+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5347BB285A841600E94F65 /* View+Border.swift */; };
+		FB5D90C72891E00200E4030E /* NumberPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5D90C62891E00200E4030E /* NumberPickerButton.swift */; };
+		FB5D90C92891EA7300E4030E /* normal.data in Resources */ = {isa = PBXBuildFile; fileRef = FB5D90C82891EA7300E4030E /* normal.data */; };
 		FB7BC71C28803A1000E8C5F1 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC71B28803A1000E8C5F1 /* R.generated.swift */; };
 		FB7BC71F28803EC500E8C5F1 /* GameSquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC71E28803EC500E8C5F1 /* GameSquareView.swift */; };
 		FB7BC72128803EE400E8C5F1 /* GameSquareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC72028803EE400E8C5F1 /* GameSquareViewModel.swift */; };
@@ -27,7 +31,7 @@
 		FB7BC7282882BC9B00E8C5F1 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC7272882BC9B00E8C5F1 /* Move.swift */; };
 		FB897488288F31DD00D7C982 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB897487288F31DD00D7C982 /* StorageManager.swift */; };
 		FB89748A288F424B00D7C982 /* Transitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB897489288F424B00D7C982 /* Transitions.swift */; };
-		FBA23907288CA414006AE3A4 /* medium.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA23902288CA413006AE3A4 /* medium.data */; };
+		FB9978D02891C908001F308C /* PickLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9978CF2891C908001F308C /* PickLevelView.swift */; };
 		FBA23908288CA414006AE3A4 /* extreme.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA23903288CA414006AE3A4 /* extreme.data */; };
 		FBA23909288CA414006AE3A4 /* easy.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA23904288CA414006AE3A4 /* easy.data */; };
 		FBA2390A288CA414006AE3A4 /* hard.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA23905288CA414006AE3A4 /* hard.data */; };
@@ -82,6 +86,7 @@
 		C3E97FEEDA6DA6E1A5A8BE8A /* Pods-SudokovTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudokovTests.release.xcconfig"; path = "Target Support Files/Pods-SudokovTests/Pods-SudokovTests.release.xcconfig"; sourceTree = "<group>"; };
 		CF7AF98213C87136B41A8D32 /* Pods_Sudokov.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sudokov.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7487A7FCD1C4181F9ABC9D2 /* Pods-Sudokov-SudokovUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sudokov-SudokovUITests.debug.xcconfig"; path = "Target Support Files/Pods-Sudokov-SudokovUITests/Pods-Sudokov-SudokovUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		DCC3040E2897F4CE00EEB26E /* LevelState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelState.swift; sourceTree = "<group>"; };
 		E82434A63DA51F03BEB052A6 /* Pods-Sudokov.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sudokov.release.xcconfig"; path = "Target Support Files/Pods-Sudokov/Pods-Sudokov.release.xcconfig"; sourceTree = "<group>"; };
 		FB0DC6AF288F05B500E02521 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		FB0DC6B1288F05E400E02521 /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
@@ -90,8 +95,11 @@
 		FB3C9716287F1008002104F0 /* TypeAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAlias.swift; sourceTree = "<group>"; };
 		FB3C9718287F11B1002104F0 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		FB3C971A28802F39002104F0 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		FB4D359028955BE600C643A1 /* TemplateLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateLevel.swift; sourceTree = "<group>"; };
 		FB5347B9285A83F800E94F65 /* EdgeBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeBorder.swift; sourceTree = "<group>"; };
 		FB5347BB285A841600E94F65 /* View+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Border.swift"; sourceTree = "<group>"; };
+		FB5D90C62891E00200E4030E /* NumberPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPickerButton.swift; sourceTree = "<group>"; };
+		FB5D90C82891EA7300E4030E /* normal.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = normal.data; sourceTree = "<group>"; };
 		FB7BC71B28803A1000E8C5F1 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		FB7BC71E28803EC500E8C5F1 /* GameSquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSquareView.swift; sourceTree = "<group>"; };
 		FB7BC72028803EE400E8C5F1 /* GameSquareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSquareViewModel.swift; sourceTree = "<group>"; };
@@ -100,7 +108,7 @@
 		FB7BC7272882BC9B00E8C5F1 /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		FB897487288F31DD00D7C982 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		FB897489288F424B00D7C982 /* Transitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitions.swift; sourceTree = "<group>"; };
-		FBA23902288CA413006AE3A4 /* medium.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medium.data; sourceTree = "<group>"; };
+		FB9978CF2891C908001F308C /* PickLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickLevelView.swift; sourceTree = "<group>"; };
 		FBA23903288CA414006AE3A4 /* extreme.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = extreme.data; sourceTree = "<group>"; };
 		FBA23904288CA414006AE3A4 /* easy.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = easy.data; sourceTree = "<group>"; };
 		FBA23905288CA414006AE3A4 /* hard.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hard.data; sourceTree = "<group>"; };
@@ -221,6 +229,8 @@
 				FBDB28B62884B33C00A372E7 /* Coordinate.swift */,
 				FBA2390C288CA616006AE3A4 /* Level.swift */,
 				FBA23910288CA6A7006AE3A4 /* Difficulty.swift */,
+				FB4D359028955BE600C643A1 /* TemplateLevel.swift */,
+				DCC3040E2897F4CE00EEB26E /* LevelState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -230,7 +240,7 @@
 			children = (
 				FBA23906288CA414006AE3A4 /* veryEasy.data */,
 				FBA23904288CA414006AE3A4 /* easy.data */,
-				FBA23902288CA413006AE3A4 /* medium.data */,
+				FB5D90C82891EA7300E4030E /* normal.data */,
 				FBA23905288CA414006AE3A4 /* hard.data */,
 				FBA23903288CA414006AE3A4 /* extreme.data */,
 			);
@@ -243,6 +253,7 @@
 				FBBBE593288DAA6C00AC809A /* Game */,
 				FBBBE594288DAA8200AC809A /* HomeCoordinator.swift */,
 				FBBDE9C0285522740078A73E /* HomeView.swift */,
+				FB9978CF2891C908001F308C /* PickLevelView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -364,6 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				FBBDE9C3285522CE0078A73E /* MenuButton.swift */,
+				FB5D90C62891E00200E4030E /* NumberPickerButton.swift */,
 				FB5347B9285A83F800E94F65 /* EdgeBorder.swift */,
 			);
 			path = Components;
@@ -480,10 +492,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FBA2390A288CA414006AE3A4 /* hard.data in Resources */,
-				FBA23907288CA414006AE3A4 /* medium.data in Resources */,
 				FBA23908288CA414006AE3A4 /* extreme.data in Resources */,
 				FB3C971B28802F39002104F0 /* Colors.xcassets in Resources */,
 				FBBDE99B285522140078A73E /* Preview Assets.xcassets in Resources */,
+				FB5D90C92891EA7300E4030E /* normal.data in Resources */,
 				FBA2390B288CA414006AE3A4 /* veryEasy.data in Resources */,
 				FBBDE998285522140078A73E /* Assets.xcassets in Resources */,
 				FBA23909288CA414006AE3A4 /* easy.data in Resources */,
@@ -635,6 +647,7 @@
 			files = (
 				FBDB28AF288365B000A372E7 /* FeatureFlags.swift in Sources */,
 				FB5347BC285A841600E94F65 /* View+Border.swift in Sources */,
+				FB5D90C72891E00200E4030E /* NumberPickerButton.swift in Sources */,
 				FBBBE591288DA96F00AC809A /* Coordinator.swift in Sources */,
 				FBBBE58F288DA7F500AC809A /* DependencyManager.swift in Sources */,
 				FB3C9715287F0FEA002104F0 /* TableBuilder.swift in Sources */,
@@ -651,12 +664,15 @@
 				FBFFF13E288F26DD0038F3D8 /* GameInfoView.swift in Sources */,
 				FBBDE9C6285523D30078A73E /* GameView.swift in Sources */,
 				FBDB28B52884B31000A372E7 /* LevelInfo.swift in Sources */,
+				FB4D359128955BE600C643A1 /* TemplateLevel.swift in Sources */,
+				DCC3040F2897F4CE00EEB26E /* LevelState.swift in Sources */,
 				FB7BC71F28803EC500E8C5F1 /* GameSquareView.swift in Sources */,
 				FBA2390D288CA616006AE3A4 /* Level.swift in Sources */,
 				FB7BC71C28803A1000E8C5F1 /* R.generated.swift in Sources */,
 				FBA23911288CA6A7006AE3A4 /* Difficulty.swift in Sources */,
 				FBDB28B12883667F00A372E7 /* GameConfiguration.swift in Sources */,
 				FBDB28B72884B33C00A372E7 /* Coordinate.swift in Sources */,
+				FB9978D02891C908001F308C /* PickLevelView.swift in Sources */,
 				FB7BC72328815E9000E8C5F1 /* NumberPickerView.swift in Sources */,
 				FB897488288F31DD00D7C982 /* StorageManager.swift in Sources */,
 				FBBBE595288DAA8200AC809A /* HomeCoordinator.swift in Sources */,

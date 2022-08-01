@@ -13,6 +13,8 @@ struct HomeView: View {
     private let localLevelManager = DependencyManager.localLevelManager
     private let storageManager = DependencyManager.storageManager
     @State var gameManager: GameManager?
+    @State var shouldShowPickDifficulty: Bool = false
+    @State private var difficulty: Difficulty?
     @ObservedObject var coordinator = HomeCoordinator()
     private var bag = Set<AnyCancellable>()
 
@@ -26,17 +28,41 @@ struct HomeView: View {
                         .environmentObject(coordinator)
                         .transition(.moveAndScale)
                 }
-            case .none:
-                VStack {
-                    Button("Start Game") {
-                        if let level = localLevelManager.getLevel(difficulty: .extreme, level: 1) {
-                            gameManager = GameManager(level: level)
+            case .selectLevel:
+                if let difficulty = difficulty {
+                    PickLevelView(viewModel: PickLevelViewModel(difficulty: difficulty)) { levelNumber in
+                        if let level = localLevelManager.getLevel(difficulty: difficulty, level: levelNumber) {
+                            gameManager = GameManager(level: level,
+                                                      templateLevel: TemplateLevel(difficulty: difficulty, level: levelNumber))
+
                             withAnimation {
                                 coordinator.currentScreen = .game
                             }
                         }
                     }
+                    .transition(.move(edge: .trailing))
+                }
+            case .none:
+                VStack {
+                    Text("Sudokov")
+                        .font(.system(size: 45, weight: .semibold))
+
+                    Button("Start Game") {
+                        shouldShowPickDifficulty = true
+                    }
                     .buttonStyle(MenuButton())
+                    .font(.system(size: 20, weight: .semibold))
+                    .padding(.top, 30)
+                }
+                .confirmationDialog("Pick Difficulty", isPresented: $shouldShowPickDifficulty, titleVisibility: .visible) {
+                    ForEach(Difficulty.allCases, id: \.self) { difficulty in
+                        Button(difficulty.name) {
+                            withAnimation {
+                                self.difficulty = difficulty
+                                coordinator.currentScreen = .selectLevel
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -198,17 +198,6 @@ for i in 0...49 {
     let cellsToHide = tableBuilder.removeCells(tableState: tableBuilder.tableState, depth: hardDepth)
     levels.append(Level(table: tableBuilder.tableState, cellsToHide: cellsToHide))
 }
-writeToFile(name: "hard.data", levels: levels)
-
-levels = []
-
-for i in 0...49 {
-    tableBuilder = TableBuilder()
-
-    let cellsToHide = tableBuilder.removeCells(tableState: tableBuilder.tableState, depth: extremeDepth)
-    levels.append(Level(table: tableBuilder.tableState, cellsToHide: cellsToHide))
-}
-writeToFile(name: "extreme.data", levels: levels)
-
+writeToFile(name: "normal.data", levels: levels)
 
 levels = []

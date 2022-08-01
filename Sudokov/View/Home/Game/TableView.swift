@@ -18,7 +18,11 @@ struct TableView: View {
                     ForEach((0..<self.gameManager.tableState[row].count), id: \.self) { col in
                         GameSquareView(viewModel: self.gameManager.getGameSquare(i: row, j: col), tableWidth: geometry.size.width)
                             .onTapGesture {
-                                withAnimation {
+                                guard gameManager.isGameActive else {
+                                    return
+                                }
+                                
+                                withAnimation(.easeOut.speed(2)) {
                                     self.gameManager.selectedCell = Coordinate(row: row, col: col)
                                 }
                             }

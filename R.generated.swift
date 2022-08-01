@@ -330,8 +330,8 @@ struct R: Rswift.Validatable {
     static let extremeData = Rswift.FileResource(bundle: R.hostingBundle, name: "extreme", pathExtension: "data")
     /// Resource file `hard.data`.
     static let hardData = Rswift.FileResource(bundle: R.hostingBundle, name: "hard", pathExtension: "data")
-    /// Resource file `medium.data`.
-    static let mediumData = Rswift.FileResource(bundle: R.hostingBundle, name: "medium", pathExtension: "data")
+    /// Resource file `normal.data`.
+    static let normalData = Rswift.FileResource(bundle: R.hostingBundle, name: "normal", pathExtension: "data")
     /// Resource file `veryEasy.data`.
     static let veryEasyData = Rswift.FileResource(bundle: R.hostingBundle, name: "veryEasy", pathExtension: "data")
 
@@ -353,9 +353,9 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
 
-    /// `bundle.url(forResource: "medium", withExtension: "data")`
-    static func mediumData(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.mediumData
+    /// `bundle.url(forResource: "normal", withExtension: "data")`
+    static func normalData(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.normalData
       return fileResource.bundle.url(forResource: fileResource)
     }
 

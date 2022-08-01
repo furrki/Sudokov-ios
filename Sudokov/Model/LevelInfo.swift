@@ -17,4 +17,6 @@ struct LevelInfo: Codable {
     let lives: Int
     let options: [Int]
     let tableState: TableMatrix
+    let level: TemplateLevel?
+    let levelState: LevelState
 }

@@ -9,9 +9,37 @@ import SwiftUI
 import Combine
 
 struct GameView: View {
+    // MARK: - Constants
+    private enum InternalAlert {
+        case wonLevel(levelDescription: String)
+        case wonPuzzle
+        case lost
+        
+        var alert: Alert {
+            switch self {
+            case .wonLevel(let levelDescription):
+                return Alert(title: Text("Congratulations!"),
+                             message: Text("You've successfully completed \(levelDescription)"),
+                             dismissButton: .default(Text("Okay!")))
+            case .wonPuzzle:
+                return Alert(title: Text("Congratulations!"),
+                             message: Text("You've successfully completed the puzzle!"),
+                             dismissButton: .default(Text("Okay!")))
+            case .lost:
+                return Alert(title: Text("No worries!"),
+                             message: Text("You can restart the puzzle"),
+                             dismissButton: .default(Text("Okay")))
+            }
+        }
+    }
+    
+    // MARK: - Properties
     @StateObject var gameManager: GameManager
     @EnvironmentObject var coordinator: HomeCoordinator
-
+    @State private var internalAlert: InternalAlert?
+    @State private var shouldShowAlert = false
+    
+    // MARK: - Body
     var body: some View {
         ZStack {
             Color
@@ -24,10 +52,10 @@ struct GameView: View {
                         .environmentObject(gameManager)
                         .environmentObject(coordinator)
                         .padding(.top, 20)
-
+                    
                     TableView(geometry: geometry)
                         .environmentObject(gameManager)
-
+                    
                     ControlsView(configuration: GameConfiguration.shared)
                         .environmentObject(gameManager)
                         .padding(.horizontal, 20)
@@ -35,7 +63,30 @@ struct GameView: View {
                     NumberPickerView(configuration: GameConfiguration.shared)
                         .environmentObject(gameManager)
                         .padding(.horizontal, 10)
+                        .alert(isPresented: $shouldShowAlert) {
+                            Alert(title: Text(""))
+                        }
+                        .onReceive(gameManager.$levelState) { levelState in
+                            switch gameManager.levelState {
+                            case .justWon:
+                                if let level = gameManager.level {
+                                    internalAlert = .wonLevel(levelDescription: "Level \(level.level), \(level.difficulty.name)")
+                                } else {
+                                    internalAlert = .wonPuzzle
+                                }
+                            case .justLost:
+                                internalAlert = .lost
+                            case .ended, .solving:
+                                break
+                            }
+                            print(gameManager.levelState)
+                            shouldShowAlert = internalAlert != nil
+                        }
+
                     Spacer()
+                }
+                .onAppear {
+                    gameManager.saveState()
                 }
             }
         }
