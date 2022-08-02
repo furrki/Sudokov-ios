@@ -12,13 +12,30 @@ struct PickLevelView: View {
     let viewModel: PickLevelViewModel
 
     let onSelectLevel: ((Int) -> Void)
+    @EnvironmentObject var coordinator: HomeCoordinator
 
     var body: some View {
         ScrollView {
             VStack {
+                HStack {
+                    Button {
+                        withAnimation {
+                            coordinator.popBack()
+                        }
+                    } label: {
+                        Image(systemName: "arrow.uturn.backward.circle")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                    }
+
+                    Spacer()
+                }
+                .padding(.horizontal, 30)
+                .padding(.top, 10)
+
                 Text(viewModel.titleText)
                     .font(.system(size: 25, weight: .bold))
-                    .padding(.top, 60)
+                    .padding(.top, 30)
 
                 VStack(spacing: 15) {
                     ForEach(1...viewModel.rowsCount, id: \.self) { row in
@@ -31,7 +48,7 @@ struct PickLevelView: View {
                                         .frame(height: 40)
                                         .frame(maxWidth: .infinity)
                                 }
-                                .buttonStyle(NumberPickerButtonStyle())
+                                .buttonStyle(NumberPickerButtonStyle(isSelected: viewModel.isFinished(row: row, col: col)))
                             }
                         }
                     }
@@ -45,30 +62,8 @@ struct PickLevelView: View {
 
 struct PickLevelView_Previews: PreviewProvider {
     static var previews: some View {
-        PickLevelView(viewModel: PickLevelViewModel(difficulty: .hard)) { _ in
+        PickLevelView(viewModel: PickLevelViewModel(difficulty: .hard, userFinishedLevels: [TemplateLevel(difficulty: .hard, visualLevel: 1)])) { _ in
 
         }
-    }
-}
-
-class PickLevelViewModel {
-    let levelCount = 50
-    let rowsCount = 10
-    let colsCount = 5
-    let difficulty: Difficulty
-    let titleText: String
-
-    init(difficulty: Difficulty) {
-        self.difficulty = difficulty
-
-        titleText = "Select Level - \(difficulty.name)"
-    }
-
-    func getContent(row: Int, col: Int) -> Int {
-        (row - 1) * colsCount + col
-    }
-
-    func getLevel(row: Int, col: Int) -> Int {
-        getContent(row: row, col: col) - 1
     }
 }

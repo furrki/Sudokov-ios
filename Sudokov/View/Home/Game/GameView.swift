@@ -64,25 +64,30 @@ struct GameView: View {
                         .environmentObject(gameManager)
                         .padding(.horizontal, 10)
                         .alert(isPresented: $shouldShowAlert) {
-                            Alert(title: Text(""))
+                            if let alert = internalAlert?.alert {
+                                return alert
+                            } else {
+                                return Alert(title: Text(""))
+                            }
                         }
                         .onReceive(gameManager.$levelState) { levelState in
                             switch gameManager.levelState {
                             case .justWon:
                                 if let level = gameManager.level {
-                                    internalAlert = .wonLevel(levelDescription: "Level \(level.level), \(level.difficulty.name)")
+                                    internalAlert = .wonLevel(levelDescription: "Level \(level.visualLevel), \(level.difficulty.name)")
                                 } else {
                                     internalAlert = .wonPuzzle
                                 }
+                                gameManager.levelState = .ended
                             case .justLost:
                                 internalAlert = .lost
+                                gameManager.levelState = .ended
                             case .ended, .solving:
                                 break
                             }
-                            print(gameManager.levelState)
+
                             shouldShowAlert = internalAlert != nil
                         }
-
                     Spacer()
                 }
                 .onAppear {

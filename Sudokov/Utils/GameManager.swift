@@ -120,6 +120,12 @@ class GameManager: ObservableObject {
         storageManager.currentLevelInfo = levelInfo
     }
 
+    private func saveToSolvedLevels() {
+        if let templateLevel = level, !storageManager.solvedLevels.contains(templateLevel) {
+            storageManager.solvedLevels.append(templateLevel)
+        }
+    }
+
     private func addBinders() {
         if configuration.featureFlags.hideNotNeededNumberButtons {
             $tableState
@@ -320,6 +326,7 @@ class GameManager: ObservableObject {
             }
         }) && conflicts.isEmpty {
             self.levelState = .justWon
+            self.saveToSolvedLevels()
             selectedCell = nil
         }
     }

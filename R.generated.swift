@@ -88,7 +88,7 @@ struct R: Rswift.Validatable {
     try intern.validate()
   }
 
-  /// This `R.color` struct is generated, and contains static references to 12 colors.
+  /// This `R.color` struct is generated, and contains static references to 14 colors.
   struct color {
     /// Color `AccentColor`.
     static let accentColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentColor")
@@ -102,6 +102,10 @@ struct R: Rswift.Validatable {
     static let noneSquareBackground = Rswift.ColorResource(bundle: R.hostingBundle, name: "NoneSquareBackground")
     /// Color `NumberPickerButtonBackground`.
     static let numberPickerButtonBackground = Rswift.ColorResource(bundle: R.hostingBundle, name: "NumberPickerButtonBackground")
+    /// Color `NumberPickerSelectedBackground`.
+    static let numberPickerSelectedBackground = Rswift.ColorResource(bundle: R.hostingBundle, name: "NumberPickerSelectedBackground")
+    /// Color `NumberPickerSelectedTextColor`.
+    static let numberPickerSelectedTextColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "NumberPickerSelectedTextColor")
     /// Color `PrimarySquareBackground`.
     static let primarySquareBackground = Rswift.ColorResource(bundle: R.hostingBundle, name: "PrimarySquareBackground")
     /// Color `SecondarySquareBackground`.
@@ -166,6 +170,24 @@ struct R: Rswift.Validatable {
     @available(iOS 11.0, *)
     static func numberPickerButtonBackground(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
       return UIKit.UIColor(resource: R.color.numberPickerButtonBackground, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "NumberPickerSelectedBackground", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func numberPickerSelectedBackground(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.numberPickerSelectedBackground, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "NumberPickerSelectedTextColor", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func numberPickerSelectedTextColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.numberPickerSelectedTextColor, compatibleWith: traitCollection)
     }
     #endif
 
@@ -268,6 +290,22 @@ struct R: Rswift.Validatable {
     @available(watchOSApplicationExtension 4.0, *)
     static func numberPickerButtonBackground(_: Void = ()) -> UIKit.UIColor? {
       return UIKit.UIColor(named: R.color.numberPickerButtonBackground.name)
+    }
+    #endif
+
+    #if os(watchOS)
+    /// `UIColor(named: "NumberPickerSelectedBackground", bundle: ..., traitCollection: ...)`
+    @available(watchOSApplicationExtension 4.0, *)
+    static func numberPickerSelectedBackground(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.numberPickerSelectedBackground.name)
+    }
+    #endif
+
+    #if os(watchOS)
+    /// `UIColor(named: "NumberPickerSelectedTextColor", bundle: ..., traitCollection: ...)`
+    @available(watchOSApplicationExtension 4.0, *)
+    static func numberPickerSelectedTextColor(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.numberPickerSelectedTextColor.name)
     }
     #endif
 

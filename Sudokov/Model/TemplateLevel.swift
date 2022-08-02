@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TemplateLevel: Codable {
+struct TemplateLevel: Codable, Equatable {
     let difficulty: Difficulty
-    let level: Int
+    let visualLevel: Int // [1-50]
 }

@@ -58,6 +58,7 @@
 		FBDB28B328849C3B00A372E7 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDB28B228849C3B00A372E7 /* TableView.swift */; };
 		FBDB28B52884B31000A372E7 /* LevelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDB28B42884B31000A372E7 /* LevelInfo.swift */; };
 		FBDB28B72884B33C00A372E7 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDB28B62884B33C00A372E7 /* Coordinate.swift */; };
+		FBF5C3A32899BBA200F5FADA /* PickLevelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF5C3A22899BBA200F5FADA /* PickLevelViewModel.swift */; };
 		FBFFF13E288F26DD0038F3D8 /* GameInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFFF13D288F26DD0038F3D8 /* GameInfoView.swift */; };
 /* End PBXBuildFile section */
 
@@ -138,6 +139,7 @@
 		FBDB28B228849C3B00A372E7 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		FBDB28B42884B31000A372E7 /* LevelInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelInfo.swift; sourceTree = "<group>"; };
 		FBDB28B62884B33C00A372E7 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		FBF5C3A22899BBA200F5FADA /* PickLevelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickLevelViewModel.swift; sourceTree = "<group>"; };
 		FBFFF13D288F26DD0038F3D8 /* GameInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoView.swift; sourceTree = "<group>"; };
 		FE249D45209134A61B456B7D /* Pods_SudokovTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SudokovTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -250,10 +252,10 @@
 		FBBBE592288DAA3300AC809A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				FBF5C3A12899BB9200F5FADA /* PickLevel */,
 				FBBBE593288DAA6C00AC809A /* Game */,
 				FBBBE594288DAA8200AC809A /* HomeCoordinator.swift */,
 				FBBDE9C0285522740078A73E /* HomeView.swift */,
-				FB9978CF2891C908001F308C /* PickLevelView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -379,6 +381,15 @@
 				FB5347B9285A83F800E94F65 /* EdgeBorder.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		FBF5C3A12899BB9200F5FADA /* PickLevel */ = {
+			isa = PBXGroup;
+			children = (
+				FB9978CF2891C908001F308C /* PickLevelView.swift */,
+				FBF5C3A22899BBA200F5FADA /* PickLevelViewModel.swift */,
+			);
+			path = PickLevel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -649,6 +660,7 @@
 				FB5347BC285A841600E94F65 /* View+Border.swift in Sources */,
 				FB5D90C72891E00200E4030E /* NumberPickerButton.swift in Sources */,
 				FBBBE591288DA96F00AC809A /* Coordinator.swift in Sources */,
+				FBF5C3A32899BBA200F5FADA /* PickLevelViewModel.swift in Sources */,
 				FBBBE58F288DA7F500AC809A /* DependencyManager.swift in Sources */,
 				FB3C9715287F0FEA002104F0 /* TableBuilder.swift in Sources */,
 				FBBDE9C4285522CE0078A73E /* MenuButton.swift in Sources */,

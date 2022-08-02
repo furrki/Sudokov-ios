@@ -30,10 +30,10 @@ struct HomeView: View {
                 }
             case .selectLevel:
                 if let difficulty = difficulty {
-                    PickLevelView(viewModel: PickLevelViewModel(difficulty: difficulty)) { levelNumber in
+                    PickLevelView(viewModel: PickLevelViewModel(difficulty: difficulty, userFinishedLevels: storageManager.solvedLevels)) { levelNumber in
                         if let level = localLevelManager.getLevel(difficulty: difficulty, level: levelNumber) {
                             gameManager = GameManager(level: level,
-                                                      templateLevel: TemplateLevel(difficulty: difficulty, level: levelNumber))
+                                                      templateLevel: TemplateLevel(difficulty: difficulty, visualLevel: levelNumber + 1))
 
                             withAnimation {
                                 coordinator.currentScreen = .game
@@ -41,6 +41,7 @@ struct HomeView: View {
                         }
                     }
                     .transition(.move(edge: .trailing))
+                    .environmentObject(coordinator)
                 }
             case .none:
                 VStack {
