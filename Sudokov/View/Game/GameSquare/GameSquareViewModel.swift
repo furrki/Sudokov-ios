@@ -27,6 +27,7 @@ struct GameSquareViewModel {
     }
 
     // MARK: - Properties
+    let featureFlagManager: FeatureFlagManager
     let selectionType: SelectionType
     let isAlerting: Bool
     let squareText: String
@@ -50,7 +51,7 @@ struct GameSquareViewModel {
     let foregroundColor: Color
 
     var backgroundColor: Color {
-        if configuration.featureFlags.tableHighlighting {
+        if featureFlagManager.tableHighlighting {
             switch selectionType {
             case .none:
                 return Color(R.color.noneSquareBackground.name)
@@ -72,12 +73,11 @@ struct GameSquareViewModel {
     }
 
     let contentType: ContentType
-    let configuration: GameConfiguration
 
     // MARK: - Initializer
     init(selectionType: SelectionType,
          contentType: ContentType,
-         configuration: GameConfiguration = GameConfiguration.shared,
+         featureFlagManager: FeatureFlagManager = DependencyManager.storageManager.featureFlagManager,
          isAlerting: Bool,
          content: Int,
          drafts: [Int],
@@ -87,7 +87,7 @@ struct GameSquareViewModel {
          boldNumber: Int? = nil) {
         self.selectionType = selectionType
         self.contentType = contentType
-        self.configuration = configuration
+        self.featureFlagManager = featureFlagManager
 
         self.squareText = (1...9).contains(content) ? "\(content)" : ""
         self.content = content
@@ -118,7 +118,7 @@ struct GameSquareViewModel {
         }
 
 
-        if configuration.featureFlags.tableHighlighting {
+        if featureFlagManager.tableHighlighting {
             self.boldNumber = boldNumber
         } else {
             self.boldNumber = nil

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NumberPickerView: View {
     @EnvironmentObject var gameManager: GameManager
-    let configuration: GameConfiguration
+    let featureFlagManager: FeatureFlagManager
 
     var body: some View {
         HStack {
@@ -35,7 +35,7 @@ struct NumberPickerView: View {
     }
 
     func shouldHide(number: Int) -> Bool {
-        guard configuration.featureFlags.hideNotNeededNumberButtons else {
+        guard featureFlagManager.hideNotNeededNumberButtons else {
             return false
         }
 

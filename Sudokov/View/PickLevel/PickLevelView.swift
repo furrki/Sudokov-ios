@@ -62,7 +62,7 @@ struct PickLevelView: View {
 
 struct PickLevelView_Previews: PreviewProvider {
     static var previews: some View {
-        PickLevelView(viewModel: PickLevelViewModel(difficulty: .hard, userFinishedLevels: [TemplateLevel(difficulty: .hard, visualLevel: 1)])) { _ in
+        PickLevelView(viewModel: PickLevelViewModel(difficulty: .normal, userFinishedLevels: [TemplateLevel(difficulty: .normal, visualLevel: 1)])) { _ in
 
         }
     }

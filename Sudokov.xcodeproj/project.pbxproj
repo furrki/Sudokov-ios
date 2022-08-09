@@ -42,7 +42,6 @@
 		FBBBE58F288DA7F500AC809A /* DependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBBE58E288DA7F500AC809A /* DependencyManager.swift */; };
 		FBBBE591288DA96F00AC809A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBBE590288DA96F00AC809A /* Coordinator.swift */; };
 		FBBBE595288DAA8200AC809A /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBBE594288DAA8200AC809A /* HomeCoordinator.swift */; };
-		FBBBE597288DAD9A00AC809A /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBBE596288DAD9A00AC809A /* UserDefaultsManager.swift */; };
 		FBBDE994285522100078A73E /* SudokovApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBDE993285522100078A73E /* SudokovApp.swift */; };
 		FBBDE996285522100078A73E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBDE995285522100078A73E /* ContentView.swift */; };
 		FBBDE998285522140078A73E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBBDE997285522140078A73E /* Assets.xcassets */; };
@@ -54,11 +53,12 @@
 		FBBDE9C4285522CE0078A73E /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBDE9C3285522CE0078A73E /* MenuButton.swift */; };
 		FBBDE9C6285523D30078A73E /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBDE9C5285523D30078A73E /* GameView.swift */; };
 		FBDB28AF288365B000A372E7 /* FeatureFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDB28AE288365B000A372E7 /* FeatureFlags.swift */; };
-		FBDB28B12883667F00A372E7 /* GameConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDB28B02883667F00A372E7 /* GameConfiguration.swift */; };
 		FBDB28B328849C3B00A372E7 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDB28B228849C3B00A372E7 /* TableView.swift */; };
 		FBDB28B52884B31000A372E7 /* LevelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDB28B42884B31000A372E7 /* LevelInfo.swift */; };
 		FBDB28B72884B33C00A372E7 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDB28B62884B33C00A372E7 /* Coordinate.swift */; };
+		FBF142D5289B1FE000C3EA2E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF142D4289B1FE000C3EA2E /* SettingsView.swift */; };
 		FBF5C3A32899BBA200F5FADA /* PickLevelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF5C3A22899BBA200F5FADA /* PickLevelViewModel.swift */; };
+		FBF5C3A52899D5A600F5FADA /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF5C3A42899D5A600F5FADA /* Int+Extensions.swift */; };
 		FBFFF13E288F26DD0038F3D8 /* GameInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFFF13D288F26DD0038F3D8 /* GameInfoView.swift */; };
 /* End PBXBuildFile section */
 
@@ -120,7 +120,6 @@
 		FBBBE58E288DA7F500AC809A /* DependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
 		FBBBE590288DA96F00AC809A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		FBBBE594288DAA8200AC809A /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
-		FBBBE596288DAD9A00AC809A /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		FBBDE990285522100078A73E /* Sudokov.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sudokov.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBBDE993285522100078A73E /* SudokovApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokovApp.swift; sourceTree = "<group>"; };
 		FBBDE995285522100078A73E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -135,11 +134,12 @@
 		FBBDE9C3285522CE0078A73E /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		FBBDE9C5285523D30078A73E /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		FBDB28AE288365B000A372E7 /* FeatureFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlags.swift; sourceTree = "<group>"; };
-		FBDB28B02883667F00A372E7 /* GameConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfiguration.swift; sourceTree = "<group>"; };
 		FBDB28B228849C3B00A372E7 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		FBDB28B42884B31000A372E7 /* LevelInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelInfo.swift; sourceTree = "<group>"; };
 		FBDB28B62884B33C00A372E7 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		FBF142D4289B1FE000C3EA2E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		FBF5C3A22899BBA200F5FADA /* PickLevelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickLevelViewModel.swift; sourceTree = "<group>"; };
+		FBF5C3A42899D5A600F5FADA /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		FBFFF13D288F26DD0038F3D8 /* GameInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoView.swift; sourceTree = "<group>"; };
 		FE249D45209134A61B456B7D /* Pods_SudokovTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SudokovTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -210,6 +210,7 @@
 			children = (
 				FB5347BB285A841600E94F65 /* View+Border.swift */,
 				FB897489288F424B00D7C982 /* Transitions.swift */,
+				FBF5C3A42899D5A600F5FADA /* Int+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -252,8 +253,6 @@
 		FBBBE592288DAA3300AC809A /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				FBF5C3A12899BB9200F5FADA /* PickLevel */,
-				FBBBE593288DAA6C00AC809A /* Game */,
 				FBBBE594288DAA8200AC809A /* HomeCoordinator.swift */,
 				FBBDE9C0285522740078A73E /* HomeView.swift */,
 			);
@@ -340,6 +339,9 @@
 			isa = PBXGroup;
 			children = (
 				FBBBE592288DAA3300AC809A /* Home */,
+				FBF142D3289B1FD300C3EA2E /* Settings */,
+				FBF5C3A12899BB9200F5FADA /* PickLevel */,
+				FBBBE593288DAA6C00AC809A /* Game */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -353,11 +355,9 @@
 				FB3C9716287F1008002104F0 /* TypeAlias.swift */,
 				FB3C9718287F11B1002104F0 /* GameManager.swift */,
 				FBDB28AE288365B000A372E7 /* FeatureFlags.swift */,
-				FBDB28B02883667F00A372E7 /* GameConfiguration.swift */,
 				FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */,
 				FBBBE58E288DA7F500AC809A /* DependencyManager.swift */,
 				FBBBE590288DA96F00AC809A /* Coordinator.swift */,
-				FBBBE596288DAD9A00AC809A /* UserDefaultsManager.swift */,
 				FB897487288F31DD00D7C982 /* StorageManager.swift */,
 			);
 			path = Utils;
@@ -381,6 +381,14 @@
 				FB5347B9285A83F800E94F65 /* EdgeBorder.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		FBF142D3289B1FD300C3EA2E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				FBF142D4289B1FE000C3EA2E /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		FBF5C3A12899BB9200F5FADA /* PickLevel */ = {
@@ -661,6 +669,7 @@
 				FB5D90C72891E00200E4030E /* NumberPickerButton.swift in Sources */,
 				FBBBE591288DA96F00AC809A /* Coordinator.swift in Sources */,
 				FBF5C3A32899BBA200F5FADA /* PickLevelViewModel.swift in Sources */,
+				FBF142D5289B1FE000C3EA2E /* SettingsView.swift in Sources */,
 				FBBBE58F288DA7F500AC809A /* DependencyManager.swift in Sources */,
 				FB3C9715287F0FEA002104F0 /* TableBuilder.swift in Sources */,
 				FBBDE9C4285522CE0078A73E /* MenuButton.swift in Sources */,
@@ -671,7 +680,6 @@
 				FB89748A288F424B00D7C982 /* Transitions.swift in Sources */,
 				FBBDE994285522100078A73E /* SudokovApp.swift in Sources */,
 				FB0DC6B4288F072F00E02521 /* CodableStorage.swift in Sources */,
-				FBBBE597288DAD9A00AC809A /* UserDefaultsManager.swift in Sources */,
 				FB5347BA285A83F800E94F65 /* EdgeBorder.swift in Sources */,
 				FBFFF13E288F26DD0038F3D8 /* GameInfoView.swift in Sources */,
 				FBBDE9C6285523D30078A73E /* GameView.swift in Sources */,
@@ -680,9 +688,9 @@
 				DCC3040F2897F4CE00EEB26E /* LevelState.swift in Sources */,
 				FB7BC71F28803EC500E8C5F1 /* GameSquareView.swift in Sources */,
 				FBA2390D288CA616006AE3A4 /* Level.swift in Sources */,
+				FBF5C3A52899D5A600F5FADA /* Int+Extensions.swift in Sources */,
 				FB7BC71C28803A1000E8C5F1 /* R.generated.swift in Sources */,
 				FBA23911288CA6A7006AE3A4 /* Difficulty.swift in Sources */,
-				FBDB28B12883667F00A372E7 /* GameConfiguration.swift in Sources */,
 				FBDB28B72884B33C00A372E7 /* Coordinate.swift in Sources */,
 				FB9978D02891C908001F308C /* PickLevelView.swift in Sources */,
 				FB7BC72328815E9000E8C5F1 /* NumberPickerView.swift in Sources */,
@@ -781,7 +789,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -835,7 +843,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

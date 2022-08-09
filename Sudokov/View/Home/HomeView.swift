@@ -14,11 +14,29 @@ struct HomeView: View {
     private let storageManager = DependencyManager.storageManager
     @State var gameManager: GameManager?
     @State var shouldShowPickDifficulty: Bool = false
+    @State private var isShowingSetting = false
+    @State private var isSelectingPlaySet = false
     @State private var difficulty: Difficulty?
     @ObservedObject var coordinator = HomeCoordinator()
     private var bag = Set<AnyCancellable>()
 
     // MARK: - Content
+
+    private var topBar: some View {
+        HStack {
+            Spacer()
+
+            Button {
+                isShowingSetting = true
+            } label: {
+                Image(systemName: "gear")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+            }
+        }
+        .padding(.horizontal, 20)
+    }
+
     var body: some View {
         ZStack {
             switch coordinator.currentScreen {
@@ -45,8 +63,22 @@ struct HomeView: View {
                 }
             case .none:
                 VStack {
+                    topBar
+                        .frame(height: 30, alignment: .trailing)
+                        .padding(.top, 20)
+
+                    Spacer()
+
                     Text("Sudokov")
                         .font(.system(size: 45, weight: .semibold))
+                        .confirmationDialog("How do you want to play?", isPresented: $isSelectingPlaySet, titleVisibility: .visible) {
+                            ForEach(FeatureFlagManager.PlaySet.allCases, id: \.self) { playSet in
+                                Button(playSet.rawValue) {
+                                    storageManager.preferredPlaySet = playSet
+                                    storageManager.featureFlagManager = FeatureFlagManager(playSet: playSet)
+                                }
+                            }
+                        }
 
                     Button("Start Game") {
                         shouldShowPickDifficulty = true
@@ -54,6 +86,11 @@ struct HomeView: View {
                     .buttonStyle(MenuButton())
                     .font(.system(size: 20, weight: .semibold))
                     .padding(.top, 30)
+                    .sheet(isPresented: $isShowingSetting) {
+                        SettingsView()
+                    }
+
+                    Spacer()
                 }
                 .confirmationDialog("Pick Difficulty", isPresented: $shouldShowPickDifficulty, titleVisibility: .visible) {
                     ForEach(Difficulty.allCases, id: \.self) { difficulty in
@@ -71,6 +108,11 @@ struct HomeView: View {
             if let currentLevel = storageManager.currentLevelInfo {
                 gameManager = GameManager(levelInfo: currentLevel)
                 coordinator.currentScreen = .game
+                return
+            }
+
+            if storageManager.preferredPlaySet == nil {
+                isSelectingPlaySet = true
             }
         }
     }

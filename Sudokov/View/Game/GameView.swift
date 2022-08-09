@@ -26,8 +26,8 @@ struct GameView: View {
                              message: Text("You've successfully completed the puzzle!"),
                              dismissButton: .default(Text("Okay!")))
             case .lost:
-                return Alert(title: Text("No worries!"),
-                             message: Text("You can restart the puzzle"),
+                return Alert(title: Text("Game Over"),
+                             message: Text("You are out of lives"),
                              dismissButton: .default(Text("Okay")))
             }
         }
@@ -56,11 +56,11 @@ struct GameView: View {
                     TableView(geometry: geometry)
                         .environmentObject(gameManager)
                     
-                    ControlsView(configuration: GameConfiguration.shared)
+                    ControlsView(featureFlagManager: DependencyManager.storageManager.featureFlagManager)
                         .environmentObject(gameManager)
                         .padding(.horizontal, 20)
 
-                    NumberPickerView(configuration: GameConfiguration.shared)
+                    NumberPickerView(featureFlagManager: DependencyManager.storageManager.featureFlagManager)
                         .environmentObject(gameManager)
                         .padding(.horizontal, 10)
                         .alert(isPresented: $shouldShowAlert) {
@@ -93,6 +93,9 @@ struct GameView: View {
                 .onAppear {
                     gameManager.saveState()
                 }
+                .onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification), perform: { output in
+                    gameManager.saveState()
+                })
             }
         }
     }

@@ -19,4 +19,5 @@ struct LevelInfo: Codable {
     let tableState: TableMatrix
     let level: TemplateLevel?
     let levelState: LevelState
+    let secondsPast: Int
 }

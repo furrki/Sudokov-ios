@@ -38,8 +38,13 @@ struct GameInfoView: View {
 
             Spacer()
 
-            if GameConfiguration.shared.featureFlags.lives {
+            if DependencyManager.storageManager.featureFlagManager.lives {
                 Text(gameManager.livesText)
+                    .font(.system(size: 14.0))
+            }
+
+            if DependencyManager.storageManager.featureFlagManager.timer {
+                Text(gameManager.timerText)
                     .font(.system(size: 14.0))
             }
         }

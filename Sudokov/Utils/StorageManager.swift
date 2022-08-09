@@ -12,6 +12,8 @@ class StorageManager {
     private enum Keys {
         static let levelInfo = "LevelInfo"
         static let solvedLevels = "SolvedLevels"
+        static let featureFlags = "FeatureFlags"
+        static let preferredPlaySet = "PreferredPlaySet"
     }
 
     // MARK: - Properties
@@ -40,6 +42,26 @@ class StorageManager {
 
         set {
             try? storage.save(newValue, for: Keys.solvedLevels)
+        }
+    }
+
+    var preferredPlaySet: FeatureFlagManager.PlaySet? {
+        get {
+            fetchFromFile(key: Keys.preferredPlaySet)
+        }
+
+        set {
+            try? storage.save(newValue, for: Keys.preferredPlaySet)
+        }
+    }
+
+    var featureFlagManager: FeatureFlagManager {
+        get {
+            fetchFromFile(key: Keys.featureFlags) ?? FeatureFlagManager(playSet: .arcade)
+        }
+
+        set {
+            try? storage.save(newValue, for: Keys.featureFlags)
         }
     }
 

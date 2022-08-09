@@ -11,8 +11,6 @@ enum Difficulty: CaseIterable, Codable {
     case veryEasy
     case easy
     case normal
-    case hard
-    case extreme
 
     var name: String {
         switch self {
@@ -22,10 +20,6 @@ enum Difficulty: CaseIterable, Codable {
             return "Easy"
         case .normal:
             return "Normal"
-        case .hard:
-            return "Hard"
-        case .extreme:
-            return "Extreme"
         }
     }
 
@@ -37,10 +31,6 @@ enum Difficulty: CaseIterable, Codable {
             return "easy"
         case .normal:
             return "normal"
-        case .hard:
-            return "hard"
-        case .extreme:
-            return "extreme"
         }
     }
 }

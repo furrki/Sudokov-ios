@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ControlsView: View {
     @EnvironmentObject var gameManager: GameManager
-    let configuration: GameConfiguration
+    let featureFlagManager: FeatureFlagManager
 
     var body: some View {
         HStack {
@@ -22,7 +22,7 @@ struct ControlsView: View {
                     .frame(maxWidth: .infinity)
             }
             
-            if configuration.featureFlags.backButton {
+            if featureFlagManager.revertButton {
                 Button {
                     gameManager.revertMove()
                 } label: {

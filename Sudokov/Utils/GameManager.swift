@@ -11,7 +11,8 @@ import Combine
 class GameManager: ObservableObject {
     // MARK: - Constants Enums
     private enum Constants {
-        static let startingLives: Int = 3
+        static let startingLives = 3
+        static let perSecondSave = 5
     }
 
     enum FillContentMode {
@@ -24,11 +25,17 @@ class GameManager: ObservableObject {
     private let storageManager: StorageManager
     private let tableFirstState: TableMatrix
     private let solution: TableMatrix
-    private let configuration: GameConfiguration
+    private let featureFlagManager: FeatureFlagManager
     private var bag = Set<AnyCancellable>()
+    private var timerCancellable: AnyCancellable?
     private var moves: [Move] = []
     private var conflicts: [Coordinate] = []
     private var unmatches: [Coordinate] = []
+    private var secondsPast: Int {
+        didSet {
+            timerText = secondsPast.getFormattedCounter()
+        }
+    }
 
     let level: TemplateLevel?
 
@@ -41,6 +48,7 @@ class GameManager: ObservableObject {
 
     @Published private(set) var isAbandoned: Bool = false
     @Published private(set) var livesText: String
+    @Published private(set) var timerText: String
     @Published private(set) var options: [Int] = []
     @Published private(set) var tableState: TableMatrix
     @Published private(set) var drafts: Dictionary<Coordinate, [Int]> = [:]
@@ -56,7 +64,6 @@ class GameManager: ObservableObject {
     // MARK: - Methods
     init(level: Level,
          templateLevel: TemplateLevel,
-         configuration: GameConfiguration = GameConfiguration.shared,
          storageManager: StorageManager = DependencyManager.storageManager) {
         solution = level.table
 
@@ -72,9 +79,11 @@ class GameManager: ObservableObject {
 
         tableState = builtTable
         tableFirstState = builtTable
-        self.configuration = configuration
+        self.featureFlagManager = storageManager.featureFlagManager
         self.storageManager = storageManager
         self.level = templateLevel
+        self.secondsPast = 0
+        self.timerText = 0.getFormattedCounter()
 
         let livesToShow = lives >= 0 ? lives : 0
         self.livesText = "Lives: \(livesToShow)/\(Constants.startingLives)"
@@ -83,7 +92,6 @@ class GameManager: ObservableObject {
     }
 
     init(levelInfo: LevelInfo,
-         configuration: GameConfiguration = GameConfiguration.shared,
          storageManager: StorageManager = DependencyManager.storageManager) {
         self.tableFirstState = levelInfo.tableFirstState
         self.solution = levelInfo.solution
@@ -94,8 +102,10 @@ class GameManager: ObservableObject {
         self.lives = levelInfo.lives
         self.options = levelInfo.options
         self.tableState = levelInfo.tableState
-        self.configuration = configuration
+        self.featureFlagManager = storageManager.featureFlagManager
         self.storageManager = storageManager
+        self.secondsPast = levelInfo.secondsPast
+        self.timerText = levelInfo.secondsPast.getFormattedCounter()
 
         let livesToShow = lives >= 0 ? lives : 0
         self.livesText = "Lives: \(livesToShow)/\(Constants.startingLives)"
@@ -116,7 +126,8 @@ class GameManager: ObservableObject {
                                   options: options,
                                   tableState: tableState,
                                   level: level,
-                                  levelState: levelState)
+                                  levelState: levelState,
+                                  secondsPast: secondsPast)
         storageManager.currentLevelInfo = levelInfo
     }
 
@@ -127,7 +138,7 @@ class GameManager: ObservableObject {
     }
 
     private func addBinders() {
-        if configuration.featureFlags.hideNotNeededNumberButtons {
+        if featureFlagManager.hideNotNeededNumberButtons {
             $tableState
                 .map { rows in
                     var options: [Int] = (0...8).map { _ in 0 }
@@ -155,6 +166,14 @@ class GameManager: ObservableObject {
                 }
                 .assign(to: \.options, on: self)
                 .store(in: &bag)
+        }
+
+        if featureFlagManager.timer {
+            timerCancellable = Timer.publish(every: 1.0, on: .main, in: .default)
+                .autoconnect()
+                .sink { [weak self] seconds in
+                    self?.tickSecond()
+                }
         }
     }
 
@@ -319,6 +338,16 @@ class GameManager: ObservableObject {
         saveState()
     }
 
+    private func tickSecond() {
+        if featureFlagManager.timer {
+            secondsPast += 1
+
+            if secondsPast % Constants.perSecondSave == 0 {
+                saveState()
+            }
+        }
+    }
+
     private func checkWin() {
         if tableState.allSatisfy({ row in
             row.allSatisfy { col in
@@ -332,7 +361,7 @@ class GameManager: ObservableObject {
     }
 
     private func checkLose() {
-        guard configuration.featureFlags.lives, lives < 0 else {
+        guard featureFlagManager.lives, lives < 0 else {
             return
         }
 
@@ -401,9 +430,9 @@ class GameManager: ObservableObject {
     }
 
     private func updateLives(coordinate: Coordinate, value: Int) {
-        if configuration.featureFlags.lives {
-            let shouldLoseLifeByConflict = configuration.featureFlags.alertConflict && !tableBuilder.availableNumbers(tableState: tableState, row: coordinate.row, col: coordinate.col).contains(value)
-            let shouldLoseLifeByUnmatch = configuration.featureFlags.alertNotMatch && solution[coordinate.row][coordinate.col] != value
+        if featureFlagManager.lives {
+            let shouldLoseLifeByConflict = featureFlagManager.alertConflict && !tableBuilder.availableNumbers(tableState: tableState, row: coordinate.row, col: coordinate.col).contains(value)
+            let shouldLoseLifeByUnmatch = featureFlagManager.alertNotMatch && solution[coordinate.row][coordinate.col] != value
 
             if shouldLoseLifeByConflict || shouldLoseLifeByUnmatch {
                 lives -= 1
@@ -413,7 +442,7 @@ class GameManager: ObservableObject {
     }
 
     private func updateConflicts(coordinate: Coordinate) {
-        if configuration.featureFlags.alertConflict {
+        if featureFlagManager.alertConflict {
             conflicts.removeAll {
                 tableBuilder.availableNumbers(tableState: tableState, row: $0.row, col: $0.col).contains(tableState[$0.row][$0.col])
             }
@@ -440,7 +469,7 @@ class GameManager: ObservableObject {
             }
         }
 
-        if configuration.featureFlags.alertNotMatch {
+        if featureFlagManager.alertNotMatch {
             unmatches.removeAll { _ in
                 self.solution[coordinate.row][coordinate.col] == self.tableState[coordinate.row][coordinate.col] || self.tableState[coordinate.row][coordinate.col] == 0
             }
