@@ -42,8 +42,7 @@ struct GameView: View {
     // MARK: - Body
     var body: some View {
         ZStack {
-            Color
-                .white
+            Color(R.color.gameBackground.name)
                 .ignoresSafeArea()
 
             GeometryReader { geometry in

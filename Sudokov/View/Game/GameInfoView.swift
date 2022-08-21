@@ -20,6 +20,7 @@ struct GameInfoView: View {
                 Image(systemName: "xmark.circle")
                     .resizable()
                     .frame(width: 25, height: 25)
+                    .foregroundColor(Color(R.color.button.name))
             }
             .alert(isPresented: $isAbandoning) {
                 Alert(

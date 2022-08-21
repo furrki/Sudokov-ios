@@ -19,6 +19,7 @@ struct ControlsView: View {
                 Image(systemName: "trash")
                     .resizable()
                     .frame(width: 20, height: 20)
+                    .foregroundColor(Color(R.color.button.name))
                     .frame(maxWidth: .infinity)
             }
             
@@ -29,6 +30,7 @@ struct ControlsView: View {
                     Image(systemName: "arrowshape.turn.up.backward")
                         .resizable()
                         .frame(width: 20, height: 20)
+                        .foregroundColor(Color(R.color.button.name))
                         .frame(maxWidth: .infinity)
                 }
             }
@@ -39,6 +41,7 @@ struct ControlsView: View {
                 Image(systemName: gameManager.fillContentMode == .text ? "pencil.circle" : "pencil.circle.fill")
                     .resizable()
                     .frame(width: 20, height: 20)
+                    .foregroundColor(Color(R.color.button.name))
                     .frame(maxWidth: .infinity)
             }
         }

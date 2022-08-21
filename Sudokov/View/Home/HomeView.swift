@@ -35,6 +35,7 @@ struct HomeView: View {
                 Image(systemName: "gear")
                     .resizable()
                     .frame(width: 30, height: 30)
+                    .foregroundColor(Color(R.color.button.name))
             }
         }
         .padding(.horizontal, 20)
