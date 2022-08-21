@@ -26,6 +26,7 @@ class GameManager: ObservableObject {
     private let tableFirstState: TableMatrix
     private let solution: TableMatrix
     private let featureFlagManager: FeatureFlagManager
+    private let analyticsManager: AnalyticsManager
     private var bag = Set<AnyCancellable>()
     private var timerCancellable: AnyCancellable?
     private var moves: [Move] = []
@@ -60,11 +61,20 @@ class GameManager: ObservableObject {
     var isGameActive: Bool {
         levelState == .solving
     }
-    
+
+    private var levelAnalytics: LevelAnalytics {
+        if let level = level {
+            return LevelAnalytics(level: level.visualLevel, difficulty: level.difficulty)
+        }
+
+        return LevelAnalytics(level: -1, difficulty: level?.difficulty ?? .normal)
+    }
+
     // MARK: - Methods
     init(level: Level,
          templateLevel: TemplateLevel,
-         storageManager: StorageManager = DependencyManager.storageManager) {
+         storageManager: StorageManager = DependencyManager.storageManager,
+         analyticsManager: AnalyticsManager = DependencyManager.analyticsManager) {
         solution = level.table
 
         let builtTable = level.table.enumerated().compactMap { rowIndex, row in
@@ -80,6 +90,7 @@ class GameManager: ObservableObject {
         tableState = builtTable
         tableFirstState = builtTable
         self.featureFlagManager = storageManager.featureFlagManager
+        self.analyticsManager = analyticsManager
         self.storageManager = storageManager
         self.level = templateLevel
         self.secondsPast = 0
@@ -92,7 +103,8 @@ class GameManager: ObservableObject {
     }
 
     init(levelInfo: LevelInfo,
-         storageManager: StorageManager = DependencyManager.storageManager) {
+         storageManager: StorageManager = DependencyManager.storageManager,
+         analyticsManager: AnalyticsManager = DependencyManager.analyticsManager) {
         self.tableFirstState = levelInfo.tableFirstState
         self.solution = levelInfo.solution
         self.drafts = levelInfo.drafts
@@ -103,6 +115,7 @@ class GameManager: ObservableObject {
         self.options = levelInfo.options
         self.tableState = levelInfo.tableState
         self.featureFlagManager = storageManager.featureFlagManager
+        self.analyticsManager = analyticsManager
         self.storageManager = storageManager
         self.secondsPast = levelInfo.secondsPast
         self.timerText = levelInfo.secondsPast.getFormattedCounter()
@@ -207,13 +220,17 @@ class GameManager: ObservableObject {
         switch fillContentMode {
         case .draft:
             fillContentMode = .text
+            analyticsManager.logEvent(.gameTurnOffDraft)
         case .text:
             fillContentMode = .draft
+            analyticsManager.logEvent(.gameTurnOnDraft)
         }
     }
 
     func abandonGame() {
         storageManager.currentLevelInfo = nil
+        analyticsManager.logEvent(.gameAbandon, parameters: levelAnalytics)
+        timerCancellable?.cancel()
         isAbandoned = true
     }
 
@@ -302,6 +319,8 @@ class GameManager: ObservableObject {
                               content: [tableState[selectedCell.row][selectedCell.col]]))
         }
 
+        analyticsManager.logEvent(.gameRemove, parameters: CellLevelAnalytics(cellAnalytics: CellAnalytics(coordinate: selectedCell, currentValue: tableState[selectedCell.row][selectedCell.col]),
+                                                                              levelAnalytics: levelAnalytics))
         tableState[selectedCell.row][selectedCell.col] = 0
         updateConflicts(coordinate: selectedCell)
         saveState()
@@ -336,6 +355,7 @@ class GameManager: ObservableObject {
 
         updateConflicts(coordinate: Coordinate(row: lastMove.row, col: lastMove.col))
         saveState()
+        analyticsManager.logEvent(.gameRevert, parameters: levelAnalytics)
     }
 
     private func tickSecond() {
@@ -354,8 +374,10 @@ class GameManager: ObservableObject {
                 col != 0
             }
         }) && conflicts.isEmpty {
-            self.levelState = .justWon
-            self.saveToSolvedLevels()
+            timerCancellable?.cancel()
+            analyticsManager.logEvent(.gameFinish, parameters: levelAnalytics)
+            levelState = .justWon
+            saveToSolvedLevels()
             selectedCell = nil
         }
     }
@@ -364,7 +386,9 @@ class GameManager: ObservableObject {
         guard featureFlagManager.lives, lives < 0 else {
             return
         }
-
+        
+        analyticsManager.logEvent(.gameLost, parameters: levelAnalytics)
+        timerCancellable?.cancel()
         self.levelState = .justLost
         selectedCell = nil
     }

@@ -45,7 +45,7 @@ class StorageManager {
         }
     }
 
-    var preferredPlaySet: FeatureFlagManager.PlaySet? {
+    var preferredPlaySet: PlaySet? {
         get {
             fetchFromFile(key: Keys.preferredPlaySet)
         }

@@ -14,4 +14,5 @@ enum DependencyManager {
     static let storage = CodableStorage(storage: disk)
     static let localLevelManager = LocalLevelManager()
     static let storageManager = StorageManager(storage: storage)
+    static let analyticsManager = AnalyticsManager()
 }

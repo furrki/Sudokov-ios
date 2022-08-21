@@ -8,11 +8,6 @@
 import Foundation
 
 class FeatureFlagManager: Codable {
-    enum PlaySet: String, Codable, CaseIterable {
-        case arcade = "Arcade"
-        case oldSchool = "Old school"
-    }
-
     let hideNotNeededNumberButtons: Bool
     let revertButton: Bool
     let tableHighlighting: Bool

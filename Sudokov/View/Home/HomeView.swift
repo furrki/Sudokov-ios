@@ -12,6 +12,8 @@ struct HomeView: View {
     // MARK: - Properties
     private let localLevelManager = DependencyManager.localLevelManager
     private let storageManager = DependencyManager.storageManager
+    private let analyticsManager = DependencyManager.analyticsManager
+
     @State var gameManager: GameManager?
     @State var shouldShowPickDifficulty: Bool = false
     @State private var isShowingSetting = false
@@ -28,6 +30,7 @@ struct HomeView: View {
 
             Button {
                 isShowingSetting = true
+                analyticsManager.logEvent(.homeSettings)
             } label: {
                 Image(systemName: "gear")
                     .resizable()
@@ -72,10 +75,12 @@ struct HomeView: View {
                     Text("Sudokov")
                         .font(.system(size: 45, weight: .semibold))
                         .confirmationDialog("How do you want to play?", isPresented: $isSelectingPlaySet, titleVisibility: .visible) {
-                            ForEach(FeatureFlagManager.PlaySet.allCases, id: \.self) { playSet in
+                            ForEach(PlaySet.allCases, id: \.self) { playSet in
                                 Button(playSet.rawValue) {
                                     storageManager.preferredPlaySet = playSet
                                     storageManager.featureFlagManager = FeatureFlagManager(playSet: playSet)
+
+                                    analyticsManager.logEvent(.homePlaySet, parameters: PlaySetAnalytics(playSet: playSet))
                                 }
                             }
                         }
