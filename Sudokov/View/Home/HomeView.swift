@@ -96,6 +96,19 @@ struct HomeView: View {
                         SettingsView()
                     }
 
+                    Button("Generate a level") {
+                        let tableBuilder = TableBuilder()
+                        let level = Level(table: tableBuilder.table, cellsToHide: tableBuilder.makeCellsToRemove(tableState: tableBuilder.tableState, depth: 50))
+                        gameManager = GameManager(level: level,
+                                                  templateLevel: nil)
+
+                        coordinator.currentScreen = .game
+                    }
+                    .buttonStyle(MenuButton())
+                    .font(.system(size: 20, weight: .semibold))
+                    .padding(.top, 30)
+
+
                     Spacer()
                 }
                 .confirmationDialog("Pick Difficulty", isPresented: $shouldShowPickDifficulty, titleVisibility: .visible) {

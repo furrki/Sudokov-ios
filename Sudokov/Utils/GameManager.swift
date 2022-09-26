@@ -72,7 +72,7 @@ class GameManager: ObservableObject {
 
     // MARK: - Methods
     init(level: Level,
-         templateLevel: TemplateLevel,
+         templateLevel: TemplateLevel?,
          storageManager: StorageManager = DependencyManager.storageManager,
          analyticsManager: AnalyticsManager = DependencyManager.analyticsManager) {
         solution = level.table
