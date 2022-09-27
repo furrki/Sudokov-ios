@@ -12,6 +12,7 @@ class AnalyticsManager {
     enum Event {
         case homePlaySet
         case homeSettings
+        case homeGenerateLevel
         case settingsPlaySet
         case settingsUpdate
         case gameTurnOnDraft
@@ -26,6 +27,7 @@ class AnalyticsManager {
             switch self {
             case .homePlaySet: return "home_playSet"
             case .homeSettings: return "home_settings"
+            case .homeGenerateLevel: return "home_generate_level"
             case .settingsPlaySet: return "settings_playSet"
             case .settingsUpdate: return "settings_update"
             case .gameTurnOnDraft: return "game_turnOnDraft"

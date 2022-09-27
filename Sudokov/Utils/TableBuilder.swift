@@ -8,6 +8,13 @@
 import Foundation
 
 class TableBuilder: ObservableObject {
+    // MARK: - Constants
+    private enum Constants {
+        static let easyDepth = 35
+        static let mediumDepth = 30
+        static let hardDepth = 23
+    }
+
     // MARK: - Properties
     var table: TableMatrix {
         return tableState
@@ -129,13 +136,15 @@ class TableBuilder: ObservableObject {
         })
     }
 
-    private func getRowIndex(tableState: TableMatrix, col: Int, of value: Int) -> Int {
-        for i in 0...8 {
-            if tableState[i][col] == value {
-                return i
-            }
+    func cellsToRemove(tableState: TableMatrix, difficulty: Difficulty) -> [Coordinate] {
+        switch difficulty {
+        case .easy:
+            return makeCellsToRemove(tableState: tableState, depth: Constants.easyDepth)
+        case .medium:
+            return makeCellsToRemove(tableState: tableState, depth: Constants.mediumDepth)
+        case .hard:
+            return makeCellsToRemove(tableState: tableState, depth: Constants.hardDepth)
         }
-        return -1
     }
 
     func makeCellsToRemove(tableState: TableMatrix, depth: Int) -> [Coordinate] {
@@ -218,5 +227,14 @@ class TableBuilder: ObservableObject {
                          shouldCheckRows: shouldCheckRows,
                          shouldCheckCols: shouldCheckCols,
                          shouldCheckSquares: shouldCheckSquares)
+    }
+
+    private func getRowIndex(tableState: TableMatrix, col: Int, of value: Int) -> Int {
+        for i in 0...8 {
+            if tableState[i][col] == value {
+                return i
+            }
+        }
+        return -1
     }
 }

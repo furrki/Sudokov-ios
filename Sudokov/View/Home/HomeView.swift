@@ -9,17 +9,26 @@ import SwiftUI
 import Combine
 
 struct HomeView: View {
+    // MARK: - Models
+    private enum GameSelection {
+        case startGame
+        case generate
+    }
+
     // MARK: - Properties
     private let localLevelManager = DependencyManager.localLevelManager
     private let storageManager = DependencyManager.storageManager
     private let analyticsManager = DependencyManager.analyticsManager
+    private let tableBuilder = DependencyManager.tableBuilder
 
     @State var gameManager: GameManager?
     @State var shouldShowPickDifficulty: Bool = false
     @State private var isShowingSetting = false
     @State private var isSelectingPlaySet = false
     @State private var difficulty: Difficulty?
+    @State private var gameSelection: GameSelection?
     @ObservedObject var coordinator = HomeCoordinator()
+
     private var bag = Set<AnyCancellable>()
 
     // MARK: - Content
@@ -85,29 +94,26 @@ struct HomeView: View {
                                 }
                             }
                         }
+                    VStack {
+                        Button("Start game") {
+                            shouldShowPickDifficulty = true
+                            gameSelection = .startGame
+                        }
+                        .buttonStyle(MenuButton())
+                        .font(.system(size: 15, weight: .semibold))
+                        .padding(.top, 30)
+                        .sheet(isPresented: $isShowingSetting) {
+                            SettingsView()
+                        }
 
-                    Button("Start Game") {
-                        shouldShowPickDifficulty = true
+                        Button("Generate a level") {
+                            gameSelection = .generate
+                            shouldShowPickDifficulty = true
+                        }
+                        .buttonStyle(MenuButton())
+                        .font(.system(size: 15, weight: .semibold))
+                        .padding(.top, 20)
                     }
-                    .buttonStyle(MenuButton())
-                    .font(.system(size: 20, weight: .semibold))
-                    .padding(.top, 30)
-                    .sheet(isPresented: $isShowingSetting) {
-                        SettingsView()
-                    }
-
-                    Button("Generate a level") {
-                        let tableBuilder = TableBuilder()
-                        let level = Level(table: tableBuilder.table, cellsToHide: tableBuilder.makeCellsToRemove(tableState: tableBuilder.tableState, depth: 50))
-                        gameManager = GameManager(level: level,
-                                                  templateLevel: nil)
-
-                        coordinator.currentScreen = .game
-                    }
-                    .buttonStyle(MenuButton())
-                    .font(.system(size: 20, weight: .semibold))
-                    .padding(.top, 30)
-
 
                     Spacer()
                 }
@@ -116,7 +122,28 @@ struct HomeView: View {
                         Button(difficulty.name) {
                             withAnimation {
                                 self.difficulty = difficulty
-                                coordinator.currentScreen = .selectLevel
+
+                                switch gameSelection {
+                                case .generate:
+                                    let level = Level(
+                                        table: tableBuilder.table,
+                                        cellsToHide: tableBuilder.cellsToRemove(
+                                            tableState: tableBuilder.tableState,
+                                            difficulty: difficulty
+                                        )
+                                    )
+
+                                    gameManager = GameManager(level: level,
+                                                              templateLevel: nil)
+
+                                    coordinator.currentScreen = .game
+
+                                case .startGame:
+                                    coordinator.currentScreen = .selectLevel
+
+                                case .none:
+                                    break
+                                }
                             }
                         }
                     }

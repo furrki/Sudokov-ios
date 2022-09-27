@@ -105,12 +105,69 @@ class TableBuilder: ObservableObject {
         return available
     }
 
-    func removeCells(tableState: TableMatrix,
-                     depth: Int) -> [Coordinate] {
+    func getConflictableCellGroups(tableState: TableMatrix) -> [[Coordinate]] {
+        let tableSize = 8
+        var possibleConflicts = Set<Set<Coordinate>>()
+
+        for row in 0...tableSize {
+            for i in 0...tableSize-1 {
+                for j in ((i + 1)...tableSize) {
+                    let iValue = tableState[row][i]
+                    let jValue = tableState[row][j]
+
+                    let iIndex = getRowIndex(tableState: tableState, col: i, of: jValue)
+                    let jIndex = getRowIndex(tableState: tableState, col: j, of: iValue)
+
+                    if iIndex == jIndex {
+                        let coordinates: Set<Coordinate> = [
+                            Coordinate(row: row, col: i),
+                            Coordinate(row: row, col: j),
+                            Coordinate(row: jIndex, col: i),
+                            Coordinate(row: iIndex, col: j),
+                        ]
+
+                        possibleConflicts.insert(coordinates)
+                    }
+                }
+            }
+        }
+        return Array(possibleConflicts.map {
+            Array($0)
+        })
+    }
+
+    private func getRowIndex(tableState: TableMatrix, col: Int, of value: Int) -> Int {
+        for i in 0...8 {
+            if tableState[i][col] == value {
+                return i
+            }
+        }
+        return -1
+    }
+
+    func makeCellsToRemove(tableState: TableMatrix, depth: Int) -> [Coordinate] {
+        var riskyCellGroups = getConflictableCellGroups(tableState: tableState)
         var cellsToHide = Set<Coordinate>()
 
         while cellsToHide.count < (81 - depth) {
-            cellsToHide.insert(Coordinate(row: Int.random(in: 0...8), col: Int.random(in: 0...8)))
+            let cell = Coordinate(row: Int.random(in: 0...8), col: Int.random(in: 0...8))
+
+            let isRiskyToRemove: Bool = riskyCellGroups.contains {
+                $0 == [cell]
+            }
+
+            if !isRiskyToRemove {
+                cellsToHide.insert(cell)
+                riskyCellGroups = riskyCellGroups.map {
+                    $0.compactMap { cellInRiskyGroup in
+                        if cellInRiskyGroup == cell {
+                            return nil
+                        }
+
+                        return cellInRiskyGroup
+                    }
+                }
+            }
         }
 
         return Array(cellsToHide)
@@ -170,14 +227,11 @@ class TableBuilder: ObservableObject {
                          shouldCheckSquares: shouldCheckSquares)
     }
 }
-let veryEasyDepth = 50
-let easyDepth = 40
+
+
+let easyDepth = 35
 let mediumDepth = 30
-let hardDepth = 25
-let extremeDepth = 22
-
-
-
+let hardDepth = 23
 
 func writeToFile(name: String, levels: [Level]) {
     let fileURL = playgroundSharedDataDirectory.appendingPathComponent(name)
@@ -195,9 +249,9 @@ var tableBuilder = TableBuilder()
 for i in 0...49 {
     tableBuilder = TableBuilder()
 
-    let cellsToHide = tableBuilder.removeCells(tableState: tableBuilder.tableState, depth: hardDepth)
+    let cellsToHide = tableBuilder.makeCellsToRemove(tableState: tableBuilder.tableState, depth: hardDepth)
     levels.append(Level(table: tableBuilder.tableState, cellsToHide: cellsToHide))
 }
-writeToFile(name: "normal.data", levels: levels)
+writeToFile(name: "hard.data", levels: levels)
 
 levels = []

@@ -10,33 +10,33 @@ import SwiftUI
 struct PickLevelView: View {
     // MARK: - Properties
     let viewModel: PickLevelViewModel
-
+    
     let onSelectLevel: ((Int) -> Void)
     @EnvironmentObject var coordinator: HomeCoordinator
-
+    
     var body: some View {
-        ScrollView {
-            VStack {
-                HStack {
-                    Button {
-                        withAnimation {
-                            coordinator.popBack()
-                        }
-                    } label: {
-                        Image(systemName: "arrow.uturn.backward.circle")
-                            .resizable()
-                            .frame(width: 30, height: 30)
+        VStack {
+            HStack {
+                Button {
+                    withAnimation {
+                        coordinator.popBack()
                     }
-
-                    Spacer()
+                } label: {
+                    Image(systemName: "arrow.uturn.backward.circle")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(Color(R.color.button.name))
                 }
-                .padding(.horizontal, 30)
-                .padding(.top, 10)
-
-                Text(viewModel.titleText)
-                    .font(.system(size: 25, weight: .bold))
-                    .padding(.top, 30)
-
+                
+                Spacer()
+            }
+            .padding(.horizontal, 30)
+            .padding(.top, 10)
+            
+            Text(viewModel.titleText)
+                .font(.system(size: 25, weight: .bold))
+                .padding(.top, 30)
+            ScrollView {
                 VStack(spacing: 15) {
                     ForEach(1...viewModel.rowsCount, id: \.self) { row in
                         HStack(spacing: 15) {
@@ -62,8 +62,8 @@ struct PickLevelView: View {
 
 struct PickLevelView_Previews: PreviewProvider {
     static var previews: some View {
-        PickLevelView(viewModel: PickLevelViewModel(difficulty: .normal, userFinishedLevels: [TemplateLevel(difficulty: .normal, visualLevel: 1)])) { _ in
-
+        PickLevelView(viewModel: PickLevelViewModel(difficulty: .medium, userFinishedLevels: [TemplateLevel(difficulty: .medium, visualLevel: 1)])) { _ in
+            
         }
     }
 }

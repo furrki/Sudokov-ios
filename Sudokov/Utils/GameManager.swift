@@ -67,7 +67,7 @@ class GameManager: ObservableObject {
             return LevelAnalytics(level: level.visualLevel, difficulty: level.difficulty)
         }
 
-        return LevelAnalytics(level: -1, difficulty: level?.difficulty ?? .normal)
+        return LevelAnalytics(level: -1, difficulty: level?.difficulty ?? .medium)
     }
 
     // MARK: - Methods

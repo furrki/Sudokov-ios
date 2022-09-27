@@ -10,7 +10,8 @@ import SwiftUI
 struct MenuButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(.all, 20)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 10)
             .background(.yellow)
             .foregroundColor(.black)
             .clipShape(Capsule())

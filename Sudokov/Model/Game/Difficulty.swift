@@ -8,29 +8,29 @@
 import Foundation
 
 enum Difficulty: CaseIterable, Codable {
-    case veryEasy
     case easy
-    case normal
+    case medium
+    case hard
 
     var name: String {
         switch self {
-        case .veryEasy:
-            return "Very Easy"
         case .easy:
             return "Easy"
-        case .normal:
-            return "Normal"
+        case .medium:
+            return "Medium"
+        case .hard:
+            return "Hard"
         }
     }
 
     var fileName: String {
         switch self {
-        case .veryEasy:
-            return "veryEasy"
         case .easy:
             return "easy"
-        case .normal:
-            return "normal"
+        case .medium:
+            return "medium"
+        case .hard:
+            return "hard"
         }
     }
 }
