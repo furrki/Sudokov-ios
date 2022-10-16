@@ -12,8 +12,8 @@ struct MenuButton: ButtonStyle {
         configuration.label
             .padding(.horizontal, 20)
             .padding(.vertical, 10)
-            .background(.yellow)
-            .foregroundColor(.black)
+            .background(Color.yellow)
+            .foregroundColor(Color.black)
             .clipShape(Capsule())
     }
 }

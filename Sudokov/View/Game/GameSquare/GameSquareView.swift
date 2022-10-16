@@ -48,7 +48,7 @@ struct GameSquareDraftView: View {
                         Text("\(getIndex(row: row, col: col))")
                             .font(shouldHighlight(row: row, col: col) ? .system(size: 11, weight: .bold) : .system(size: 9))
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .foregroundColor(.black)
+                            .foregroundColor(Color(R.color.userSquareText.name))
                             .opacity(drafts.contains(getIndex(row: row, col: col)) ? 1 : 0)
                     }
                 }

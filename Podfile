@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '15.6'
 
 target 'Sudokov' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -7,7 +7,7 @@ target 'Sudokov' do
 
   # Pods for Sudokov
   pod 'R.swift'
-#  pod 'Google-Mobile-Ads-SDxsK'
+  pod 'Google-Mobile-Ads-SDK'
 
   target 'SudokovTests' do
     inherit! :search_paths

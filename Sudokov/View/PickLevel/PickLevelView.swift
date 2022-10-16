@@ -10,10 +10,10 @@ import SwiftUI
 struct PickLevelView: View {
     // MARK: - Properties
     let viewModel: PickLevelViewModel
-    
+
     let onSelectLevel: ((Int) -> Void)
     @EnvironmentObject var coordinator: HomeCoordinator
-    
+
     var body: some View {
         VStack {
             HStack {
@@ -27,12 +27,12 @@ struct PickLevelView: View {
                         .frame(width: 30, height: 30)
                         .foregroundColor(Color(R.color.button.name))
                 }
-                
+
                 Spacer()
             }
             .padding(.horizontal, 30)
             .padding(.top, 10)
-            
+
             Text(viewModel.titleText)
                 .font(.system(size: 25, weight: .bold))
                 .padding(.top, 30)
@@ -63,7 +63,7 @@ struct PickLevelView: View {
 struct PickLevelView_Previews: PreviewProvider {
     static var previews: some View {
         PickLevelView(viewModel: PickLevelViewModel(difficulty: .medium, userFinishedLevels: [TemplateLevel(difficulty: .medium, visualLevel: 1)])) { _ in
-            
+
         }
     }
 }

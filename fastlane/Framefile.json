@@ -1,0 +1,33 @@
+{
+  "default": {
+    "frame": "SPACE_GRAY",
+    "keyword": {
+      "color": "#000"
+    },
+    "padding": 50,
+    "show_complete_frame": true,
+    "stack_title": false,
+    "title_min_height": "34%"
+  },
+  "data": [
+    {
+      "filter": "iPad",
+      "keyword": {
+        "color": "#fff"
+      },
+      "title": {
+        "color": "#fff"
+      },
+      "title_min_height": "27.5%"
+    },
+    {
+      "filter": "Overview",
+      "keyword": {
+        "text": "..."
+      },
+      "title": {
+        "text": "..."
+      }
+    }
+  ]
+}

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import GoogleMobileAds
 
 struct GameView: View {
     // MARK: - Constants
@@ -87,7 +88,11 @@ struct GameView: View {
 
                             shouldShowAlert = internalAlert != nil
                         }
-                    Spacer()
+
+//                    Spacer()
+//
+//                    AdView()
+//                        .frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
                 }
                 .onAppear {
                     gameManager.saveState()

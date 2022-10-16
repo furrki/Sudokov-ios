@@ -1,0 +1,43 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Uploads the ipa to AppStoreConnect"
+  lane :upoad_ipa do
+    build_app(workspace: "Sudokov.xcworkspace", scheme: "Sudokov")
+    pilot(
+      ipa: "sudokov.ipa",
+      skip_submission: true,
+      skip_waiting_for_build_processing: true
+    )
+    deliver(
+      submit_for_review: false,
+      force: true, # Skip HTMl report verification
+      skip_metadata: true,
+      skip_binary_upload: true
+    )
+  end
+
+  lane :screenshots do
+    frameit(
+          path: "./fastlane/screenshots",
+          force_orientation_block: proc do |filename|
+              :portrait
+          end
+        )
+  end
+end

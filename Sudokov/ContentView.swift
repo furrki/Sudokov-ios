@@ -7,12 +7,14 @@
 
 import SwiftUI
 import FirebaseCore
+import GoogleMobileAds
 
 struct ContentView: View {
     var body: some View {
         HomeView()
             .onAppear {
                 FirebaseApp.configure()
+                GADMobileAds.sharedInstance().start(completionHandler: nil)
             }
     }
 }
