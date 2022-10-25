@@ -8,13 +8,6 @@
 import Foundation
 
 class TableBuilder: ObservableObject {
-    // MARK: - Constants
-    private enum Constants {
-        static let easyDepth = 35
-        static let mediumDepth = 30
-        static let hardDepth = 23
-    }
-
     // MARK: - Properties
     var table: TableMatrix {
         return tableState
@@ -134,17 +127,6 @@ class TableBuilder: ObservableObject {
         return Array(possibleConflicts.map {
             Array($0)
         })
-    }
-
-    func cellsToRemove(tableState: TableMatrix, difficulty: Difficulty) -> [Coordinate] {
-        switch difficulty {
-        case .easy:
-            return makeCellsToRemove(tableState: tableState, depth: Constants.easyDepth)
-        case .medium:
-            return makeCellsToRemove(tableState: tableState, depth: Constants.mediumDepth)
-        case .hard:
-            return makeCellsToRemove(tableState: tableState, depth: Constants.hardDepth)
-        }
     }
 
     func makeCellsToRemove(tableState: TableMatrix, depth: Int) -> [Coordinate] {

@@ -39,6 +39,7 @@ class GameManager: ObservableObject {
     }
 
     let level: TemplateLevel?
+    let depth: Int
 
     private(set) var lives: Int = Constants.startingLives {
         didSet {
@@ -99,6 +100,12 @@ class GameManager: ObservableObject {
         let livesToShow = lives >= 0 ? lives : 0
         self.livesText = "Lives: \(livesToShow)/\(Constants.startingLives)"
         self.levelState = .solving
+        self.depth = tableFirstState.reduce(0) {
+            $0 + $1.filter { square in
+                square != 0
+            }.count
+        }
+        
         addBinders()
     }
 
@@ -124,6 +131,13 @@ class GameManager: ObservableObject {
         self.livesText = "Lives: \(livesToShow)/\(Constants.startingLives)"
         self.level = levelInfo.level
         self.levelState = levelInfo.levelState
+
+        self.depth = levelInfo.tableFirstState.reduce(0) {
+            $0 + $1.filter { square in
+                square != 0
+            }.count
+        }
+
         addBinders()
         objectWillChange.send()
     }
@@ -147,6 +161,18 @@ class GameManager: ObservableObject {
     private func saveToSolvedLevels() {
         if let templateLevel = level, !storageManager.solvedLevels.contains(templateLevel) {
             storageManager.solvedLevels.append(templateLevel)
+        }
+
+        if level == nil {
+            if let existingStatisticsIndex = storageManager.levelStatistics.firstIndex (where: {
+                $0.depth == self.depth
+            }) {
+                storageManager.levelStatistics[existingStatisticsIndex] = LevelStatistics(depth: depth,
+                                                                                          count: storageManager.levelStatistics[existingStatisticsIndex].count + 1)
+            } else {
+                storageManager.levelStatistics.append(LevelStatistics(depth: depth,
+                                                                      count: 1))
+            }
         }
     }
 

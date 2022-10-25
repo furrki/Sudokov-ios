@@ -17,15 +17,21 @@
 		FB10394428EE012E00F96174 /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10394328EE012E00F96174 /* AdView.swift */; };
 		FB10394628EE042B00F96174 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10394528EE042B00F96174 /* Configuration.swift */; };
 		FB10394828EE05A700F96174 /* UIApplication+keyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10394728EE05A700F96174 /* UIApplication+keyWindow.swift */; };
+		FB125AC628FD8D8400810211 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB125AC528FD8D8400810211 /* BackButton.swift */; };
+		FB125AC928FD964D00810211 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = FB125AC828FD964D00810211 /* SwiftUICharts */; };
 		FB1596E628B2BC5000CD0417 /* CellLevelAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1596E528B2BC5000CD0417 /* CellLevelAnalytics.swift */; };
 		FB3C9715287F0FEA002104F0 /* TableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9714287F0FEA002104F0 /* TableBuilder.swift */; };
 		FB3C9717287F1008002104F0 /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9716287F1008002104F0 /* TypeAlias.swift */; };
 		FB3C9719287F11B1002104F0 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9718287F11B1002104F0 /* GameManager.swift */; };
 		FB3C971B28802F39002104F0 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB3C971A28802F39002104F0 /* Colors.xcassets */; };
+		FB496CCE2901AB3E0047548B /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB496CCD2901AB3E0047548B /* StatisticsView.swift */; };
+		FB496CD02901AD420047548B /* LevelStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB496CCF2901AD420047548B /* LevelStatistics.swift */; };
 		FB4D359128955BE600C643A1 /* TemplateLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4D359028955BE600C643A1 /* TemplateLevel.swift */; };
 		FB5347BA285A83F800E94F65 /* EdgeBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5347B9285A83F800E94F65 /* EdgeBorder.swift */; };
 		FB5347BC285A841600E94F65 /* View+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5347BB285A841600E94F65 /* View+Border.swift */; };
 		FB5D90C72891E00200E4030E /* NumberPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5D90C62891E00200E4030E /* NumberPickerButton.swift */; };
+		FB77D00528FC989100D7E17F /* SelectDifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB77D00428FC989100D7E17F /* SelectDifficultyView.swift */; };
+		FB77D00728FC9ABE00D7E17F /* LinearGradientSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB77D00628FC9ABE00D7E17F /* LinearGradientSlider.swift */; };
 		FB7BC71C28803A1000E8C5F1 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC71B28803A1000E8C5F1 /* R.generated.swift */; };
 		FB7BC71F28803EC500E8C5F1 /* GameSquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC71E28803EC500E8C5F1 /* GameSquareView.swift */; };
 		FB7BC72128803EE400E8C5F1 /* GameSquareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC72028803EE400E8C5F1 /* GameSquareViewModel.swift */; };
@@ -119,15 +125,20 @@
 		FB10394328EE012E00F96174 /* AdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
 		FB10394528EE042B00F96174 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		FB10394728EE05A700F96174 /* UIApplication+keyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+keyWindow.swift"; sourceTree = "<group>"; };
+		FB125AC528FD8D8400810211 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		FB1596E528B2BC5000CD0417 /* CellLevelAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellLevelAnalytics.swift; sourceTree = "<group>"; };
 		FB3C9714287F0FEA002104F0 /* TableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBuilder.swift; sourceTree = "<group>"; };
 		FB3C9716287F1008002104F0 /* TypeAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAlias.swift; sourceTree = "<group>"; };
 		FB3C9718287F11B1002104F0 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		FB3C971A28802F39002104F0 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		FB496CCD2901AB3E0047548B /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		FB496CCF2901AD420047548B /* LevelStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelStatistics.swift; sourceTree = "<group>"; };
 		FB4D359028955BE600C643A1 /* TemplateLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateLevel.swift; sourceTree = "<group>"; };
 		FB5347B9285A83F800E94F65 /* EdgeBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeBorder.swift; sourceTree = "<group>"; };
 		FB5347BB285A841600E94F65 /* View+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Border.swift"; sourceTree = "<group>"; };
 		FB5D90C62891E00200E4030E /* NumberPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPickerButton.swift; sourceTree = "<group>"; };
+		FB77D00428FC989100D7E17F /* SelectDifficultyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDifficultyView.swift; sourceTree = "<group>"; };
+		FB77D00628FC9ABE00D7E17F /* LinearGradientSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGradientSlider.swift; sourceTree = "<group>"; };
 		FB7BC71B28803A1000E8C5F1 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		FB7BC71E28803EC500E8C5F1 /* GameSquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSquareView.swift; sourceTree = "<group>"; };
 		FB7BC72028803EE400E8C5F1 /* GameSquareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSquareViewModel.swift; sourceTree = "<group>"; };
@@ -191,6 +202,7 @@
 				FBBAAC4228B037D50090E24A /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				FBBAAC3C28B037D50090E24A /* FirebaseAnalytics in Frameworks */,
 				FBBAAC3E28B037D50090E24A /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				FB125AC928FD964D00810211 /* SwiftUICharts in Frameworks */,
 				FBBAAC4428B037D50090E24A /* FirebaseAppCheck in Frameworks */,
 				6F59AAB5E2E2D83BD9AC35C3 /* Pods_Sudokov.framework in Frameworks */,
 			);
@@ -255,6 +267,14 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
+		FB496CCC2901AA380047548B /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				FB496CCD2901AB3E0047548B /* StatisticsView.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
 		FB5347B8285A83E900E94F65 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +285,14 @@
 				FB10394728EE05A700F96174 /* UIApplication+keyWindow.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FB77D00328FC987D00D7E17F /* SelectDifficulty */ = {
+			isa = PBXGroup;
+			children = (
+				FB77D00428FC989100D7E17F /* SelectDifficultyView.swift */,
+			);
+			path = SelectDifficulty;
 			sourceTree = "<group>";
 		};
 		FB7BC71D28803EB800E8C5F1 /* GameSquare */ = {
@@ -387,6 +415,8 @@
 		FBBDE9BD285522400078A73E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FB496CCC2901AA380047548B /* Statistics */,
+				FB77D00328FC987D00D7E17F /* SelectDifficulty */,
 				FBBBE592288DAA3300AC809A /* Home */,
 				FBF142D3289B1FD300C3EA2E /* Settings */,
 				FBF5C3A12899BB9200F5FADA /* PickLevel */,
@@ -431,6 +461,8 @@
 				FB5D90C62891E00200E4030E /* NumberPickerButton.swift */,
 				FB5347B9285A83F800E94F65 /* EdgeBorder.swift */,
 				FB10394328EE012E00F96174 /* AdView.swift */,
+				FB77D00628FC9ABE00D7E17F /* LinearGradientSlider.swift */,
+				FB125AC528FD8D8400810211 /* BackButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -445,6 +477,7 @@
 				FBA23910288CA6A7006AE3A4 /* Difficulty.swift */,
 				FB4D359028955BE600C643A1 /* TemplateLevel.swift */,
 				DCC3040E2897F4CE00EEB26E /* LevelState.swift */,
+				FB496CCF2901AD420047548B /* LevelStatistics.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -505,6 +538,7 @@
 				FBBAAC4128B037D50090E24A /* FirebaseAnalyticsWithoutAdIdSupport */,
 				FBBAAC4328B037D50090E24A /* FirebaseAppCheck */,
 				FBBAAC4528B037D50090E24A /* FirebaseAppDistribution-Beta */,
+				FB125AC828FD964D00810211 /* SwiftUICharts */,
 			);
 			productName = Sudokov;
 			productReference = FBBDE990285522100078A73E /* Sudokov.app */;
@@ -605,6 +639,7 @@
 			mainGroup = FBBDE987285522100078A73E;
 			packageReferences = (
 				FBBAAC3A28B037D50090E24A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				FB125AC728FD964C00810211 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
 			);
 			productRefGroup = FBBDE991285522100078A73E /* Products */;
 			projectDirPath = "";
@@ -786,6 +821,7 @@
 				FBDB28AF288365B000A372E7 /* FeatureFlags.swift in Sources */,
 				FBCF08CE28B25FA200ABA471 /* Encodable+dictionary.swift in Sources */,
 				FB5347BC285A841600E94F65 /* View+Border.swift in Sources */,
+				FB77D00728FC9ABE00D7E17F /* LinearGradientSlider.swift in Sources */,
 				FB5D90C72891E00200E4030E /* NumberPickerButton.swift in Sources */,
 				FBBBE591288DA96F00AC809A /* Coordinator.swift in Sources */,
 				FBF5C3A32899BBA200F5FADA /* PickLevelViewModel.swift in Sources */,
@@ -793,6 +829,7 @@
 				FBCF08D628B2A5A100ABA471 /* SettingsAnalytics.swift in Sources */,
 				FB10394828EE05A700F96174 /* UIApplication+keyWindow.swift in Sources */,
 				FBBBE58F288DA7F500AC809A /* DependencyManager.swift in Sources */,
+				FB496CD02901AD420047548B /* LevelStatistics.swift in Sources */,
 				FB3C9715287F0FEA002104F0 /* TableBuilder.swift in Sources */,
 				FB10394428EE012E00F96174 /* AdView.swift in Sources */,
 				FBBDE9C4285522CE0078A73E /* MenuButton.swift in Sources */,
@@ -814,6 +851,7 @@
 				FB4D359128955BE600C643A1 /* TemplateLevel.swift in Sources */,
 				DCC3040F2897F4CE00EEB26E /* LevelState.swift in Sources */,
 				FB7BC71F28803EC500E8C5F1 /* GameSquareView.swift in Sources */,
+				FB77D00528FC989100D7E17F /* SelectDifficultyView.swift in Sources */,
 				FBCF08CC28B25F7B00ABA471 /* LevelAnalytics.swift in Sources */,
 				FBA2390D288CA616006AE3A4 /* Level.swift in Sources */,
 				FBF5C3A52899D5A600F5FADA /* Int+Extensions.swift in Sources */,
@@ -822,6 +860,7 @@
 				FBDB28B72884B33C00A372E7 /* Coordinate.swift in Sources */,
 				FB10394628EE042B00F96174 /* Configuration.swift in Sources */,
 				FB1596E628B2BC5000CD0417 /* CellLevelAnalytics.swift in Sources */,
+				FB496CCE2901AB3E0047548B /* StatisticsView.swift in Sources */,
 				FB9978D02891C908001F308C /* PickLevelView.swift in Sources */,
 				FB7BC72328815E9000E8C5F1 /* NumberPickerView.swift in Sources */,
 				FB897488288F31DD00D7C982 /* StorageManager.swift in Sources */,
@@ -831,6 +870,7 @@
 				FB7BC7252882154B00E8C5F1 /* ControlsView.swift in Sources */,
 				FB3C9719287F11B1002104F0 /* GameManager.swift in Sources */,
 				FBCF08D428B29E9E00ABA471 /* PlaySet.swift in Sources */,
+				FB125AC628FD8D8400810211 /* BackButton.swift in Sources */,
 				FBDB28B328849C3B00A372E7 /* TableView.swift in Sources */,
 				FB0DC6B0288F05B500E02521 /* Storage.swift in Sources */,
 				FBA2390F288CA68F006AE3A4 /* LocalLevelManager.swift in Sources */,
@@ -1005,7 +1045,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudokov/Preview Content\"";
 				DEVELOPMENT_TEAM = TU6A9VFP8M;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = TU6A9VFP8M;
@@ -1045,7 +1085,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudokov/Preview Content\"";
 				DEVELOPMENT_TEAM = TU6A9VFP8M;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = TU6A9VFP8M;
@@ -1245,6 +1285,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FB125AC728FD964C00810211 /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/willdale/SwiftUICharts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		FBBAAC3A28B037D50090E24A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1256,6 +1304,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FB125AC828FD964D00810211 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB125AC728FD964C00810211 /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
+			productName = SwiftUICharts;
+		};
 		FBBAAC3B28B037D50090E24A /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FBBAAC3A28B037D50090E24A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

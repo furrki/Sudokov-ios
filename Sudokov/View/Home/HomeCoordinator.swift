@@ -14,5 +14,6 @@ class HomeCoordinator: Coordinator, ObservableObject {
     enum Screen: String, Hashable, CaseIterable {
         case game
         case selectLevel
+        case selectGenerateDifficulty
     }
 }

@@ -10,28 +10,16 @@ import SwiftUI
 struct PickLevelView: View {
     // MARK: - Properties
     let viewModel: PickLevelViewModel
-
     let onSelectLevel: ((Int) -> Void)
     @EnvironmentObject var coordinator: HomeCoordinator
 
     var body: some View {
         VStack {
-            HStack {
-                Button {
-                    withAnimation {
-                        coordinator.popBack()
-                    }
-                } label: {
-                    Image(systemName: "arrow.uturn.backward.circle")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(Color(R.color.button.name))
+            BackButton {
+                withAnimation {
+                    coordinator.popBack()
                 }
-
-                Spacer()
             }
-            .padding(.horizontal, 30)
-            .padding(.top, 10)
 
             Text(viewModel.titleText)
                 .font(.system(size: 25, weight: .bold))

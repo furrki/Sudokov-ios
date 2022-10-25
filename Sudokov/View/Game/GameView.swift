@@ -89,10 +89,10 @@ struct GameView: View {
                             shouldShowAlert = internalAlert != nil
                         }
 
-//                    Spacer()
-//
-//                    AdView()
-//                        .frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
+                    Spacer()
+
+                    AdView()
+                        .frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
                 }
                 .onAppear {
                     gameManager.saveState()

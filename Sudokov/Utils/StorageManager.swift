@@ -14,6 +14,8 @@ class StorageManager {
         static let solvedLevels = "SolvedLevels"
         static let featureFlags = "FeatureFlags"
         static let preferredPlaySet = "PreferredPlaySet"
+        static let preferredDepth = "PreferredDepth"
+        static let levelStatistics = "LevelStatistics"
     }
 
     // MARK: - Properties
@@ -52,6 +54,26 @@ class StorageManager {
 
         set {
             try? storage.save(newValue, for: Keys.preferredPlaySet)
+        }
+    }
+
+    var preferredDepth: Int {
+        get {
+            fetchFromFile(key: Keys.preferredDepth) ?? GameConfiguration.defaultPickDepth
+        }
+
+        set {
+            try? storage.save(newValue, for: Keys.preferredDepth)
+        }
+    }
+
+    var levelStatistics: [LevelStatistics] {
+        get {
+            fetchFromFile(key: Keys.levelStatistics) ?? []
+        }
+
+        set {
+            try? storage.save(newValue, for: Keys.levelStatistics)
         }
     }
 

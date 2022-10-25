@@ -9,12 +9,6 @@ import SwiftUI
 import Combine
 
 struct HomeView: View {
-    // MARK: - Models
-    private enum GameSelection {
-        case startGame
-        case generate
-    }
-
     // MARK: - Properties
     private let localLevelManager = DependencyManager.localLevelManager
     private let storageManager = DependencyManager.storageManager
@@ -24,9 +18,9 @@ struct HomeView: View {
     @State var gameManager: GameManager?
     @State var shouldShowPickDifficulty: Bool = false
     @State private var isShowingSetting = false
+    @State private var isShowingStatistics = false
     @State private var isSelectingPlaySet = false
     @State private var difficulty: Difficulty?
-    @State private var gameSelection: GameSelection?
     @ObservedObject var coordinator = HomeCoordinator()
 
     private var bag = Set<AnyCancellable>()
@@ -34,8 +28,18 @@ struct HomeView: View {
     // MARK: - Content
 
     private var topBar: some View {
-        HStack {
+        HStack(alignment: .top, spacing: 20.0) {
             Spacer()
+
+            Button {
+                isShowingStatistics = true
+                analyticsManager.logEvent(.homeSettings)
+            } label: {
+                Image(systemName: "line.3.horizontal.circle")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(Color(R.color.button.name))
+            }
 
             Button {
                 isShowingSetting = true
@@ -97,7 +101,6 @@ struct HomeView: View {
                     VStack {
                         Button("Start game") {
                             shouldShowPickDifficulty = true
-                            gameSelection = .startGame
                         }
                         .buttonStyle(MenuButton())
                         .font(.system(size: 15, weight: .semibold))
@@ -107,12 +110,14 @@ struct HomeView: View {
                         }
 
                         Button("Generate a level") {
-                            gameSelection = .generate
-                            shouldShowPickDifficulty = true
+                            coordinator.currentScreen = .selectGenerateDifficulty
                         }
                         .buttonStyle(MenuButton())
                         .font(.system(size: 15, weight: .semibold))
                         .padding(.top, 20)
+                        .sheet(isPresented: $isShowingStatistics) {
+                            StatisticsView()
+                        }
                     }
 
                     Spacer()
@@ -122,32 +127,27 @@ struct HomeView: View {
                         Button(difficulty.name) {
                             withAnimation {
                                 self.difficulty = difficulty
-
-                                switch gameSelection {
-                                case .generate:
-                                    let level = Level(
-                                        table: tableBuilder.table,
-                                        cellsToHide: tableBuilder.cellsToRemove(
-                                            tableState: tableBuilder.tableState,
-                                            difficulty: difficulty
-                                        )
-                                    )
-
-                                    gameManager = GameManager(level: level,
-                                                              templateLevel: nil)
-
-                                    coordinator.currentScreen = .game
-
-                                case .startGame:
-                                    coordinator.currentScreen = .selectLevel
-
-                                case .none:
-                                    break
-                                }
+                                coordinator.currentScreen = .selectLevel
                             }
                         }
                     }
                 }
+            case .selectGenerateDifficulty:
+                SelectDifficultyView { difficulty in
+                    let level = Level(
+                        table: tableBuilder.table,
+                        cellsToHide: tableBuilder.makeCellsToRemove(
+                            tableState: tableBuilder.tableState,
+                            depth: difficulty
+                        )
+                    )
+
+                    gameManager = GameManager(level: level,
+                                              templateLevel: nil)
+
+                    coordinator.currentScreen = .game
+                }
+                .environmentObject(coordinator)
             }
         }
         .onAppear {
