@@ -46,7 +46,7 @@ class FeatureFlagManager: Codable {
             self.revertButton = true
             self.tableHighlighting = true
             self.alertConflict = true
-            self.alertNotMatch = false
+            self.alertNotMatch = true
             self.lives = true
             self.timer = true
         }

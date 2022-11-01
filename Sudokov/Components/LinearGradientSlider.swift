@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LinearGradientSlider: View {
     @Binding var value: Double
-    var colors: [Color] = [.red, .green, .green]
+    var colors: [Color] = [.red, .green]
     var range: ClosedRange<Double>
     var step: Double
 

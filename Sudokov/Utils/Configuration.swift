@@ -9,10 +9,10 @@ import Foundation
 
 enum GameConfiguration {
     static let maximumDepth = 70
-    static let veryEasyDepth = 50
-    static let easyDepth = 35
-    static let mediumDepth = 30
-    static let hardDepth = 23
+    static let veryEasyDepth = 60
+    static let easyDepth = 50
+    static let mediumDepth = 38
+    static let hardDepth = 30
     static let minimumDepth = 20
     static let defaultPickDepth = 30
 }
