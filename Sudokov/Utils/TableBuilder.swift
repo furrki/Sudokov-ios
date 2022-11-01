@@ -103,27 +103,74 @@ class TableBuilder: ObservableObject {
         var possibleConflicts = Set<Set<Coordinate>>()
 
         for row in 0...tableSize {
-            for i in 0...tableSize-1 {
-                for j in ((i + 1)...tableSize) {
-                    let iValue = tableState[row][i]
-                    let jValue = tableState[row][j]
+            for i in 0...tableSize {
+                // Matches for rows - rows or cols to cols
+                if i < tableSize {
+                    for j in ((i + 1)...tableSize) {
+                        let iValue = tableState[row][i]
+                        let jValue = tableState[row][j]
 
-                    let iIndex = getRowIndex(tableState: tableState, col: i, of: jValue)
-                    let jIndex = getRowIndex(tableState: tableState, col: j, of: iValue)
+                        let iIndex = getRowIndex(tableState: tableState, col: i, of: jValue)
+                        let jIndex = getRowIndex(tableState: tableState, col: j, of: iValue)
 
-                    if iIndex == jIndex {
-                        let coordinates: Set<Coordinate> = [
-                            Coordinate(row: row, col: i),
-                            Coordinate(row: row, col: j),
-                            Coordinate(row: jIndex, col: i),
-                            Coordinate(row: iIndex, col: j),
-                        ]
+                        if iIndex == jIndex {
+                            let coordinates: Set<Coordinate> = [
+                                Coordinate(row: row, col: i),
+                                Coordinate(row: row, col: j),
+                                Coordinate(row: jIndex, col: i),
+                                Coordinate(row: iIndex, col: j),
+                            ]
 
-                        possibleConflicts.insert(coordinates)
+                            possibleConflicts.insert(coordinates)
+                        }
+                    }
+                }
+
+                // cross checks for multiple puzzles
+                if (row + 1) % 3 != 0 {
+                    // \ cross
+                    if (i + 1) % 3 != 0 {
+                        let iValue = tableState[row][i]
+                        let jValue = tableState[row + 1][i + 1]
+
+                        let iRowIndex = getRowIndex(tableState: tableState, col: i, of: jValue)
+                        let jRowIndex = getRowIndex(tableState: tableState, col: i + 1, of: iValue)
+
+                        let iColIndex = getColIndex(tableState: tableState, row: row, of: jValue)
+                        let jColIndex = getColIndex(tableState: tableState, row: row + 1, of: iValue)
+
+                        if iRowIndex == jRowIndex && iColIndex == jColIndex {
+                            let coordinates: Set<Coordinate> = [
+                                Coordinate(row: row, col: i),
+                                Coordinate(row: row + 1, col: i + 1),
+                            ]
+                            possibleConflicts.insert(coordinates)
+                        }
+                    }
+
+                    // / cross
+                    if i > 0 && (i - 1) % 3 != 0 {
+                        let iValue = tableState[row][i]
+                        let jValue = tableState[row + 1][i - 1]
+
+                        let iRowIndex = getRowIndex(tableState: tableState, col: i, of: jValue)
+                        let jRowIndex = getRowIndex(tableState: tableState, col: i - 1, of: iValue)
+
+                        let iColIndex = getColIndex(tableState: tableState, row: row, of: jValue)
+                        let jColIndex = getColIndex(tableState: tableState, row: row + 1, of: iValue)
+
+                        if iRowIndex == jRowIndex && iColIndex == jColIndex {
+                            let coordinates: Set<Coordinate> = [
+                                Coordinate(row: row, col: i),
+                                Coordinate(row: row + 1, col: i - 1),
+                            ]
+                            possibleConflicts.insert(coordinates)
+                        }
                     }
                 }
             }
         }
+
         return Array(possibleConflicts.map {
             Array($0)
         })
@@ -214,6 +261,15 @@ class TableBuilder: ObservableObject {
     private func getRowIndex(tableState: TableMatrix, col: Int, of value: Int) -> Int {
         for i in 0...8 {
             if tableState[i][col] == value {
+                return i
+            }
+        }
+        return -1
+    }
+
+    private func getColIndex(tableState: TableMatrix, row: Int, of value: Int) -> Int {
+        for i in 0...8 {
+            if tableState[row][i] == value {
                 return i
             }
         }
