@@ -33,7 +33,7 @@ struct HomeView: View {
 
             Button {
                 isShowingStatistics = true
-                analyticsManager.logEvent(.homeSettings)
+                analyticsManager.logEvent(.customGameStatistics)
             } label: {
                 Image(systemName: "line.3.horizontal.circle")
                     .resizable()
@@ -145,6 +145,8 @@ struct HomeView: View {
                     gameManager = GameManager(level: level,
                                               templateLevel: nil)
 
+                    analyticsManager.logEvent(.customGameGenerate,
+                                              parameters: CustomGameAnalytics(difficulty: difficulty))
                     coordinator.currentScreen = .game
                 }
                 .environmentObject(coordinator)

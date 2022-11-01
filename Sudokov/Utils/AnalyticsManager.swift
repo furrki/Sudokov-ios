@@ -22,6 +22,8 @@ class AnalyticsManager {
         case gameAbandon
         case gameFinish
         case gameLost
+        case customGameStatistics
+        case customGameGenerate
 
         var key: String {
             switch self {
@@ -37,6 +39,8 @@ class AnalyticsManager {
             case .gameAbandon: return "game_abandon"
             case .gameFinish: return "game_finish"
             case .gameLost: return "game_lost"
+            case .customGameStatistics: return "custom_game_statistics"
+            case .customGameGenerate: return "custom_game_generate"
             }
         }
     }
