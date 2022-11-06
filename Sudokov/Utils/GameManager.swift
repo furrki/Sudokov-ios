@@ -32,14 +32,12 @@ class GameManager: ObservableObject {
     private var moves: [Move] = []
     private var conflicts: [Coordinate] = []
     private var unmatches: [Coordinate] = []
+
     private var secondsPast: Int {
         didSet {
             timerText = secondsPast.getFormattedCounter()
         }
     }
-
-    let level: TemplateLevel?
-    let depth: Int
 
     private(set) var lives: Int = Constants.startingLives {
         didSet {
@@ -47,6 +45,17 @@ class GameManager: ObservableObject {
             livesText = "Lives: \(livesToShow)/\(Constants.startingLives)"
         }
     }
+
+    var levelText: String {
+        if let level = level {
+            return "Level \(level.visualLevel) \(level.difficulty.name)"
+        } else {
+            return "\(depth) - \(Difficulty.getDifficulty(depth: depth).name)"
+        }
+    }
+
+    let level: TemplateLevel?
+    let depth: Int
 
     @Published private(set) var isAbandoned: Bool = false
     @Published private(set) var livesText: String

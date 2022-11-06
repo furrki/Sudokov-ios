@@ -15,6 +15,13 @@ struct Coordinate: Codable, Hashable {
 }
 
 class TableBuilder: ObservableObject {
+    // MARK: - Constants
+    enum BigSquareDudeState {
+        case horizontal
+        case vertical
+        case irrelevant
+    }
+
     // MARK: - Properties
     var table: TableMatrix {
         return tableState
@@ -24,9 +31,13 @@ class TableBuilder: ObservableObject {
     @Published var index = 0
 
     // MARK: - Methods
-    init() {
-        tableState = Array(repeating: Array(repeating: 0, count: 9), count: 9)
-        generateLevel()
+    init(tableState: TableMatrix? = nil) {
+        if let tableState = tableState {
+            self.tableState = tableState
+        } else {
+            self.tableState = Array(repeating: Array(repeating: 0, count: 9), count: 9)
+            generateLevel()
+        }
     }
 
     func generateLevel() {
@@ -106,99 +117,19 @@ class TableBuilder: ObservableObject {
     }
 
     func getConflictableCellGroups(tableState: TableMatrix) -> [[Coordinate]] {
-        let tableSize = 8
+        let bigRowRange = 0...2
         var possibleConflicts = Set<Set<Coordinate>>()
 
-        for row in 0...tableSize {
-            for i in 0...tableSize {
-                // Matches for rows - rows or cols to cols
-                if i < tableSize {
-                    for j in ((i + 1)...tableSize) {
-                        let iValue = tableState[row][i]
-                        let jValue = tableState[row][j]
-
-                        let iIndex = getRowIndex(tableState: tableState, col: i, of: jValue)
-                        let jIndex = getRowIndex(tableState: tableState, col: j, of: iValue)
-
-                        if iIndex == jIndex {
-                            let coordinates: Set<Coordinate> = [
-                                Coordinate(row: row, col: i),
-                                Coordinate(row: row, col: j),
-                                Coordinate(row: jIndex, col: i),
-                                Coordinate(row: iIndex, col: j),
-                            ]
-
-                            possibleConflicts.insert(coordinates)
-                        }
-                    }
-                }
-
-                // cross checks for multiple puzzles
-                if (row + 1) % 3 != 0 {
-                    // \ cross
-                    if (i + 1) % 3 != 0 {
-                        let iValue = tableState[row][i]
-                        let jValue = tableState[row + 1][i + 1]
-
-                        let iRowIndex = getRowIndex(tableState: tableState, col: i, of: jValue)
-                        let jRowIndex = getRowIndex(tableState: tableState, col: i + 1, of: iValue)
-
-                        let iColIndex = getColIndex(tableState: tableState, row: row, of: jValue)
-                        let jColIndex = getColIndex(tableState: tableState, row: row + 1, of: iValue)
-
-                        if iRowIndex == jRowIndex && iColIndex == jColIndex {
-                            let coordinates: Set<Coordinate> = [
-                                Coordinate(row: row, col: i),
-                                Coordinate(row: row + 1, col: i + 1),
-                            ]
-                            possibleConflicts.insert(coordinates)
-                        }
-                    }
-
-                    // / cross
-                    if i > 0 && (i - 1) % 3 != 0 {
-                        let iValue = tableState[row][i]
-                        let jValue = tableState[row + 1][i - 1]
-
-                        let iRowIndex = getRowIndex(tableState: tableState, col: i, of: jValue)
-                        let jRowIndex = getRowIndex(tableState: tableState, col: i - 1, of: iValue)
-
-                        let iColIndex = getColIndex(tableState: tableState, row: row, of: jValue)
-                        let jColIndex = getColIndex(tableState: tableState, row: row + 1, of: iValue)
-
-                        if iRowIndex == jRowIndex && iColIndex == jColIndex {
-                            let coordinates: Set<Coordinate> = [
-                                Coordinate(row: row, col: i),
-                                Coordinate(row: row + 1, col: i - 1),
-                            ]
-                            possibleConflicts.insert(coordinates)
-                        }
-                    }
-                }
+        for i in bigRowRange {
+            for j in bigRowRange {
+                let res = iterateBigSquare(bigCoordinate: Coordinate(row: i, col: j))
+                possibleConflicts = possibleConflicts.union(res)
             }
         }
 
         return Array(possibleConflicts.map {
             Array($0)
         })
-    }
-
-    private func getRowIndex(tableState: TableMatrix, col: Int, of value: Int) -> Int {
-        for i in 0...8 {
-            if tableState[i][col] == value {
-                return i
-            }
-        }
-        return -1
-    }
-
-    private func getColIndex(tableState: TableMatrix, row: Int, of value: Int) -> Int {
-        for i in 0...8 {
-            if tableState[row][i] == value {
-                return i
-            }
-        }
-        return -1
     }
 
     func makeCellsToRemove(tableState: TableMatrix, depth: Int) -> [Coordinate] {
@@ -282,15 +213,155 @@ class TableBuilder: ObservableObject {
                          shouldCheckCols: shouldCheckCols,
                          shouldCheckSquares: shouldCheckSquares)
     }
+
+    private func getRowIndex(tableState: TableMatrix, col: Int, of value: Int) -> Int {
+        for i in 0...8 {
+            if tableState[i][col] == value {
+                return i
+            }
+        }
+        return -1
+    }
+
+    private func getColIndex(tableState: TableMatrix, row: Int, of value: Int) -> Int {
+        for i in 0...8 {
+            if tableState[row][i] == value {
+                return i
+            }
+        }
+        return -1
+    }
+
+    private func indexesOfCell(coordinate: Coordinate) -> [Coordinate] {
+        var coordinates = [Coordinate]()
+
+        for i in (coordinate.row * 3)...(coordinate.row * 3 + 2) {
+            for j in (coordinate.col * 3)...(coordinate.col * 3 + 2) {
+                coordinates.append(Coordinate(row: i, col: j))
+            }
+        }
+
+        return coordinates
+    }
+
+    private func isHorizontallySecure(baseCoordinate: Coordinate, relevantCoordinate: Coordinate) -> Bool {
+        let baseValue = table[baseCoordinate.row][baseCoordinate.col]
+        let relevantValue = table[relevantCoordinate.row][relevantCoordinate.col]
+
+        let rowIndexOfRelevantOnBaseCol = getRowIndex(tableState: table, col: baseCoordinate.col, of: relevantValue)
+        let rowIndexOfBaseOnRelevantCol = getRowIndex(tableState: table, col: relevantCoordinate.col, of: baseValue)
+
+        return rowIndexOfBaseOnRelevantCol != rowIndexOfRelevantOnBaseCol
+    }
+
+    private func isVerticallySecure(baseCoordinate: Coordinate, relevantCoordinate: Coordinate) -> Bool {
+        let baseValue = table[baseCoordinate.row][baseCoordinate.col]
+        let relevantValue = table[relevantCoordinate.row][relevantCoordinate.col]
+
+        let colIndexOfRelevantOnBaseRow = getColIndex(tableState: table,
+                                                      row: baseCoordinate.row,
+                                                      of: relevantValue)
+
+        let colIndexOfBaseOnRelevantRow = getColIndex(tableState: table,
+                                                      row: relevantCoordinate.row,
+                                                      of: baseValue)
+
+        return colIndexOfRelevantOnBaseRow != colIndexOfBaseOnRelevantRow
+    }
+
+    private func getHorizontalDudes(baseCoordinate: Coordinate, relevantCoordinate: Coordinate) -> [Coordinate] {
+        let baseValue = table[baseCoordinate.row][baseCoordinate.col]
+        let relevantValue = table[relevantCoordinate.row][relevantCoordinate.col]
+
+        let colIndexOfRelevantOnBaseRow = getColIndex(tableState: table,
+                                                      row: baseCoordinate.row,
+                                                      of: relevantValue)
+
+        let colIndexOfBaseOnRelevantRow = getColIndex(tableState: table,
+                                                      row: relevantCoordinate.row,
+                                                      of: baseValue)
+
+        return [
+            Coordinate(row: baseCoordinate.row, col: colIndexOfRelevantOnBaseRow),
+            Coordinate(row: relevantCoordinate.row, col: colIndexOfBaseOnRelevantRow)
+        ]
+    }
+
+    private func getVerticalDudes(baseCoordinate: Coordinate, relevantCoordinate: Coordinate) -> [Coordinate] {
+        let baseValue = table[baseCoordinate.row][baseCoordinate.col]
+        let relevantValue = table[relevantCoordinate.row][relevantCoordinate.col]
+
+        let rowIndexOfRelevantOnBaseCol = getRowIndex(tableState: table, col: baseCoordinate.col, of: relevantValue)
+        let rowIndexOfBaseOnRelevantCol = getRowIndex(tableState: table, col: relevantCoordinate.col, of: baseValue)
+
+        return [
+            Coordinate(row: rowIndexOfRelevantOnBaseCol, col: baseCoordinate.col),
+            Coordinate(row: rowIndexOfBaseOnRelevantCol, col: relevantCoordinate.col)
+        ]
+    }
+
+    private func iterateBigSquare(bigCoordinate: Coordinate) -> Set<Set<Coordinate>> {
+        var coordinates = Set<Set<Coordinate>>()
+        let indexes = indexesOfCell(coordinate: bigCoordinate)
+        for (i, baseCoordinate) in indexes.dropLast().enumerated() {
+            for (_ , relevantCoordinate) in indexes.dropFirst(i + 1).enumerated() {
+                let bigSquareState = getBigSquareState(baseCoordiate: baseCoordinate, relevantCoordinate: relevantCoordinate)
+                switch bigSquareState {
+                case .horizontal:
+
+                    if !isHorizontallySecure(baseCoordinate: baseCoordinate, relevantCoordinate: relevantCoordinate) {
+                        var coordinatesToAppend = [Coordinate]()
+                        coordinatesToAppend.append(contentsOf: getHorizontalDudes(baseCoordinate: baseCoordinate,
+                                                                      relevantCoordinate: relevantCoordinate))
+                        coordinatesToAppend.append(baseCoordinate)
+                        coordinatesToAppend.append(relevantCoordinate)
+                        coordinates.insert(Set(coordinatesToAppend))
+                    }
+                case .vertical:
+
+                    if !isVerticallySecure(baseCoordinate: baseCoordinate, relevantCoordinate: relevantCoordinate) {
+                        var coordinatesToAppend = [Coordinate]()
+                        coordinatesToAppend.append(contentsOf: getVerticalDudes(baseCoordinate: baseCoordinate,
+                                                                      relevantCoordinate: relevantCoordinate))
+                        coordinatesToAppend.append(baseCoordinate)
+                        coordinatesToAppend.append(relevantCoordinate)
+                        coordinates.insert(Set(coordinatesToAppend))
+                    }
+                case .irrelevant:
+                    if !isVerticallySecure(baseCoordinate: baseCoordinate, relevantCoordinate: relevantCoordinate) &&
+                        !isHorizontallySecure(baseCoordinate: baseCoordinate, relevantCoordinate: relevantCoordinate) {
+                        var coordinatesToAppend = [Coordinate]()
+                        coordinatesToAppend.append(contentsOf: getHorizontalDudes(baseCoordinate: baseCoordinate,
+                                                                      relevantCoordinate: relevantCoordinate))
+                        coordinatesToAppend.append(contentsOf: getVerticalDudes(baseCoordinate: baseCoordinate,
+                                                                      relevantCoordinate: relevantCoordinate))
+                        coordinatesToAppend.append(baseCoordinate)
+                        coordinatesToAppend.append(relevantCoordinate)
+                        coordinates.insert(Set(coordinatesToAppend))
+                    }
+                }
+            }
+        }
+        return coordinates
+    }
+
+    private func getBigSquareState(baseCoordiate: Coordinate, relevantCoordinate: Coordinate) -> BigSquareDudeState {
+
+        if baseCoordiate.col == relevantCoordinate.col {
+            return .vertical
+        } else if baseCoordiate.row == relevantCoordinate.row {
+            return .horizontal
+        }
+        return .irrelevant
+    }
 }
 
-
 let easyDepth = 45
-let mediumDepth = 38
-let hardDepth = 30
+let mediumDepth = 35
+let hardDepth = 26
 
 func writeToFile(name: String, levels: [Level]) {
-    let fileURL = playgroundSharedDataDirectory.appendingPathComponen›t(name)
+    let fileURL = playgroundSharedDataDirectory.appendingPathComponent(name)
     let data = try? JSONEncoder().encode(levels)
     let dataString = data?.base64EncodedString()
     do {
@@ -305,9 +376,9 @@ var tableBuilder = TableBuilder()
 for i in 0...49 {
     tableBuilder = TableBuilder()
 
-    let cellsToHide = tableBuilder.makeCellsToRemove(tableState: tableBuilder.tableState, depth: easyDepth)
+    let cellsToHide = tableBuilder.makeCellsToRemove(tableState: tableBuilder.tableState, depth: hardDepth)
     levels.append(Level(table: tableBuilder.tableState, cellsToHide: cellsToHide))
 }
-writeToFile(name: "easy.data", levels: levels)
+writeToFile(name: "hard.data", levels: levels)
 
 levels = []

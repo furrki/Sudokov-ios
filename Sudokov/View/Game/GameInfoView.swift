@@ -13,7 +13,7 @@ struct GameInfoView: View {
     @State private var isAbandoning = false
 
     var body: some View {
-        HStack {
+        HStack(spacing: 15) {
             Button {
                 isAbandoning = true
             } label: {
@@ -36,6 +36,9 @@ struct GameInfoView: View {
                     }
                 )
             }
+
+            Text(gameManager.levelText)
+                .font(.system(size: 14.0))
 
             Spacer()
 

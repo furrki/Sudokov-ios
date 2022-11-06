@@ -122,7 +122,7 @@ struct HomeView: View {
                     Spacer()
                 }
                 .confirmationDialog("Pick Difficulty", isPresented: $shouldShowPickDifficulty, titleVisibility: .visible) {
-                    ForEach(Difficulty.allCases, id: \.self) { difficulty in
+                    ForEach(Difficulty.preparedLevels, id: \.self) { difficulty in
                         Button(difficulty.name) {
                             withAnimation {
                                 self.difficulty = difficulty

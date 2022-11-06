@@ -55,20 +55,7 @@ struct SelectDifficultyView: View {
 
     // MARK: - Methods
     private func getDifficultyDescription() -> String {
-        switch Int(difficulty) {
-        case GameConfiguration.minimumDepth...GameConfiguration.hardDepth:
-            return "Hardcore 🔥"
-        case (GameConfiguration.hardDepth + 1)...GameConfiguration.mediumDepth:
-            return "Hard ❤️‍🔥"
-        case (GameConfiguration.mediumDepth + 1)...GameConfiguration.easyDepth:
-            return "Medium 👊"
-        case (GameConfiguration.easyDepth + 1)...GameConfiguration.veryEasyDepth:
-            return "Easy 🌞"
-        case (GameConfiguration.veryEasyDepth + 1)...GameConfiguration.maximumDepth:
-            return "Basic ☀️"
-        default:
-            return "Simple ☀️"
-        }
+        Difficulty.getDifficulty(depth: Int(difficulty)).name
     }
 }
 
