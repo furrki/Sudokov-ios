@@ -13,7 +13,7 @@ extension Int {
         formatter.allowedUnits = [.hour, .minute, .second]
         formatter.unitsStyle = .positional
 
-        if let formattedString = formatter.string(from: TimeInterval(self)) {
+        if let formattedString = formatter.string(from: TimeInterval(self)), self > 60 * 10 {
             return formattedString
         } else {
             let minutes = self / 60 % 60
