@@ -9,8 +9,16 @@ import Foundation
 
 extension Int {
     func getFormattedCounter() -> String {
-        let minutes = self / 60 % 60
-        let seconds = self % 60
-        return String(format: "%02i:%02i", minutes, seconds)
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .positional
+
+        if let formattedString = formatter.string(from: TimeInterval(self)) {
+            return formattedString
+        } else {
+            let minutes = self / 60 % 60
+            let seconds = self % 60
+            return String(format: "%02i:%02i", minutes, seconds)
+        }
     }
 }
