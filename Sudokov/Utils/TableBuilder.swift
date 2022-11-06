@@ -23,13 +23,20 @@ class TableBuilder: ObservableObject {
     @Published private(set) var tableState: TableMatrix
     @Published var index = 0
 
+    private(set) var depth: Int?
+    private(set) var cellsToHide = [Coordinate]()
+
     // MARK: - Methods
-    init(tableState: TableMatrix? = nil) {
+    init(tableState: TableMatrix? = nil, depth: Int? = nil) {
+        self.depth = depth
+
         if let tableState = tableState {
             self.tableState = tableState
         } else {
             self.tableState = Array(repeating: Array(repeating: 0, count: 9), count: 9)
             generateLevel()
+
+            makeCellsToRemove()
         }
     }
 
@@ -125,9 +132,16 @@ class TableBuilder: ObservableObject {
         })
     }
 
-    func makeCellsToRemove(tableState: TableMatrix, depth: Int) -> [Coordinate] {
+    private func makeCellsToRemove() {
+        guard let depth = depth else {
+            return
+        }
+
         var riskyCellGroups = getConflictableCellGroups(tableState: tableState)
         var cellsToHide = Set<Coordinate>()
+
+        let triesTreshold = 5000
+        var tries = 0
 
         while cellsToHide.count < (81 - depth) {
             let cell = Coordinate(row: Int.random(in: 0...8), col: Int.random(in: 0...8))
@@ -136,7 +150,8 @@ class TableBuilder: ObservableObject {
                 $0 == [cell]
             }
 
-            if !isRiskyToRemove {
+            if !isRiskyToRemove && !cellsToHide.contains(cell) {
+                tries = 0
                 cellsToHide.insert(cell)
                 riskyCellGroups = riskyCellGroups.map {
                     $0.compactMap { cellInRiskyGroup in
@@ -147,10 +162,19 @@ class TableBuilder: ObservableObject {
                         return cellInRiskyGroup
                     }
                 }
+            } else {
+                tries += 1
+            }
+
+            if tries >= triesTreshold {
+                generateLevel()
+                riskyCellGroups = getConflictableCellGroups(tableState: tableState)
+                cellsToHide = Set<Coordinate>()
+                tries = 0
             }
         }
 
-        return Array(cellsToHide)
+        self.cellsToHide = Array(cellsToHide)
     }
 
     // MARK: - Private Methods

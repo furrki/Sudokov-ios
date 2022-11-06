@@ -133,13 +133,10 @@ struct HomeView: View {
                 }
             case .selectGenerateDifficulty:
                 SelectDifficultyView { difficulty in
-                    let tableBuilder = TableBuilder()
+                    let tableBuilder = TableBuilder(depth: difficulty)
                     let level = Level(
                         table: tableBuilder.table,
-                        cellsToHide: tableBuilder.makeCellsToRemove(
-                            tableState: tableBuilder.tableState,
-                            depth: difficulty
-                        )
+                        cellsToHide: Array(tableBuilder.cellsToHide)
                     )
 
                     gameManager = GameManager(level: level,
