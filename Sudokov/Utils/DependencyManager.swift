@@ -15,5 +15,4 @@ enum DependencyManager {
     static let localLevelManager = LocalLevelManager()
     static let storageManager = StorageManager(storage: storage)
     static let analyticsManager = AnalyticsManager()
-    static let tableBuilder = TableBuilder()
 }

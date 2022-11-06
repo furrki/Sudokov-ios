@@ -11,7 +11,6 @@ struct SelectDifficultyView: View {
     // MARK: - Properties
     @EnvironmentObject private var coordinator: HomeCoordinator
     @State private var difficulty: Double = Double(GameConfiguration.defaultPickDepth)
-    private let tableBuilder = DependencyManager.tableBuilder
     private let storageManager = DependencyManager.storageManager
     private let difficultyRange = Double(GameConfiguration.minimumDepth)...Double(GameConfiguration.maximumDepth)
 

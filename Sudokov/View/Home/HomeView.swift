@@ -13,7 +13,6 @@ struct HomeView: View {
     private let localLevelManager = DependencyManager.localLevelManager
     private let storageManager = DependencyManager.storageManager
     private let analyticsManager = DependencyManager.analyticsManager
-    private let tableBuilder = DependencyManager.tableBuilder
 
     @State var gameManager: GameManager?
     @State var shouldShowPickDifficulty: Bool = false
@@ -134,6 +133,7 @@ struct HomeView: View {
                 }
             case .selectGenerateDifficulty:
                 SelectDifficultyView { difficulty in
+                    let tableBuilder = TableBuilder()
                     let level = Level(
                         table: tableBuilder.table,
                         cellsToHide: tableBuilder.makeCellsToRemove(

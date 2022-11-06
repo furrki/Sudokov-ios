@@ -21,7 +21,7 @@ class GameManager: ObservableObject {
     }
     
     // MARK: - Properties
-    let tableBuilder = TableBuilder()
+    let tableBuilder: TableBuilder
     private let storageManager: StorageManager
     private let tableFirstState: TableMatrix
     private let solution: TableMatrix
@@ -70,6 +70,8 @@ class GameManager: ObservableObject {
 
         return LevelAnalytics(level: -1, difficulty: level?.difficulty ?? .medium)
     }
+//    @Published var conflictIndex = 0
+//    var conflictableCellGroups = [[Coordinate]]()
 
     // MARK: - Methods
     init(level: Level,
@@ -100,6 +102,7 @@ class GameManager: ObservableObject {
         let livesToShow = lives >= 0 ? lives : 0
         self.livesText = "Lives: \(livesToShow)/\(Constants.startingLives)"
         self.levelState = .solving
+        self.tableBuilder = TableBuilder(tableState: solution)
         self.depth = tableFirstState.reduce(0) {
             $0 + $1.filter { square in
                 square != 0
@@ -107,6 +110,8 @@ class GameManager: ObservableObject {
         }
         
         addBinders()
+//        conflictableCellGroups = tableBuilder.getConflictableCellGroups(tableState: solution)
+//        conflicts = conflictableCellGroups[conflictIndex]
     }
 
     init(levelInfo: LevelInfo,
@@ -131,7 +136,7 @@ class GameManager: ObservableObject {
         self.livesText = "Lives: \(livesToShow)/\(Constants.startingLives)"
         self.level = levelInfo.level
         self.levelState = levelInfo.levelState
-
+        self.tableBuilder = TableBuilder(tableState: solution)
         self.depth = levelInfo.tableFirstState.reduce(0) {
             $0 + $1.filter { square in
                 square != 0
@@ -140,6 +145,8 @@ class GameManager: ObservableObject {
 
         addBinders()
         objectWillChange.send()
+//        conflictableCellGroups = tableBuilder.getConflictableCellGroups(tableState: solution)
+//        conflicts = conflictableCellGroups[conflictIndex]
     }
 
     func saveState() {
@@ -239,6 +246,12 @@ class GameManager: ObservableObject {
     }
 
     func switchFillContentMode() {
+//        conflictIndex += 1
+//        if conflictIndex == conflictableCellGroups.count {
+//            conflictIndex = 0
+//        }
+//        conflicts = conflictableCellGroups[conflictIndex]
+//        return
         guard isGameActive else {
             return
         }
