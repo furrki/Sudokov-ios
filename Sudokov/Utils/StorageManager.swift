@@ -16,6 +16,7 @@ class StorageManager {
         static let preferredPlaySet = "PreferredPlaySet"
         static let preferredDepth = "PreferredDepth"
         static let levelStatistics = "LevelStatistics"
+        static let winCount = "WinCount"
     }
 
     // MARK: - Properties
@@ -93,6 +94,16 @@ class StorageManager {
             return data
         } catch {
             return nil
+        }
+    }
+    
+    var winCount: Int {
+        get {
+            fetchFromFile(key: Keys.winCount) ?? 0
+        }
+
+        set {
+            try? storage.save(newValue, for: Keys.winCount)
         }
     }
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import StoreKit
 
 class GameManager: ObservableObject {
     // MARK: - Constants Enums
@@ -23,6 +24,7 @@ class GameManager: ObservableObject {
     // MARK: - Properties
     let tableBuilder: TableBuilder
     private let storageManager: StorageManager
+    private let uiApplication: UIApplication
     private let tableFirstState: TableMatrix
     private let solution: TableMatrix
     private let featureFlagManager: FeatureFlagManager
@@ -107,6 +109,7 @@ class GameManager: ObservableObject {
         self.level = templateLevel
         self.secondsPast = 0
         self.timerText = 0.getFormattedCounter()
+        self.uiApplication = UIApplication.shared
 
         let livesToShow = lives >= 0 ? lives : 0
         self.livesText = "Lives: \(livesToShow)/\(Constants.startingLives)"
@@ -140,6 +143,7 @@ class GameManager: ObservableObject {
         self.storageManager = storageManager
         self.secondsPast = levelInfo.secondsPast
         self.timerText = levelInfo.secondsPast.getFormattedCounter()
+        self.uiApplication = UIApplication.shared
 
         let livesToShow = lives >= 0 ? lives : 0
         self.livesText = "Lives: \(livesToShow)/\(Constants.startingLives)"
@@ -428,8 +432,20 @@ class GameManager: ObservableObject {
             saveToSolvedLevels()
             selectedCell = nil
         }
+        
+        showRatingView()
     }
 
+    private func showRatingView() {
+        if storageManager.winCount < 10 {
+            storageManager.winCount += 1
+            if storageManager.winCount % 3 == 0 {
+                guard let currentScene = uiApplication.connectedScenes.first as? UIWindowScene else { return }
+                SKStoreReviewController.requestReview(in: currentScene)
+            }
+        }
+    }
+    
     private func checkLose() {
         guard featureFlagManager.lives, lives < 0 else {
             return
