@@ -21,7 +21,7 @@ struct BackButton: View {
                     .foregroundColor(Color(R.color.button.name))
             }
 
-            Spacer()
+            Spacer().frame(maxWidth:.infinity)
         }
         .padding(.horizontal, 30)
         .padding(.top, 10)

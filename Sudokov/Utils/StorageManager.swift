@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class StorageManager {
     // MARK: - Constants
@@ -16,6 +17,7 @@ class StorageManager {
         static let preferredPlaySet = "PreferredPlaySet"
         static let preferredDepth = "PreferredDepth"
         static let levelStatistics = "LevelStatistics"
+        static let preferredColorScheme = "PreferredColorScheme"
     }
 
     // MARK: - Properties
@@ -54,6 +56,12 @@ class StorageManager {
 
         set {
             try? storage.save(newValue, for: Keys.preferredPlaySet)
+        }
+    }
+
+    var preferredColorScheme: ColorScheme? {
+        get {
+            .dark
         }
     }
 
