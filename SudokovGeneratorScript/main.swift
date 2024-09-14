@@ -16,20 +16,25 @@ func writeToFile(name: String, levels: [Level]) {
     let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(name)
     let data = try? JSONEncoder().encode(levels)
     let dataString = data?.base64EncodedString()
+    
     do {
         try dataString!.write(to: fileURL, atomically: false, encoding: .utf8)
+        print("File saved to \(fileURL)")
+    } catch {
+        print("Error writing to file")
     }
-    catch {/* error handling here */}
 }
 
 var levels: [Level] = []
 var tableBuilder = TableBuilder()
 
+print("Generating levels")
 for _ in 0...99 {
     tableBuilder = TableBuilder(depth: easyDepth)
     let cellsToHide = tableBuilder.cellsToHide
     levels.append(Level(table: tableBuilder.tableState, cellsToHide: cellsToHide))
 }
+
 writeToFile(name: "easy.data", levels: levels)
 
 levels = []
