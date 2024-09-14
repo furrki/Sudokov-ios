@@ -8,4 +8,3 @@
 import Foundation
 
 typealias TableMatrix = [[Int]]
-typealias GameMatrix = [[GameSquareViewModel]]

@@ -23,7 +23,7 @@
 		FB1C80022C7B505400F9E797 /* BigSquareIteratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C80012C7B505400F9E797 /* BigSquareIteratorTests.swift */; };
 		FB3627862C94FA82001DB778 /* NakedPairsFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3627852C94FA82001DB778 /* NakedPairsFinder.swift */; };
 		FB3C9715287F0FEA002104F0 /* TableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9714287F0FEA002104F0 /* TableBuilder.swift */; };
-		FB3C9717287F1008002104F0 /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9716287F1008002104F0 /* TypeAlias.swift */; };
+		FB3C9717287F1008002104F0 /* TableMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9716287F1008002104F0 /* TableMatrix.swift */; };
 		FB3C9719287F11B1002104F0 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9718287F11B1002104F0 /* GameManager.swift */; };
 		FB3C971B28802F39002104F0 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB3C971A28802F39002104F0 /* Colors.xcassets */; };
 		FB4426482C95A76800B98A1E /* hard.data in Resources */ = {isa = PBXBuildFile; fileRef = FB4426472C95A76800B98A1E /* hard.data */; };
@@ -52,6 +52,24 @@
 		FBA59C38291839C600D727A1 /* medium.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA59C35291839C500D727A1 /* medium.data */; };
 		FBB7C5482C95BC7B0027B971 /* SwordFishFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */; };
 		FBB7C5492C95BC7B0027B971 /* BigSquareIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */; };
+		FBB7C5522C95BCB10027B971 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5512C95BCB10027B971 /* main.swift */; };
+		FBB7C5562C95BCB70027B971 /* BigSquareIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */; };
+		FBB7C5572C95BCB90027B971 /* TableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9714287F0FEA002104F0 /* TableBuilder.swift */; };
+		FBB7C5582C95BCBB0027B971 /* SwordFishFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */; };
+		FBB7C5592C95BCBD0027B971 /* NakedPairsFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3627852C94FA82001DB778 /* NakedPairsFinder.swift */; };
+		FBB7C55A2C95BCED0027B971 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA2390C288CA616006AE3A4 /* Level.swift */; };
+		FBB7C55B2C95BCF30027B971 /* LevelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDB28B42884B31000A372E7 /* LevelInfo.swift */; };
+		FBB7C55C2C95BCFB0027B971 /* TemplateLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4D359028955BE600C643A1 /* TemplateLevel.swift */; };
+		FBB7C55D2C95BD080027B971 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA23910288CA6A7006AE3A4 /* Difficulty.swift */; };
+		FBB7C55E2C95BD160027B971 /* TableMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9716287F1008002104F0 /* TableMatrix.swift */; };
+		FBB7C5602C95BD260027B971 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDB28B62884B33C00A372E7 /* Coordinate.swift */; };
+		FBB7C5612C95BD2C0027B971 /* FeatureFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDB28AE288365B000A372E7 /* FeatureFlags.swift */; };
+		FBB7C5622C95BD340027B971 /* PlaySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCF08D328B29E9E00ABA471 /* PlaySet.swift */; };
+		FBB7C5632C95BD370027B971 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BC7272882BC9B00E8C5F1 /* Move.swift */; };
+		FBB7C5642C95BD400027B971 /* LevelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3040E2897F4CE00EEB26E /* LevelState.swift */; };
+		FBB7C5652C95BD420027B971 /* LevelStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB496CCF2901AD420047548B /* LevelStatistics.swift */; };
+		FBB7C5662C95BD4C0027B971 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10394528EE042B00F96174 /* Configuration.swift */; };
+		FBB7C5682C95BD6C0027B971 /* GameMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5672C95BD6C0027B971 /* GameMatrix.swift */; };
 		FBBAAC3728B034EA0090E24A /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBAAC3628B034EA0090E24A /* AnalyticsManager.swift */; };
 		FBBAAC3928B0370D0090E24A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBBAAC3828B0370D0090E24A /* GoogleService-Info.plist */; };
 		FBBAAC3C28B037D50090E24A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FBBAAC3B28B037D50090E24A /* FirebaseAnalytics */; };
@@ -115,6 +133,18 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FBB7C54D2C95BCB10027B971 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0004DCA2CEE1E4DE792930C0 /* Pods_Sudokov_SudokovUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sudokov_SudokovUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9DEB6C2FD81A5636656284 /* Pods-Sudokov.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sudokov.debug.xcconfig"; path = "Target Support Files/Pods-Sudokov/Pods-Sudokov.debug.xcconfig"; sourceTree = "<group>"; };
@@ -136,7 +166,7 @@
 		FB1C80012C7B505400F9E797 /* BigSquareIteratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigSquareIteratorTests.swift; sourceTree = "<group>"; };
 		FB3627852C94FA82001DB778 /* NakedPairsFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NakedPairsFinder.swift; sourceTree = "<group>"; };
 		FB3C9714287F0FEA002104F0 /* TableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBuilder.swift; sourceTree = "<group>"; };
-		FB3C9716287F1008002104F0 /* TypeAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAlias.swift; sourceTree = "<group>"; };
+		FB3C9716287F1008002104F0 /* TableMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableMatrix.swift; sourceTree = "<group>"; };
 		FB3C9718287F11B1002104F0 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		FB3C971A28802F39002104F0 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		FB4426472C95A76800B98A1E /* hard.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hard.data; sourceTree = "<group>"; };
@@ -165,6 +195,9 @@
 		FBA59C35291839C500D727A1 /* medium.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medium.data; sourceTree = "<group>"; };
 		FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwordFishFinder.swift; sourceTree = "<group>"; };
 		FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigSquareIterator.swift; sourceTree = "<group>"; };
+		FBB7C54F2C95BCB10027B971 /* SudokovGeneratorScript */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SudokovGeneratorScript; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBB7C5512C95BCB10027B971 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		FBB7C5672C95BD6C0027B971 /* GameMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMatrix.swift; sourceTree = "<group>"; };
 		FBBAAC3628B034EA0090E24A /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		FBBAAC3828B0370D0090E24A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FBBBE58E288DA7F500AC809A /* DependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
@@ -205,6 +238,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FBB7C54C2C95BCB10027B971 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FBBDE98D285522100078A73E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -347,6 +387,21 @@
 			path = Levels;
 			sourceTree = "<group>";
 		};
+		FBB7C54A2C95BC940027B971 /* Generator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Generator;
+			sourceTree = "<group>";
+		};
+		FBB7C5502C95BCB10027B971 /* SudokovGeneratorScript */ = {
+			isa = PBXGroup;
+			children = (
+				FBB7C5512C95BCB10027B971 /* main.swift */,
+			);
+			path = SudokovGeneratorScript;
+			sourceTree = "<group>";
+		};
 		FBBBE592288DAA3300AC809A /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,6 +430,7 @@
 				FBBDE992285522100078A73E /* Sudokov */,
 				FBBDE9A3285522140078A73E /* SudokovTests */,
 				FBBDE9AD285522140078A73E /* SudokovUITests */,
+				FBB7C5502C95BCB10027B971 /* SudokovGeneratorScript */,
 				FBBDE991285522100078A73E /* Products */,
 				9B7C526E0E0E11D34681AE74 /* Pods */,
 				D01E2C221860B87E170875F2 /* Frameworks */,
@@ -388,6 +444,7 @@
 				FBBDE9A0285522140078A73E /* SudokovTests.xctest */,
 				FBBDE9AA285522140078A73E /* SudokovUITests.xctest */,
 				FBE11CD728FA1EB000C62890 /* SudokovScreenshots.xctest */,
+				FBB7C54F2C95BCB10027B971 /* SudokovGeneratorScript */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -396,6 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				FBE852CC28E3A30900F4284B /* Info.plist */,
+				FBB7C54A2C95BC940027B971 /* Generator */,
 				FBBDE9C2285522C20078A73E /* Components */,
 				FB7BC7262882BC9000E8C5F1 /* Model */,
 				FBBDE9BE285522470078A73E /* Utils */,
@@ -456,7 +514,8 @@
 				FB3627802C94FA38001DB778 /* TableBuilder */,
 				FB0DC6AE288F05A800E02521 /* Storage */,
 				FB5347B8285A83E900E94F65 /* Extensions */,
-				FB3C9716287F1008002104F0 /* TypeAlias.swift */,
+				FB3C9716287F1008002104F0 /* TableMatrix.swift */,
+				FBB7C5672C95BD6C0027B971 /* GameMatrix.swift */,
 				FB3C9718287F11B1002104F0 /* GameManager.swift */,
 				FBDB28AE288365B000A372E7 /* FeatureFlags.swift */,
 				FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */,
@@ -541,6 +600,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		FBB7C54E2C95BCB10027B971 /* SudokovGeneratorScript */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FBB7C5532C95BCB10027B971 /* Build configuration list for PBXNativeTarget "SudokovGeneratorScript" */;
+			buildPhases = (
+				FBB7C54B2C95BCB10027B971 /* Sources */,
+				FBB7C54C2C95BCB10027B971 /* Frameworks */,
+				FBB7C54D2C95BCB10027B971 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SudokovGeneratorScript;
+			productName = SudokovGeneratorScript;
+			productReference = FBB7C54F2C95BCB10027B971 /* SudokovGeneratorScript */;
+			productType = "com.apple.product-type.tool";
+		};
 		FBBDE98F285522100078A73E /* Sudokov */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FBBDE9B4285522140078A73E /* Build configuration list for PBXNativeTarget "Sudokov" */;
@@ -637,6 +713,9 @@
 				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					FBB7C54E2C95BCB10027B971 = {
+						CreatedOnToolsVersion = 15.4;
+					};
 					FBBDE98F285522100078A73E = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -675,6 +754,7 @@
 				FBBDE99F285522140078A73E /* SudokovTests */,
 				FBBDE9A9285522140078A73E /* SudokovUITests */,
 				FBE11CD628FA1EB000C62890 /* SudokovScreenshots */,
+				FBB7C54E2C95BCB10027B971 /* SudokovGeneratorScript */,
 			);
 		};
 /* End PBXProject section */
@@ -840,6 +920,30 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FBB7C54B2C95BCB10027B971 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBB7C5622C95BD340027B971 /* PlaySet.swift in Sources */,
+				FBB7C55A2C95BCED0027B971 /* Level.swift in Sources */,
+				FBB7C5572C95BCB90027B971 /* TableBuilder.swift in Sources */,
+				FBB7C5612C95BD2C0027B971 /* FeatureFlags.swift in Sources */,
+				FBB7C5642C95BD400027B971 /* LevelState.swift in Sources */,
+				FBB7C55C2C95BCFB0027B971 /* TemplateLevel.swift in Sources */,
+				FBB7C5582C95BCBB0027B971 /* SwordFishFinder.swift in Sources */,
+				FBB7C55E2C95BD160027B971 /* TableMatrix.swift in Sources */,
+				FBB7C5522C95BCB10027B971 /* main.swift in Sources */,
+				FBB7C55D2C95BD080027B971 /* Difficulty.swift in Sources */,
+				FBB7C5562C95BCB70027B971 /* BigSquareIterator.swift in Sources */,
+				FBB7C5632C95BD370027B971 /* Move.swift in Sources */,
+				FBB7C5662C95BD4C0027B971 /* Configuration.swift in Sources */,
+				FBB7C55B2C95BCF30027B971 /* LevelInfo.swift in Sources */,
+				FBB7C5652C95BD420027B971 /* LevelStatistics.swift in Sources */,
+				FBB7C5592C95BCBD0027B971 /* NakedPairsFinder.swift in Sources */,
+				FBB7C5602C95BD260027B971 /* Coordinate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FBBDE98C285522100078A73E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -860,7 +964,7 @@
 				FB3C9715287F0FEA002104F0 /* TableBuilder.swift in Sources */,
 				FB10394428EE012E00F96174 /* AdView.swift in Sources */,
 				FBBDE9C4285522CE0078A73E /* MenuButton.swift in Sources */,
-				FB3C9717287F1008002104F0 /* TypeAlias.swift in Sources */,
+				FB3C9717287F1008002104F0 /* TableMatrix.swift in Sources */,
 				FBCF08D828B2B18B00ABA471 /* CellAnalytics.swift in Sources */,
 				FBBDE9C1285522740078A73E /* HomeView.swift in Sources */,
 				FB0DC6B2288F05E400E02521 /* DiskStorage.swift in Sources */,
@@ -874,6 +978,7 @@
 				FB5347BA285A83F800E94F65 /* EdgeBorder.swift in Sources */,
 				FBFFF13E288F26DD0038F3D8 /* GameInfoView.swift in Sources */,
 				FBBDE9C6285523D30078A73E /* GameView.swift in Sources */,
+				FBB7C5682C95BD6C0027B971 /* GameMatrix.swift in Sources */,
 				FBDB28B52884B31000A372E7 /* LevelInfo.swift in Sources */,
 				FB4D359128955BE600C643A1 /* TemplateLevel.swift in Sources */,
 				DCC3040F2897F4CE00EEB26E /* LevelState.swift in Sources */,
@@ -954,6 +1059,39 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		FBB7C5542C95BCB10027B971 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		FBB7C5552C95BCB10027B971 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		FBBDE9B2285522140078A73E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1269,6 +1407,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FBB7C5532C95BCB10027B971 /* Build configuration list for PBXNativeTarget "SudokovGeneratorScript" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FBB7C5542C95BCB10027B971 /* Debug */,
+				FBB7C5552C95BCB10027B971 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FBBDE98B285522100078A73E /* Build configuration list for PBXProject "Sudokov" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
