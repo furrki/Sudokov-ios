@@ -48,7 +48,6 @@
 		FBA2390D288CA616006AE3A4 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA2390C288CA616006AE3A4 /* Level.swift */; };
 		FBA2390F288CA68F006AE3A4 /* LocalLevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */; };
 		FBA23911288CA6A7006AE3A4 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA23910288CA6A7006AE3A4 /* Difficulty.swift */; };
-		FBA59C37291839C600D727A1 /* easy.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA59C34291839C400D727A1 /* easy.data */; };
 		FBA59C38291839C600D727A1 /* medium.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA59C35291839C500D727A1 /* medium.data */; };
 		FBB7C5482C95BC7B0027B971 /* SwordFishFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */; };
 		FBB7C5492C95BC7B0027B971 /* BigSquareIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */; };
@@ -70,6 +69,7 @@
 		FBB7C5652C95BD420027B971 /* LevelStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB496CCF2901AD420047548B /* LevelStatistics.swift */; };
 		FBB7C5662C95BD4C0027B971 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10394528EE042B00F96174 /* Configuration.swift */; };
 		FBB7C5682C95BD6C0027B971 /* GameMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5672C95BD6C0027B971 /* GameMatrix.swift */; };
+		FBB7C5722C95C7430027B971 /* easy.data in Resources */ = {isa = PBXBuildFile; fileRef = FBB7C5712C95C7430027B971 /* easy.data */; };
 		FBBAAC3728B034EA0090E24A /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBAAC3628B034EA0090E24A /* AnalyticsManager.swift */; };
 		FBBAAC3928B0370D0090E24A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBBAAC3828B0370D0090E24A /* GoogleService-Info.plist */; };
 		FBBAAC3C28B037D50090E24A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FBBAAC3B28B037D50090E24A /* FirebaseAnalytics */; };
@@ -191,13 +191,13 @@
 		FBA2390C288CA616006AE3A4 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLevelManager.swift; sourceTree = "<group>"; };
 		FBA23910288CA6A7006AE3A4 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
-		FBA59C34291839C400D727A1 /* easy.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = easy.data; sourceTree = "<group>"; };
 		FBA59C35291839C500D727A1 /* medium.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medium.data; sourceTree = "<group>"; };
 		FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwordFishFinder.swift; sourceTree = "<group>"; };
 		FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigSquareIterator.swift; sourceTree = "<group>"; };
 		FBB7C54F2C95BCB10027B971 /* SudokovGeneratorScript */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SudokovGeneratorScript; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBB7C5512C95BCB10027B971 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FBB7C5672C95BD6C0027B971 /* GameMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMatrix.swift; sourceTree = "<group>"; };
+		FBB7C5712C95C7430027B971 /* easy.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = easy.data; sourceTree = "<group>"; };
 		FBBAAC3628B034EA0090E24A /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		FBBAAC3828B0370D0090E24A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FBBBE58E288DA7F500AC809A /* DependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
@@ -381,17 +381,10 @@
 			isa = PBXGroup;
 			children = (
 				FB4426472C95A76800B98A1E /* hard.data */,
-				FBA59C34291839C400D727A1 /* easy.data */,
+				FBB7C5712C95C7430027B971 /* easy.data */,
 				FBA59C35291839C500D727A1 /* medium.data */,
 			);
 			path = Levels;
-			sourceTree = "<group>";
-		};
-		FBB7C54A2C95BC940027B971 /* Generator */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Generator;
 			sourceTree = "<group>";
 		};
 		FBB7C5502C95BCB10027B971 /* SudokovGeneratorScript */ = {
@@ -453,7 +446,6 @@
 			isa = PBXGroup;
 			children = (
 				FBE852CC28E3A30900F4284B /* Info.plist */,
-				FBB7C54A2C95BC940027B971 /* Generator */,
 				FBBDE9C2285522C20078A73E /* Components */,
 				FB7BC7262882BC9000E8C5F1 /* Model */,
 				FBBDE9BE285522470078A73E /* Utils */,
@@ -764,9 +756,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBB7C5722C95C7430027B971 /* easy.data in Resources */,
 				FB4426482C95A76800B98A1E /* hard.data in Resources */,
 				FBBAAC3928B0370D0090E24A /* GoogleService-Info.plist in Resources */,
-				FBA59C37291839C600D727A1 /* easy.data in Resources */,
 				FB3C971B28802F39002104F0 /* Colors.xcassets in Resources */,
 				FBBDE99B285522140078A73E /* Preview Assets.xcassets in Resources */,
 				FBA59C38291839C600D727A1 /* medium.data in Resources */,
@@ -1067,6 +1059,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
+				INFOPLIST_FILE = "$(SRCROOT)/Sudokov/Info.plist";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1084,6 +1077,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
+				INFOPLIST_FILE = "$(SRCROOT)/Sudokov/Info.plist";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
