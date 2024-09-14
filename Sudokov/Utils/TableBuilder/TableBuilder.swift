@@ -24,6 +24,7 @@ class TableBuilder: ObservableObject {
     
     private(set) var depth: Int?
     private(set) var cellsToHide = [Coordinate]()
+    private(set) var riskyCellGroups = [[Coordinate]]()
     
     // MARK: - Methods
     init(tableState: TableMatrix? = nil, depth: Int? = nil) {
@@ -33,9 +34,8 @@ class TableBuilder: ObservableObject {
             self.tableState = tableState
         } else {
             self.tableState = Array(repeating: Array(repeating: 0, count: 9), count: 9)
-            generateLevel()
             
-            makeCellsToRemove()
+            makeLevel()
         }
     }
     
@@ -124,13 +124,24 @@ class TableBuilder: ObservableObject {
         })
     }
     
+    func makeLevel() {
+        generateLevel()
+        riskyCellGroups = getConflictableCellGroups(tableState: tableState)
+        makeCellsToRemove()
+        var hasSwordfish = iterateSwordFishCheck()
+        
+        while hasSwordfish {
+            hasSwordfish = iterateSwordFishCheck()
+            makeCellsToRemove()
+        }
+    }
+    
     private func makeCellsToRemove() {
         guard let depth = depth else {
             return
         }
         
-        var riskyCellGroups = getConflictableCellGroups(tableState: tableState)
-        var cellsToHide = Set<Coordinate>()
+        var cellsToHide = Set(self.cellsToHide)
         
         let triesTreshold = 5000
         var tries = 0
@@ -167,6 +178,22 @@ class TableBuilder: ObservableObject {
         }
         
         self.cellsToHide = Array(cellsToHide)
+    }
+    
+    private func iterateSwordFishCheck() -> Bool {
+        var hasSwordFish = false
+        let swordfishCoordinates = SwordFishFinder(table: table, cellsPlannedForRemoval: self.cellsToHide).findAll()
+        for swordfishCoordinate in swordfishCoordinates {
+            if !riskyCellGroups.contains(swordfishCoordinate) {
+                riskyCellGroups.append(swordfishCoordinate)
+                hasSwordFish = true
+                cellsToHide.removeAll {
+                    $0 == swordfishCoordinate.first!
+                }
+            }
+        }
+        
+        return hasSwordFish
     }
     
     // MARK: - Private Methods
