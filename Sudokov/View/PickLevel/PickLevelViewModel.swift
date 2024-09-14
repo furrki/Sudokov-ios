@@ -8,8 +8,8 @@
 import Foundation
 
 class PickLevelViewModel {
-    let levelCount = 50
-    let rowsCount = 10
+    let levelCount = 100
+    let rowsCount = 20
     let colsCount = 5
     let difficulty: Difficulty
     let titleText: String

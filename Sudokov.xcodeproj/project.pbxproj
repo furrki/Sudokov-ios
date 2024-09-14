@@ -21,13 +21,12 @@
 		FB125AC928FD964D00810211 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = FB125AC828FD964D00810211 /* SwiftUICharts */; };
 		FB1596E628B2BC5000CD0417 /* CellLevelAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1596E528B2BC5000CD0417 /* CellLevelAnalytics.swift */; };
 		FB1C80022C7B505400F9E797 /* BigSquareIteratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C80012C7B505400F9E797 /* BigSquareIteratorTests.swift */; };
-		FB3627822C94FA4A001DB778 /* BigSquareIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3627812C94FA4A001DB778 /* BigSquareIterator.swift */; };
-		FB3627842C94FA65001DB778 /* SwordFishFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3627832C94FA65001DB778 /* SwordFishFinder.swift */; };
 		FB3627862C94FA82001DB778 /* NakedPairsFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3627852C94FA82001DB778 /* NakedPairsFinder.swift */; };
 		FB3C9715287F0FEA002104F0 /* TableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9714287F0FEA002104F0 /* TableBuilder.swift */; };
 		FB3C9717287F1008002104F0 /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9716287F1008002104F0 /* TypeAlias.swift */; };
 		FB3C9719287F11B1002104F0 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9718287F11B1002104F0 /* GameManager.swift */; };
 		FB3C971B28802F39002104F0 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB3C971A28802F39002104F0 /* Colors.xcassets */; };
+		FB4426482C95A76800B98A1E /* hard.data in Resources */ = {isa = PBXBuildFile; fileRef = FB4426472C95A76800B98A1E /* hard.data */; };
 		FB496CCE2901AB3E0047548B /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB496CCD2901AB3E0047548B /* StatisticsView.swift */; };
 		FB496CD02901AD420047548B /* LevelStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB496CCF2901AD420047548B /* LevelStatistics.swift */; };
 		FB4D359128955BE600C643A1 /* TemplateLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4D359028955BE600C643A1 /* TemplateLevel.swift */; };
@@ -51,7 +50,8 @@
 		FBA23911288CA6A7006AE3A4 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA23910288CA6A7006AE3A4 /* Difficulty.swift */; };
 		FBA59C37291839C600D727A1 /* easy.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA59C34291839C400D727A1 /* easy.data */; };
 		FBA59C38291839C600D727A1 /* medium.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA59C35291839C500D727A1 /* medium.data */; };
-		FBA59C39291839C600D727A1 /* hard.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA59C36291839C600D727A1 /* hard.data */; };
+		FBB7C5482C95BC7B0027B971 /* SwordFishFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */; };
+		FBB7C5492C95BC7B0027B971 /* BigSquareIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */; };
 		FBBAAC3728B034EA0090E24A /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBAAC3628B034EA0090E24A /* AnalyticsManager.swift */; };
 		FBBAAC3928B0370D0090E24A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBBAAC3828B0370D0090E24A /* GoogleService-Info.plist */; };
 		FBBAAC3C28B037D50090E24A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FBBAAC3B28B037D50090E24A /* FirebaseAnalytics */; };
@@ -134,13 +134,12 @@
 		FB125AC528FD8D8400810211 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		FB1596E528B2BC5000CD0417 /* CellLevelAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellLevelAnalytics.swift; sourceTree = "<group>"; };
 		FB1C80012C7B505400F9E797 /* BigSquareIteratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigSquareIteratorTests.swift; sourceTree = "<group>"; };
-		FB3627812C94FA4A001DB778 /* BigSquareIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigSquareIterator.swift; sourceTree = "<group>"; };
-		FB3627832C94FA65001DB778 /* SwordFishFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwordFishFinder.swift; sourceTree = "<group>"; };
 		FB3627852C94FA82001DB778 /* NakedPairsFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NakedPairsFinder.swift; sourceTree = "<group>"; };
 		FB3C9714287F0FEA002104F0 /* TableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBuilder.swift; sourceTree = "<group>"; };
 		FB3C9716287F1008002104F0 /* TypeAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAlias.swift; sourceTree = "<group>"; };
 		FB3C9718287F11B1002104F0 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		FB3C971A28802F39002104F0 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		FB4426472C95A76800B98A1E /* hard.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hard.data; sourceTree = "<group>"; };
 		FB496CCD2901AB3E0047548B /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		FB496CCF2901AD420047548B /* LevelStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelStatistics.swift; sourceTree = "<group>"; };
 		FB4D359028955BE600C643A1 /* TemplateLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateLevel.swift; sourceTree = "<group>"; };
@@ -164,7 +163,8 @@
 		FBA23910288CA6A7006AE3A4 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		FBA59C34291839C400D727A1 /* easy.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = easy.data; sourceTree = "<group>"; };
 		FBA59C35291839C500D727A1 /* medium.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medium.data; sourceTree = "<group>"; };
-		FBA59C36291839C600D727A1 /* hard.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hard.data; sourceTree = "<group>"; };
+		FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwordFishFinder.swift; sourceTree = "<group>"; };
+		FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigSquareIterator.swift; sourceTree = "<group>"; };
 		FBBAAC3628B034EA0090E24A /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		FBBAAC3828B0370D0090E24A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FBBBE58E288DA7F500AC809A /* DependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
@@ -283,8 +283,8 @@
 			isa = PBXGroup;
 			children = (
 				FB3C9714287F0FEA002104F0 /* TableBuilder.swift */,
-				FB3627812C94FA4A001DB778 /* BigSquareIterator.swift */,
-				FB3627832C94FA65001DB778 /* SwordFishFinder.swift */,
+				FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */,
+				FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */,
 				FB3627852C94FA82001DB778 /* NakedPairsFinder.swift */,
 			);
 			path = TableBuilder;
@@ -340,8 +340,8 @@
 		FBA23901288CA401006AE3A4 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				FB4426472C95A76800B98A1E /* hard.data */,
 				FBA59C34291839C400D727A1 /* easy.data */,
-				FBA59C36291839C600D727A1 /* hard.data */,
 				FBA59C35291839C500D727A1 /* medium.data */,
 			);
 			path = Levels;
@@ -634,7 +634,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1400;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					FBBDE98F285522100078A73E = {
@@ -684,7 +684,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBA59C39291839C600D727A1 /* hard.data in Resources */,
+				FB4426482C95A76800B98A1E /* hard.data in Resources */,
 				FBBAAC3928B0370D0090E24A /* GoogleService-Info.plist in Resources */,
 				FBA59C37291839C600D727A1 /* easy.data in Resources */,
 				FB3C971B28802F39002104F0 /* Colors.xcassets in Resources */,
@@ -881,10 +881,9 @@
 				FB77D00528FC989100D7E17F /* SelectDifficultyView.swift in Sources */,
 				FBCF08CC28B25F7B00ABA471 /* LevelAnalytics.swift in Sources */,
 				FBA2390D288CA616006AE3A4 /* Level.swift in Sources */,
-				FB3627822C94FA4A001DB778 /* BigSquareIterator.swift in Sources */,
 				FBF5C3A52899D5A600F5FADA /* Int+Extensions.swift in Sources */,
 				FB3627862C94FA82001DB778 /* NakedPairsFinder.swift in Sources */,
-				FB3627842C94FA65001DB778 /* SwordFishFinder.swift in Sources */,
+				FBB7C5482C95BC7B0027B971 /* SwordFishFinder.swift in Sources */,
 				FB7BC71C28803A1000E8C5F1 /* R.generated.swift in Sources */,
 				FBA23911288CA6A7006AE3A4 /* Difficulty.swift in Sources */,
 				FBDB28B72884B33C00A372E7 /* Coordinate.swift in Sources */,
@@ -900,6 +899,7 @@
 				FB7BC7252882154B00E8C5F1 /* ControlsView.swift in Sources */,
 				FB3C9719287F11B1002104F0 /* GameManager.swift in Sources */,
 				FBCF08D428B29E9E00ABA471 /* PlaySet.swift in Sources */,
+				FBB7C5492C95BC7B0027B971 /* BigSquareIterator.swift in Sources */,
 				FB125AC628FD8D8400810211 /* BackButton.swift in Sources */,
 				FBDB28B328849C3B00A372E7 /* TableView.swift in Sources */,
 				FB0DC6B0288F05B500E02521 /* Storage.swift in Sources */,
