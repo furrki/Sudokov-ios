@@ -49,6 +49,8 @@
 		FBA2390F288CA68F006AE3A4 /* LocalLevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */; };
 		FBA23911288CA6A7006AE3A4 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA23910288CA6A7006AE3A4 /* Difficulty.swift */; };
 		FBA59C38291839C600D727A1 /* medium.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA59C35291839C500D727A1 /* medium.data */; };
+		FBA85B202CBC7FD000D7E42D /* AsymmetryAvoider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA85B1F2CBC7FCF00D7E42D /* AsymmetryAvoider.swift */; };
+		FBA85B212CBC7FD000D7E42D /* AsymmetryAvoider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA85B1F2CBC7FCF00D7E42D /* AsymmetryAvoider.swift */; };
 		FBB7C5482C95BC7B0027B971 /* SwordFishFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */; };
 		FBB7C5492C95BC7B0027B971 /* BigSquareIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */; };
 		FBB7C5522C95BCB10027B971 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5512C95BCB10027B971 /* main.swift */; };
@@ -72,12 +74,6 @@
 		FBB7C5722C95C7430027B971 /* easy.data in Resources */ = {isa = PBXBuildFile; fileRef = FBB7C5712C95C7430027B971 /* easy.data */; };
 		FBBAAC3728B034EA0090E24A /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBAAC3628B034EA0090E24A /* AnalyticsManager.swift */; };
 		FBBAAC3928B0370D0090E24A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBBAAC3828B0370D0090E24A /* GoogleService-Info.plist */; };
-		FBBAAC3C28B037D50090E24A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FBBAAC3B28B037D50090E24A /* FirebaseAnalytics */; };
-		FBBAAC3E28B037D50090E24A /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = FBBAAC3D28B037D50090E24A /* FirebaseAnalyticsOnDeviceConversion */; };
-		FBBAAC4028B037D50090E24A /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FBBAAC3F28B037D50090E24A /* FirebaseAnalyticsSwift */; };
-		FBBAAC4228B037D50090E24A /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = FBBAAC4128B037D50090E24A /* FirebaseAnalyticsWithoutAdIdSupport */; };
-		FBBAAC4428B037D50090E24A /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = FBBAAC4328B037D50090E24A /* FirebaseAppCheck */; };
-		FBBAAC4628B037D50090E24A /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = FBBAAC4528B037D50090E24A /* FirebaseAppDistribution-Beta */; };
 		FBBBE58F288DA7F500AC809A /* DependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBBE58E288DA7F500AC809A /* DependencyManager.swift */; };
 		FBBBE591288DA96F00AC809A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBBE590288DA96F00AC809A /* Coordinator.swift */; };
 		FBBBE595288DAA8200AC809A /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBBE594288DAA8200AC809A /* HomeCoordinator.swift */; };
@@ -192,6 +188,7 @@
 		FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLevelManager.swift; sourceTree = "<group>"; };
 		FBA23910288CA6A7006AE3A4 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		FBA59C35291839C500D727A1 /* medium.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medium.data; sourceTree = "<group>"; };
+		FBA85B1F2CBC7FCF00D7E42D /* AsymmetryAvoider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsymmetryAvoider.swift; sourceTree = "<group>"; };
 		FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwordFishFinder.swift; sourceTree = "<group>"; };
 		FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigSquareIterator.swift; sourceTree = "<group>"; };
 		FBB7C54F2C95BCB10027B971 /* SudokovGeneratorScript */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SudokovGeneratorScript; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,13 +246,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBBAAC4628B037D50090E24A /* FirebaseAppDistribution-Beta in Frameworks */,
-				FBBAAC4028B037D50090E24A /* FirebaseAnalyticsSwift in Frameworks */,
-				FBBAAC4228B037D50090E24A /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
-				FBBAAC3C28B037D50090E24A /* FirebaseAnalytics in Frameworks */,
-				FBBAAC3E28B037D50090E24A /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				FB125AC928FD964D00810211 /* SwiftUICharts in Frameworks */,
-				FBBAAC4428B037D50090E24A /* FirebaseAppCheck in Frameworks */,
 				6F59AAB5E2E2D83BD9AC35C3 /* Pods_Sudokov.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,6 +317,7 @@
 				FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */,
 				FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */,
 				FB3627852C94FA82001DB778 /* NakedPairsFinder.swift */,
+				FBA85B1F2CBC7FCF00D7E42D /* AsymmetryAvoider.swift */,
 			);
 			path = TableBuilder;
 			sourceTree = "<group>";
@@ -626,12 +618,6 @@
 			);
 			name = Sudokov;
 			packageProductDependencies = (
-				FBBAAC3B28B037D50090E24A /* FirebaseAnalytics */,
-				FBBAAC3D28B037D50090E24A /* FirebaseAnalyticsOnDeviceConversion */,
-				FBBAAC3F28B037D50090E24A /* FirebaseAnalyticsSwift */,
-				FBBAAC4128B037D50090E24A /* FirebaseAnalyticsWithoutAdIdSupport */,
-				FBBAAC4328B037D50090E24A /* FirebaseAppCheck */,
-				FBBAAC4528B037D50090E24A /* FirebaseAppDistribution-Beta */,
 				FB125AC828FD964D00810211 /* SwiftUICharts */,
 			);
 			productName = Sudokov;
@@ -735,7 +721,6 @@
 			);
 			mainGroup = FBBDE987285522100078A73E;
 			packageReferences = (
-				FBBAAC3A28B037D50090E24A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				FB125AC728FD964C00810211 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
 			);
 			productRefGroup = FBBDE991285522100078A73E /* Products */;
@@ -926,6 +911,7 @@
 				FBB7C55E2C95BD160027B971 /* TableMatrix.swift in Sources */,
 				FBB7C5522C95BCB10027B971 /* main.swift in Sources */,
 				FBB7C55D2C95BD080027B971 /* Difficulty.swift in Sources */,
+				FBA85B202CBC7FD000D7E42D /* AsymmetryAvoider.swift in Sources */,
 				FBB7C5562C95BCB70027B971 /* BigSquareIterator.swift in Sources */,
 				FBB7C5632C95BD370027B971 /* Move.swift in Sources */,
 				FBB7C5662C95BD4C0027B971 /* Configuration.swift in Sources */,
@@ -976,6 +962,7 @@
 				DCC3040F2897F4CE00EEB26E /* LevelState.swift in Sources */,
 				FB7BC71F28803EC500E8C5F1 /* GameSquareView.swift in Sources */,
 				FB77D00528FC989100D7E17F /* SelectDifficultyView.swift in Sources */,
+				FBA85B212CBC7FD000D7E42D /* AsymmetryAvoider.swift in Sources */,
 				FBCF08CC28B25F7B00ABA471 /* LevelAnalytics.swift in Sources */,
 				FBA2390D288CA616006AE3A4 /* Level.swift in Sources */,
 				FBF5C3A52899D5A600F5FADA /* Int+Extensions.swift in Sources */,
@@ -1206,13 +1193,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudokov/Preview Content\"";
 				DEVELOPMENT_TEAM = TU6A9VFP8M;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = TU6A9VFP8M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sudokov/Info.plist;
@@ -1226,11 +1211,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.furrki.Sudokov;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.furrki.Sudokov";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.furrki.Sudokov";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1247,12 +1231,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudokov/Preview Content\"";
 				DEVELOPMENT_TEAM = TU6A9VFP8M;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = TU6A9VFP8M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sudokov/Info.plist;
@@ -1266,11 +1248,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.furrki.Sudokov;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.furrki.Sudokov";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.furrki.Sudokov";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1466,14 +1447,6 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		FBBAAC3A28B037D50090E24A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1481,36 +1454,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FB125AC728FD964C00810211 /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
 			productName = SwiftUICharts;
-		};
-		FBBAAC3B28B037D50090E24A /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FBBAAC3A28B037D50090E24A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		FBBAAC3D28B037D50090E24A /* FirebaseAnalyticsOnDeviceConversion */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FBBAAC3A28B037D50090E24A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsOnDeviceConversion;
-		};
-		FBBAAC3F28B037D50090E24A /* FirebaseAnalyticsSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FBBAAC3A28B037D50090E24A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsSwift;
-		};
-		FBBAAC4128B037D50090E24A /* FirebaseAnalyticsWithoutAdIdSupport */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FBBAAC3A28B037D50090E24A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsWithoutAdIdSupport;
-		};
-		FBBAAC4328B037D50090E24A /* FirebaseAppCheck */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FBBAAC3A28B037D50090E24A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAppCheck;
-		};
-		FBBAAC4528B037D50090E24A /* FirebaseAppDistribution-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FBBAAC3A28B037D50090E24A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseAppDistribution-Beta";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

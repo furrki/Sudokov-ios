@@ -8,6 +8,7 @@ target 'Sudokov' do
   # Pods for Sudokov
   pod 'R.swift'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'FirebaseAnalytics'
 
   target 'SudokovTests' do
     inherit! :search_paths

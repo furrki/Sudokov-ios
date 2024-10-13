@@ -26,6 +26,8 @@ class TableBuilder: ObservableObject {
     private(set) var cellsToHide = [Coordinate]()
     private(set) var riskyCellGroups = [[Coordinate]]()
     
+    private let asymmetryAvoider: AsymmetryAvoider = AsymmetryAvoider()
+    
     // MARK: - Methods
     init(tableState: TableMatrix? = nil, depth: Int? = nil) {
         self.depth = depth
@@ -135,36 +137,22 @@ class TableBuilder: ObservableObject {
             makeCellsToRemove()
         }
     }
-    
+                                                                
     private func makeCellsToRemove() {
         guard let depth = depth else {
             return
         }
         
-        var cellsToHide = Set(self.cellsToHide)
-        
+        var cellsToHide = Set<Coordinate>()
         let triesTreshold = 5000
         var tries = 0
         
         while cellsToHide.count < (81 - depth) {
             let cell = Coordinate(row: Int.random(in: 0...8), col: Int.random(in: 0...8))
             
-            let isRiskyToRemove: Bool = riskyCellGroups.contains {
-                $0 == [cell]
-            }
-            
-            if !isRiskyToRemove && !cellsToHide.contains(cell) {
+            if asymmetryAvoider.canRemoveSymmetrically(cell, cellsToHide: cellsToHide, isRiskyToRemove: isRiskyToRemove) {
                 tries = 0
-                cellsToHide.insert(cell)
-                riskyCellGroups = riskyCellGroups.map {
-                    $0.compactMap { cellInRiskyGroup in
-                        if cellInRiskyGroup == cell {
-                            return nil
-                        }
-                        
-                        return cellInRiskyGroup
-                    }
-                }
+                asymmetryAvoider.removeSymmetrically(cell, cellsToHide: &cellsToHide, removeFromRiskyCellGroups: removeFromRiskyCellGroups)
             } else {
                 tries += 1
             }
@@ -178,6 +166,16 @@ class TableBuilder: ObservableObject {
         }
         
         self.cellsToHide = Array(cellsToHide)
+    }
+    
+    private func isRiskyToRemove(cell: Coordinate) -> Bool {
+        riskyCellGroups.contains { $0 == [cell] }
+    }
+    
+    private func removeFromRiskyCellGroups(cell: Coordinate) {
+        riskyCellGroups = riskyCellGroups.map { group in
+            group.filter { $0 != cell }
+        }
     }
     
     private func iterateSwordFishCheck() -> Bool {
@@ -249,5 +247,4 @@ class TableBuilder: ObservableObject {
                          shouldCheckCols: shouldCheckCols,
                          shouldCheckSquares: shouldCheckSquares)
     }
-    
 }

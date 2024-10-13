@@ -15,10 +15,10 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
-### ios upoad_ipa
+### ios upload_ipa
 
 ```sh
-[bundle exec] fastlane ios upoad_ipa
+[bundle exec] fastlane ios upload_ipa
 ```
 
 Uploads the ipa to AppStoreConnect
