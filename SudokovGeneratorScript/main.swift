@@ -9,7 +9,7 @@ import Foundation
 
 let easyDepth = 45
 let mediumDepth = 35
-let hardDepth = 26
+let hardDepth = 25
 
 func writeToFile(name: String, levels: [Level]) {
     // documents directory
@@ -25,16 +25,20 @@ func writeToFile(name: String, levels: [Level]) {
     }
 }
 
-var levels: [Level] = []
-var tableBuilder = TableBuilder()
-
-print("Generating levels")
-for _ in 0...99 {
-    tableBuilder = TableBuilder(depth: easyDepth)
-    let cellsToHide = tableBuilder.cellsToHide
-    levels.append(Level(table: tableBuilder.tableState, cellsToHide: cellsToHide))
+func generateLevels(depth: Int, name: String) {
+    var levels: [Level] = []
+    var tableBuilder = TableBuilder()
+    
+    print("Generating \(name) Levels")
+    for _ in 0...99 {
+        tableBuilder = TableBuilder(depth: depth)
+        let cellsToHide = tableBuilder.cellsToHide
+        levels.append(Level(table: tableBuilder.tableState, cellsToHide: cellsToHide))
+    }
+    
+    writeToFile(name: "\(name).data", levels: levels)
 }
 
-writeToFile(name: "easy.data", levels: levels)
-
-levels = []
+generateLevels(depth: easyDepth, name: "easy")
+generateLevels(depth: mediumDepth, name: "medium")
+generateLevels(depth: hardDepth, name: "hard")

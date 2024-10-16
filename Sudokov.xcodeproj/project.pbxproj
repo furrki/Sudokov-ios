@@ -21,12 +21,14 @@
 		FB125AC928FD964D00810211 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = FB125AC828FD964D00810211 /* SwiftUICharts */; };
 		FB1596E628B2BC5000CD0417 /* CellLevelAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1596E528B2BC5000CD0417 /* CellLevelAnalytics.swift */; };
 		FB1C80022C7B505400F9E797 /* BigSquareIteratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C80012C7B505400F9E797 /* BigSquareIteratorTests.swift */; };
+		FB27B4242CBFAFE800C9B957 /* easy.data in Resources */ = {isa = PBXBuildFile; fileRef = FB27B4212CBFAFE800C9B957 /* easy.data */; };
+		FB27B4252CBFAFE800C9B957 /* hard.data in Resources */ = {isa = PBXBuildFile; fileRef = FB27B4222CBFAFE800C9B957 /* hard.data */; };
+		FB27B4262CBFAFE800C9B957 /* medium.data in Resources */ = {isa = PBXBuildFile; fileRef = FB27B4232CBFAFE800C9B957 /* medium.data */; };
 		FB3627862C94FA82001DB778 /* NakedPairsFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3627852C94FA82001DB778 /* NakedPairsFinder.swift */; };
 		FB3C9715287F0FEA002104F0 /* TableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9714287F0FEA002104F0 /* TableBuilder.swift */; };
 		FB3C9717287F1008002104F0 /* TableMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9716287F1008002104F0 /* TableMatrix.swift */; };
 		FB3C9719287F11B1002104F0 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9718287F11B1002104F0 /* GameManager.swift */; };
 		FB3C971B28802F39002104F0 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB3C971A28802F39002104F0 /* Colors.xcassets */; };
-		FB4426482C95A76800B98A1E /* hard.data in Resources */ = {isa = PBXBuildFile; fileRef = FB4426472C95A76800B98A1E /* hard.data */; };
 		FB496CCE2901AB3E0047548B /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB496CCD2901AB3E0047548B /* StatisticsView.swift */; };
 		FB496CD02901AD420047548B /* LevelStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB496CCF2901AD420047548B /* LevelStatistics.swift */; };
 		FB4D359128955BE600C643A1 /* TemplateLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4D359028955BE600C643A1 /* TemplateLevel.swift */; };
@@ -48,7 +50,6 @@
 		FBA2390D288CA616006AE3A4 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA2390C288CA616006AE3A4 /* Level.swift */; };
 		FBA2390F288CA68F006AE3A4 /* LocalLevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */; };
 		FBA23911288CA6A7006AE3A4 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA23910288CA6A7006AE3A4 /* Difficulty.swift */; };
-		FBA59C38291839C600D727A1 /* medium.data in Resources */ = {isa = PBXBuildFile; fileRef = FBA59C35291839C500D727A1 /* medium.data */; };
 		FBA85B202CBC7FD000D7E42D /* AsymmetryAvoider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA85B1F2CBC7FCF00D7E42D /* AsymmetryAvoider.swift */; };
 		FBA85B212CBC7FD000D7E42D /* AsymmetryAvoider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA85B1F2CBC7FCF00D7E42D /* AsymmetryAvoider.swift */; };
 		FBB7C5482C95BC7B0027B971 /* SwordFishFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */; };
@@ -71,7 +72,6 @@
 		FBB7C5652C95BD420027B971 /* LevelStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB496CCF2901AD420047548B /* LevelStatistics.swift */; };
 		FBB7C5662C95BD4C0027B971 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10394528EE042B00F96174 /* Configuration.swift */; };
 		FBB7C5682C95BD6C0027B971 /* GameMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5672C95BD6C0027B971 /* GameMatrix.swift */; };
-		FBB7C5722C95C7430027B971 /* easy.data in Resources */ = {isa = PBXBuildFile; fileRef = FBB7C5712C95C7430027B971 /* easy.data */; };
 		FBBAAC3728B034EA0090E24A /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBAAC3628B034EA0090E24A /* AnalyticsManager.swift */; };
 		FBBAAC3928B0370D0090E24A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBBAAC3828B0370D0090E24A /* GoogleService-Info.plist */; };
 		FBBBE58F288DA7F500AC809A /* DependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBBE58E288DA7F500AC809A /* DependencyManager.swift */; };
@@ -160,12 +160,14 @@
 		FB125AC528FD8D8400810211 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		FB1596E528B2BC5000CD0417 /* CellLevelAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellLevelAnalytics.swift; sourceTree = "<group>"; };
 		FB1C80012C7B505400F9E797 /* BigSquareIteratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigSquareIteratorTests.swift; sourceTree = "<group>"; };
+		FB27B4212CBFAFE800C9B957 /* easy.data */ = {isa = PBXFileReference; lastKnownFileType = text; path = easy.data; sourceTree = "<group>"; };
+		FB27B4222CBFAFE800C9B957 /* hard.data */ = {isa = PBXFileReference; lastKnownFileType = text; path = hard.data; sourceTree = "<group>"; };
+		FB27B4232CBFAFE800C9B957 /* medium.data */ = {isa = PBXFileReference; lastKnownFileType = text; path = medium.data; sourceTree = "<group>"; };
 		FB3627852C94FA82001DB778 /* NakedPairsFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NakedPairsFinder.swift; sourceTree = "<group>"; };
 		FB3C9714287F0FEA002104F0 /* TableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBuilder.swift; sourceTree = "<group>"; };
 		FB3C9716287F1008002104F0 /* TableMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableMatrix.swift; sourceTree = "<group>"; };
 		FB3C9718287F11B1002104F0 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		FB3C971A28802F39002104F0 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		FB4426472C95A76800B98A1E /* hard.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hard.data; sourceTree = "<group>"; };
 		FB496CCD2901AB3E0047548B /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		FB496CCF2901AD420047548B /* LevelStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelStatistics.swift; sourceTree = "<group>"; };
 		FB4D359028955BE600C643A1 /* TemplateLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateLevel.swift; sourceTree = "<group>"; };
@@ -187,14 +189,12 @@
 		FBA2390C288CA616006AE3A4 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLevelManager.swift; sourceTree = "<group>"; };
 		FBA23910288CA6A7006AE3A4 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
-		FBA59C35291839C500D727A1 /* medium.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medium.data; sourceTree = "<group>"; };
 		FBA85B1F2CBC7FCF00D7E42D /* AsymmetryAvoider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsymmetryAvoider.swift; sourceTree = "<group>"; };
 		FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwordFishFinder.swift; sourceTree = "<group>"; };
 		FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigSquareIterator.swift; sourceTree = "<group>"; };
 		FBB7C54F2C95BCB10027B971 /* SudokovGeneratorScript */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SudokovGeneratorScript; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBB7C5512C95BCB10027B971 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FBB7C5672C95BD6C0027B971 /* GameMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMatrix.swift; sourceTree = "<group>"; };
-		FBB7C5712C95C7430027B971 /* easy.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = easy.data; sourceTree = "<group>"; };
 		FBBAAC3628B034EA0090E24A /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		FBBAAC3828B0370D0090E24A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FBBBE58E288DA7F500AC809A /* DependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
@@ -372,9 +372,9 @@
 		FBA23901288CA401006AE3A4 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
-				FB4426472C95A76800B98A1E /* hard.data */,
-				FBB7C5712C95C7430027B971 /* easy.data */,
-				FBA59C35291839C500D727A1 /* medium.data */,
+				FB27B4212CBFAFE800C9B957 /* easy.data */,
+				FB27B4222CBFAFE800C9B957 /* hard.data */,
+				FB27B4232CBFAFE800C9B957 /* medium.data */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -741,12 +741,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBB7C5722C95C7430027B971 /* easy.data in Resources */,
-				FB4426482C95A76800B98A1E /* hard.data in Resources */,
 				FBBAAC3928B0370D0090E24A /* GoogleService-Info.plist in Resources */,
 				FB3C971B28802F39002104F0 /* Colors.xcassets in Resources */,
 				FBBDE99B285522140078A73E /* Preview Assets.xcassets in Resources */,
-				FBA59C38291839C600D727A1 /* medium.data in Resources */,
+				FB27B4242CBFAFE800C9B957 /* easy.data in Resources */,
+				FB27B4252CBFAFE800C9B957 /* hard.data in Resources */,
+				FB27B4262CBFAFE800C9B957 /* medium.data in Resources */,
 				FBBDE998285522140078A73E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1195,7 +1195,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudokov/Preview Content\"";
 				DEVELOPMENT_TEAM = TU6A9VFP8M;
 				ENABLE_PREVIEWS = YES;
@@ -1211,7 +1211,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.furrki.Sudokov;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1232,7 +1232,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudokov/Preview Content\"";
 				DEVELOPMENT_TEAM = TU6A9VFP8M;
 				ENABLE_PREVIEWS = YES;
@@ -1248,7 +1248,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.furrki.Sudokov;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
