@@ -148,11 +148,13 @@ class TableBuilder: ObservableObject {
         var tries = 0
         
         while cellsToHide.count < (81 - depth) {
-            let cell = Coordinate(row: Int.random(in: 0...8), col: Int.random(in: 0...8))
-            
-            if asymmetryAvoider.canRemoveSymmetrically(cell, cellsToHide: cellsToHide, isRiskyToRemove: isRiskyToRemove) {
-                tries = 0
-                asymmetryAvoider.removeSymmetrically(cell, cellsToHide: &cellsToHide, removeFromRiskyCellGroups: removeFromRiskyCellGroups)
+            if let cell = RandomCellPicker(table: tableState, cellsPlannedForRemoval: Array(cellsToHide)).pickCell() {
+                if asymmetryAvoider.canRemoveSymmetrically(cell, cellsToHide: cellsToHide, isRiskyToRemove: isRiskyToRemove) {
+                    tries = 0
+                    asymmetryAvoider.removeSymmetrically(cell, cellsToHide: &cellsToHide, removeFromRiskyCellGroups: removeFromRiskyCellGroups)
+                } else {
+                    tries += 1
+                }
             } else {
                 tries += 1
             }

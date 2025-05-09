@@ -47,6 +47,8 @@
 		FB897488288F31DD00D7C982 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB897487288F31DD00D7C982 /* StorageManager.swift */; };
 		FB89748A288F424B00D7C982 /* Transitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB897489288F424B00D7C982 /* Transitions.swift */; };
 		FB9978D02891C908001F308C /* PickLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9978CF2891C908001F308C /* PickLevelView.swift */; };
+		FB9A3BE02DCE580E00FD9680 /* RandomCellPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9A3BDF2DCE580900FD9680 /* RandomCellPicker.swift */; };
+		FB9A3BE12DCE580E00FD9680 /* RandomCellPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9A3BDF2DCE580900FD9680 /* RandomCellPicker.swift */; };
 		FBA2390D288CA616006AE3A4 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA2390C288CA616006AE3A4 /* Level.swift */; };
 		FBA2390F288CA68F006AE3A4 /* LocalLevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */; };
 		FBA23911288CA6A7006AE3A4 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA23910288CA6A7006AE3A4 /* Difficulty.swift */; };
@@ -186,6 +188,7 @@
 		FB897487288F31DD00D7C982 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		FB897489288F424B00D7C982 /* Transitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitions.swift; sourceTree = "<group>"; };
 		FB9978CF2891C908001F308C /* PickLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickLevelView.swift; sourceTree = "<group>"; };
+		FB9A3BDF2DCE580900FD9680 /* RandomCellPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomCellPicker.swift; sourceTree = "<group>"; };
 		FBA2390C288CA616006AE3A4 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLevelManager.swift; sourceTree = "<group>"; };
 		FBA23910288CA6A7006AE3A4 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
@@ -313,6 +316,7 @@
 		FB3627802C94FA38001DB778 /* TableBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				FB9A3BDF2DCE580900FD9680 /* RandomCellPicker.swift */,
 				FB3C9714287F0FEA002104F0 /* TableBuilder.swift */,
 				FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */,
 				FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */,
@@ -901,6 +905,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB9A3BE02DCE580E00FD9680 /* RandomCellPicker.swift in Sources */,
 				FBB7C5622C95BD340027B971 /* PlaySet.swift in Sources */,
 				FBB7C55A2C95BCED0027B971 /* Level.swift in Sources */,
 				FBB7C5572C95BCB90027B971 /* TableBuilder.swift in Sources */,
@@ -973,6 +978,7 @@
 				FBDB28B72884B33C00A372E7 /* Coordinate.swift in Sources */,
 				FB10394628EE042B00F96174 /* Configuration.swift in Sources */,
 				FB1596E628B2BC5000CD0417 /* CellLevelAnalytics.swift in Sources */,
+				FB9A3BE12DCE580E00FD9680 /* RandomCellPicker.swift in Sources */,
 				FB496CCE2901AB3E0047548B /* StatisticsView.swift in Sources */,
 				FB9978D02891C908001F308C /* PickLevelView.swift in Sources */,
 				FB7BC72328815E9000E8C5F1 /* NumberPickerView.swift in Sources */,
