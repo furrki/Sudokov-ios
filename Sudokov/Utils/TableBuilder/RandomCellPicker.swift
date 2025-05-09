@@ -20,7 +20,7 @@ class RandomCellPicker: BigSquareIterator {
                 let coordinate = Coordinate(row: row, col: col)
                 return cellsPlannedForRemoval.contains(coordinate) ? nil : coordinate
             }
-        }.shuffled().prefix(10)
+        }.shuffled().prefix(14)
 
         let cellsWithRisk = randomCells.map { cell in
             (cell, calculateRisk(cell: cell))
