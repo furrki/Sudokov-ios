@@ -148,15 +148,26 @@ class TableBuilder: ObservableObject {
         var tries = 0
         
         while cellsToHide.count < (81 - depth) {
-            if let cell = RandomCellPicker(table: tableState, cellsPlannedForRemoval: Array(cellsToHide)).pickCell() {
-                if asymmetryAvoider.canRemoveSymmetrically(cell, cellsToHide: cellsToHide, isRiskyToRemove: isRiskyToRemove) {
-                    tries = 0
-                    asymmetryAvoider.removeSymmetrically(cell, cellsToHide: &cellsToHide, removeFromRiskyCellGroups: removeFromRiskyCellGroups)
-                } else {
-                    tries += 1
+            // Get all available cells that are not already hidden
+            let uniqueSolutionVerifier = UniqueSolutionVerifier(table: tableState, cellsToRemove: cellsToHide)
+            
+            let availableCells = (0..<9).flatMap { row in
+                (0..<9).compactMap { col in
+                    let coordinate = Coordinate(row: row, col: col)
+                    return cellsToHide.contains(coordinate) ? nil : coordinate
                 }
-            } else {
-                tries += 1
+            }
+            
+            if !availableCells.isEmpty {
+                // Pick a random cell from available cells
+                let cell = uniqueSolutionVerifier.selectRandomSafeCell()!
+                
+                let uniqueSolution = uniqueSolutionVerifier.hasUniqueSolution()
+                
+                cellsToHide.insert(cell)
+                
+                print("Unique solution: \(uniqueSolution)")
+                print("Cells to hide: \(cellsToHide.count)")
             }
             
             if tries >= triesTreshold {
@@ -168,6 +179,8 @@ class TableBuilder: ObservableObject {
         }
         
         self.cellsToHide = Array(cellsToHide)
+
+        print("Unique solution: \(UniqueSolutionVerifier(table: tableState, cellsToRemove: cellsToHide).hasUniqueSolution())")
     }
     
     private func isRiskyToRemove(cell: Coordinate) -> Bool {

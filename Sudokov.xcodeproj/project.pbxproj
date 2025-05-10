@@ -49,6 +49,8 @@
 		FB9978D02891C908001F308C /* PickLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9978CF2891C908001F308C /* PickLevelView.swift */; };
 		FB9A3BE02DCE580E00FD9680 /* RandomCellPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9A3BDF2DCE580900FD9680 /* RandomCellPicker.swift */; };
 		FB9A3BE12DCE580E00FD9680 /* RandomCellPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9A3BDF2DCE580900FD9680 /* RandomCellPicker.swift */; };
+		FB9A3BE32DCE64B300FD9680 /* UniqueSolutionVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9A3BE22DCE64AE00FD9680 /* UniqueSolutionVerifier.swift */; };
+		FB9A3BE42DCE64B300FD9680 /* UniqueSolutionVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9A3BE22DCE64AE00FD9680 /* UniqueSolutionVerifier.swift */; };
 		FBA2390D288CA616006AE3A4 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA2390C288CA616006AE3A4 /* Level.swift */; };
 		FBA2390F288CA68F006AE3A4 /* LocalLevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */; };
 		FBA23911288CA6A7006AE3A4 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA23910288CA6A7006AE3A4 /* Difficulty.swift */; };
@@ -189,6 +191,7 @@
 		FB897489288F424B00D7C982 /* Transitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitions.swift; sourceTree = "<group>"; };
 		FB9978CF2891C908001F308C /* PickLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickLevelView.swift; sourceTree = "<group>"; };
 		FB9A3BDF2DCE580900FD9680 /* RandomCellPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomCellPicker.swift; sourceTree = "<group>"; };
+		FB9A3BE22DCE64AE00FD9680 /* UniqueSolutionVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueSolutionVerifier.swift; sourceTree = "<group>"; };
 		FBA2390C288CA616006AE3A4 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLevelManager.swift; sourceTree = "<group>"; };
 		FBA23910288CA6A7006AE3A4 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
@@ -316,6 +319,7 @@
 		FB3627802C94FA38001DB778 /* TableBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				FB9A3BE22DCE64AE00FD9680 /* UniqueSolutionVerifier.swift */,
 				FB9A3BDF2DCE580900FD9680 /* RandomCellPicker.swift */,
 				FB3C9714287F0FEA002104F0 /* TableBuilder.swift */,
 				FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */,
@@ -787,9 +791,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sudokov-SudokovUITests/Pods-Sudokov-SudokovUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sudokov-SudokovUITests/Pods-Sudokov-SudokovUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -826,9 +834,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sudokov/Pods-Sudokov-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sudokov/Pods-Sudokov-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -912,6 +924,7 @@
 				FBB7C5612C95BD2C0027B971 /* FeatureFlags.swift in Sources */,
 				FBB7C5642C95BD400027B971 /* LevelState.swift in Sources */,
 				FBB7C55C2C95BCFB0027B971 /* TemplateLevel.swift in Sources */,
+				FB9A3BE42DCE64B300FD9680 /* UniqueSolutionVerifier.swift in Sources */,
 				FBB7C5582C95BCBB0027B971 /* SwordFishFinder.swift in Sources */,
 				FBB7C55E2C95BD160027B971 /* TableMatrix.swift in Sources */,
 				FBB7C5522C95BCB10027B971 /* main.swift in Sources */,
@@ -938,6 +951,7 @@
 				FB5D90C72891E00200E4030E /* NumberPickerButton.swift in Sources */,
 				FBBBE591288DA96F00AC809A /* Coordinator.swift in Sources */,
 				FBF5C3A32899BBA200F5FADA /* PickLevelViewModel.swift in Sources */,
+				FB9A3BE32DCE64B300FD9680 /* UniqueSolutionVerifier.swift in Sources */,
 				FB82D02C2911AB7000F27B6F /* CustomGameAnalytics.swift in Sources */,
 				FBF142D5289B1FE000C3EA2E /* SettingsView.swift in Sources */,
 				FBCF08D628B2A5A100ABA471 /* SettingsAnalytics.swift in Sources */,
@@ -1226,7 +1240,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1263,7 +1277,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
