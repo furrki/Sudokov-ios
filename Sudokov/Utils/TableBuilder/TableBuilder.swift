@@ -143,34 +143,63 @@ class TableBuilder: ObservableObject {
             return
         }
         
+        // Number of cells to remain visible
+        let visibleCells = depth
+        // Number of cells to hide
+        let cellsToHideCount = 81 - visibleCells
+        
+        // If requesting a very hard puzzle (20-24 hints), use the extreme generator
+        if visibleCells <= 24 {
+            let uniqueSolutionVerifier = UniqueSolutionVerifier(table: tableState)
+            
+            // Try to generate an extreme puzzle with the requested number of hints
+            if let cellsToHideSet = uniqueSolutionVerifier.generateExtremePuzzle(
+                targetHints: visibleCells, 
+                maxIterations: 100,
+                timeLimit: 120
+            ) {
+                self.cellsToHide = Array(cellsToHideSet)
+                print("Generated extreme puzzle with \(visibleCells) hints")
+                print("Unique solution: \(UniqueSolutionVerifier(table: tableState, cellsToRemove: cellsToHideSet).hasUniqueSolution())")
+                return
+            }
+            
+            // If extreme generation failed, fall back to the regular method with slightly more hints
+            print("Extreme generation failed, falling back to standard method")
+        }
+        
+        // Standard generation for easier puzzles or as fallback
         var cellsToHide = Set<Coordinate>()
         let triesTreshold = 5000
         var tries = 0
         
-        while cellsToHide.count < (81 - depth) {
-            // Get all available cells that are not already hidden
+        while cellsToHide.count < cellsToHideCount {
+            // Create verifier with current state
             let uniqueSolutionVerifier = UniqueSolutionVerifier(table: tableState, cellsToRemove: cellsToHide)
             
-            let availableCells = (0..<9).flatMap { row in
-                (0..<9).compactMap { col in
-                    let coordinate = Coordinate(row: row, col: col)
-                    return cellsToHide.contains(coordinate) ? nil : coordinate
+            // For harder puzzles (25-35 hints), use batch processing for efficiency
+            if visibleCells <= 35 && cellsToHide.count > 40 {
+                if let cell = uniqueSolutionVerifier.findSafeCellInBatches() {
+                    cellsToHide.insert(cell)
+                    tries = 0
+                    print("Cells to hide: \(cellsToHide.count)")
+                    continue
                 }
             }
             
-            if !availableCells.isEmpty {
-                // Pick a random cell from available cells
-                let cell = uniqueSolutionVerifier.selectRandomSafeCell()!
-                
-                let uniqueSolution = uniqueSolutionVerifier.hasUniqueSolution()
-                
+            // For easier puzzles or if batch processing didn't find a cell
+            if let cell = uniqueSolutionVerifier.selectRandomSafeCell() {
                 cellsToHide.insert(cell)
-                
-                print("Unique solution: \(uniqueSolution)")
+                tries = 0
                 print("Cells to hide: \(cellsToHide.count)")
+            } else {
+                // If we can't find a safe cell, increment try counter
+                tries += 1
             }
             
+            // If we've tried too many times without success, start over
             if tries >= triesTreshold {
+                print("Regenerating puzzle after \(tries) failed attempts")
                 generateLevel()
                 riskyCellGroups = getConflictableCellGroups(tableState: tableState)
                 cellsToHide = Set<Coordinate>()
@@ -179,7 +208,7 @@ class TableBuilder: ObservableObject {
         }
         
         self.cellsToHide = Array(cellsToHide)
-
+        print("Generated puzzle with \(visibleCells) hints")
         print("Unique solution: \(UniqueSolutionVerifier(table: tableState, cellsToRemove: cellsToHide).hasUniqueSolution())")
     }
     
