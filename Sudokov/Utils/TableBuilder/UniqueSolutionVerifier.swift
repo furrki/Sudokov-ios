@@ -6,7 +6,8 @@
 //
 import Foundation
 
-class UniqueSolutionVerifier: BigSquareIterator {
+/// Verifies if a Sudoku puzzle has a unique solution
+class UniqueSolutionVerifier {
     var table: TableMatrix
     var cellsToRemove: Set<Coordinate> = []
     

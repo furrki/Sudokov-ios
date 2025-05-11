@@ -24,6 +24,16 @@
 		FB27B4242CBFAFE800C9B957 /* easy.data in Resources */ = {isa = PBXBuildFile; fileRef = FB27B4212CBFAFE800C9B957 /* easy.data */; };
 		FB27B4252CBFAFE800C9B957 /* hard.data in Resources */ = {isa = PBXBuildFile; fileRef = FB27B4222CBFAFE800C9B957 /* hard.data */; };
 		FB27B4262CBFAFE800C9B957 /* medium.data in Resources */ = {isa = PBXBuildFile; fileRef = FB27B4232CBFAFE800C9B957 /* medium.data */; };
+		FB2A231E2DD1487600E0CA49 /* CellSafetyAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A231D2DD1487600E0CA49 /* CellSafetyAnalyzer.swift */; };
+		FB2A231F2DD1487600E0CA49 /* CellSafetyAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A231D2DD1487600E0CA49 /* CellSafetyAnalyzer.swift */; };
+		FB2A23212DD1487E00E0CA49 /* DangerousCellFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A23202DD1487E00E0CA49 /* DangerousCellFinder.swift */; };
+		FB2A23222DD1487E00E0CA49 /* DangerousCellFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A23202DD1487E00E0CA49 /* DangerousCellFinder.swift */; };
+		FB2A23242DD1488700E0CA49 /* PatternEliminator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A23232DD1488700E0CA49 /* PatternEliminator.swift */; };
+		FB2A23252DD1488700E0CA49 /* PatternEliminator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A23232DD1488700E0CA49 /* PatternEliminator.swift */; };
+		FB2A23272DD1489400E0CA49 /* PuzzleGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A23262DD1489400E0CA49 /* PuzzleGenerator.swift */; };
+		FB2A23282DD1489400E0CA49 /* PuzzleGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A23262DD1489400E0CA49 /* PuzzleGenerator.swift */; };
+		FB2A232A2DD148A100E0CA49 /* SudokuPuzzleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A23292DD148A100E0CA49 /* SudokuPuzzleManager.swift */; };
+		FB2A232B2DD148A100E0CA49 /* SudokuPuzzleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A23292DD148A100E0CA49 /* SudokuPuzzleManager.swift */; };
 		FB3627862C94FA82001DB778 /* NakedPairsFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3627852C94FA82001DB778 /* NakedPairsFinder.swift */; };
 		FB3C9715287F0FEA002104F0 /* TableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9714287F0FEA002104F0 /* TableBuilder.swift */; };
 		FB3C9717287F1008002104F0 /* TableMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9716287F1008002104F0 /* TableMatrix.swift */; };
@@ -167,6 +177,11 @@
 		FB27B4212CBFAFE800C9B957 /* easy.data */ = {isa = PBXFileReference; lastKnownFileType = text; path = easy.data; sourceTree = "<group>"; };
 		FB27B4222CBFAFE800C9B957 /* hard.data */ = {isa = PBXFileReference; lastKnownFileType = text; path = hard.data; sourceTree = "<group>"; };
 		FB27B4232CBFAFE800C9B957 /* medium.data */ = {isa = PBXFileReference; lastKnownFileType = text; path = medium.data; sourceTree = "<group>"; };
+		FB2A231D2DD1487600E0CA49 /* CellSafetyAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellSafetyAnalyzer.swift; sourceTree = "<group>"; };
+		FB2A23202DD1487E00E0CA49 /* DangerousCellFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerousCellFinder.swift; sourceTree = "<group>"; };
+		FB2A23232DD1488700E0CA49 /* PatternEliminator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternEliminator.swift; sourceTree = "<group>"; };
+		FB2A23262DD1489400E0CA49 /* PuzzleGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleGenerator.swift; sourceTree = "<group>"; };
+		FB2A23292DD148A100E0CA49 /* SudokuPuzzleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuPuzzleManager.swift; sourceTree = "<group>"; };
 		FB3627852C94FA82001DB778 /* NakedPairsFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NakedPairsFinder.swift; sourceTree = "<group>"; };
 		FB3C9714287F0FEA002104F0 /* TableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBuilder.swift; sourceTree = "<group>"; };
 		FB3C9716287F1008002104F0 /* TableMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableMatrix.swift; sourceTree = "<group>"; };
@@ -326,6 +341,11 @@
 				FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */,
 				FB3627852C94FA82001DB778 /* NakedPairsFinder.swift */,
 				FBA85B1F2CBC7FCF00D7E42D /* AsymmetryAvoider.swift */,
+				FB2A231D2DD1487600E0CA49 /* CellSafetyAnalyzer.swift */,
+				FB2A23202DD1487E00E0CA49 /* DangerousCellFinder.swift */,
+				FB2A23232DD1488700E0CA49 /* PatternEliminator.swift */,
+				FB2A23262DD1489400E0CA49 /* PuzzleGenerator.swift */,
+				FB2A23292DD148A100E0CA49 /* SudokuPuzzleManager.swift */,
 			);
 			path = TableBuilder;
 			sourceTree = "<group>";
@@ -918,6 +938,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB9A3BE02DCE580E00FD9680 /* RandomCellPicker.swift in Sources */,
+				FB2A23282DD1489400E0CA49 /* PuzzleGenerator.swift in Sources */,
 				FBB7C5622C95BD340027B971 /* PlaySet.swift in Sources */,
 				FBB7C55A2C95BCED0027B971 /* Level.swift in Sources */,
 				FBB7C5572C95BCB90027B971 /* TableBuilder.swift in Sources */,
@@ -931,7 +952,11 @@
 				FBB7C55D2C95BD080027B971 /* Difficulty.swift in Sources */,
 				FBA85B202CBC7FD000D7E42D /* AsymmetryAvoider.swift in Sources */,
 				FBB7C5562C95BCB70027B971 /* BigSquareIterator.swift in Sources */,
+				FB2A23242DD1488700E0CA49 /* PatternEliminator.swift in Sources */,
+				FB2A23212DD1487E00E0CA49 /* DangerousCellFinder.swift in Sources */,
+				FB2A232A2DD148A100E0CA49 /* SudokuPuzzleManager.swift in Sources */,
 				FBB7C5632C95BD370027B971 /* Move.swift in Sources */,
+				FB2A231E2DD1487600E0CA49 /* CellSafetyAnalyzer.swift in Sources */,
 				FBB7C5662C95BD4C0027B971 /* Configuration.swift in Sources */,
 				FBB7C55B2C95BCF30027B971 /* LevelInfo.swift in Sources */,
 				FBB7C5652C95BD420027B971 /* LevelStatistics.swift in Sources */,
@@ -963,7 +988,9 @@
 				FBBDE9C4285522CE0078A73E /* MenuButton.swift in Sources */,
 				FB3C9717287F1008002104F0 /* TableMatrix.swift in Sources */,
 				FBCF08D828B2B18B00ABA471 /* CellAnalytics.swift in Sources */,
+				FB2A231F2DD1487600E0CA49 /* CellSafetyAnalyzer.swift in Sources */,
 				FBBDE9C1285522740078A73E /* HomeView.swift in Sources */,
+				FB2A232B2DD148A100E0CA49 /* SudokuPuzzleManager.swift in Sources */,
 				FB0DC6B2288F05E400E02521 /* DiskStorage.swift in Sources */,
 				FBBAAC3728B034EA0090E24A /* AnalyticsManager.swift in Sources */,
 				FBBDE996285522100078A73E /* ContentView.swift in Sources */,
@@ -980,6 +1007,7 @@
 				FB4D359128955BE600C643A1 /* TemplateLevel.swift in Sources */,
 				DCC3040F2897F4CE00EEB26E /* LevelState.swift in Sources */,
 				FB7BC71F28803EC500E8C5F1 /* GameSquareView.swift in Sources */,
+				FB2A23272DD1489400E0CA49 /* PuzzleGenerator.swift in Sources */,
 				FB77D00528FC989100D7E17F /* SelectDifficultyView.swift in Sources */,
 				FBA85B212CBC7FD000D7E42D /* AsymmetryAvoider.swift in Sources */,
 				FBCF08CC28B25F7B00ABA471 /* LevelAnalytics.swift in Sources */,
@@ -987,6 +1015,7 @@
 				FBF5C3A52899D5A600F5FADA /* Int+Extensions.swift in Sources */,
 				FB3627862C94FA82001DB778 /* NakedPairsFinder.swift in Sources */,
 				FBB7C5482C95BC7B0027B971 /* SwordFishFinder.swift in Sources */,
+				FB2A23252DD1488700E0CA49 /* PatternEliminator.swift in Sources */,
 				FB7BC71C28803A1000E8C5F1 /* R.generated.swift in Sources */,
 				FBA23911288CA6A7006AE3A4 /* Difficulty.swift in Sources */,
 				FBDB28B72884B33C00A372E7 /* Coordinate.swift in Sources */,
@@ -1001,6 +1030,7 @@
 				FB7BC7282882BC9B00E8C5F1 /* Move.swift in Sources */,
 				FB7BC72128803EE400E8C5F1 /* GameSquareViewModel.swift in Sources */,
 				FB7BC7252882154B00E8C5F1 /* ControlsView.swift in Sources */,
+				FB2A23222DD1487E00E0CA49 /* DangerousCellFinder.swift in Sources */,
 				FB3C9719287F11B1002104F0 /* GameManager.swift in Sources */,
 				FBCF08D428B29E9E00ABA471 /* PlaySet.swift in Sources */,
 				FBB7C5492C95BC7B0027B971 /* BigSquareIterator.swift in Sources */,
