@@ -26,8 +26,6 @@ class TableBuilder: ObservableObject {
     private(set) var cellsToHide = [Coordinate]()
     private(set) var riskyCellGroups = [[Coordinate]]()
     
-    private let asymmetryAvoider: AsymmetryAvoider = AsymmetryAvoider()
-    
     // MARK: - Methods
     init(tableState: TableMatrix? = nil, depth: Int? = nil) {
         self.depth = depth

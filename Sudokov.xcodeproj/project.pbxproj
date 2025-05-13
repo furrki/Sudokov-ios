@@ -57,15 +57,11 @@
 		FB897488288F31DD00D7C982 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB897487288F31DD00D7C982 /* StorageManager.swift */; };
 		FB89748A288F424B00D7C982 /* Transitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB897489288F424B00D7C982 /* Transitions.swift */; };
 		FB9978D02891C908001F308C /* PickLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9978CF2891C908001F308C /* PickLevelView.swift */; };
-		FB9A3BE02DCE580E00FD9680 /* RandomCellPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9A3BDF2DCE580900FD9680 /* RandomCellPicker.swift */; };
-		FB9A3BE12DCE580E00FD9680 /* RandomCellPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9A3BDF2DCE580900FD9680 /* RandomCellPicker.swift */; };
 		FB9A3BE32DCE64B300FD9680 /* UniqueSolutionVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9A3BE22DCE64AE00FD9680 /* UniqueSolutionVerifier.swift */; };
 		FB9A3BE42DCE64B300FD9680 /* UniqueSolutionVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9A3BE22DCE64AE00FD9680 /* UniqueSolutionVerifier.swift */; };
 		FBA2390D288CA616006AE3A4 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA2390C288CA616006AE3A4 /* Level.swift */; };
 		FBA2390F288CA68F006AE3A4 /* LocalLevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */; };
 		FBA23911288CA6A7006AE3A4 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA23910288CA6A7006AE3A4 /* Difficulty.swift */; };
-		FBA85B202CBC7FD000D7E42D /* AsymmetryAvoider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA85B1F2CBC7FCF00D7E42D /* AsymmetryAvoider.swift */; };
-		FBA85B212CBC7FD000D7E42D /* AsymmetryAvoider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA85B1F2CBC7FCF00D7E42D /* AsymmetryAvoider.swift */; };
 		FBB7C5482C95BC7B0027B971 /* SwordFishFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */; };
 		FBB7C5492C95BC7B0027B971 /* BigSquareIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */; };
 		FBB7C5522C95BCB10027B971 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB7C5512C95BCB10027B971 /* main.swift */; };
@@ -205,12 +201,10 @@
 		FB897487288F31DD00D7C982 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		FB897489288F424B00D7C982 /* Transitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitions.swift; sourceTree = "<group>"; };
 		FB9978CF2891C908001F308C /* PickLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickLevelView.swift; sourceTree = "<group>"; };
-		FB9A3BDF2DCE580900FD9680 /* RandomCellPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomCellPicker.swift; sourceTree = "<group>"; };
 		FB9A3BE22DCE64AE00FD9680 /* UniqueSolutionVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueSolutionVerifier.swift; sourceTree = "<group>"; };
 		FBA2390C288CA616006AE3A4 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLevelManager.swift; sourceTree = "<group>"; };
 		FBA23910288CA6A7006AE3A4 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
-		FBA85B1F2CBC7FCF00D7E42D /* AsymmetryAvoider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsymmetryAvoider.swift; sourceTree = "<group>"; };
 		FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwordFishFinder.swift; sourceTree = "<group>"; };
 		FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigSquareIterator.swift; sourceTree = "<group>"; };
 		FBB7C54F2C95BCB10027B971 /* SudokovGeneratorScript */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SudokovGeneratorScript; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -335,12 +329,10 @@
 			isa = PBXGroup;
 			children = (
 				FB9A3BE22DCE64AE00FD9680 /* UniqueSolutionVerifier.swift */,
-				FB9A3BDF2DCE580900FD9680 /* RandomCellPicker.swift */,
 				FB3C9714287F0FEA002104F0 /* TableBuilder.swift */,
 				FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */,
 				FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */,
 				FB3627852C94FA82001DB778 /* NakedPairsFinder.swift */,
-				FBA85B1F2CBC7FCF00D7E42D /* AsymmetryAvoider.swift */,
 				FB2A231D2DD1487600E0CA49 /* CellSafetyAnalyzer.swift */,
 				FB2A23202DD1487E00E0CA49 /* DangerousCellFinder.swift */,
 				FB2A23232DD1488700E0CA49 /* PatternEliminator.swift */,
@@ -937,7 +929,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB9A3BE02DCE580E00FD9680 /* RandomCellPicker.swift in Sources */,
 				FB2A23282DD1489400E0CA49 /* PuzzleGenerator.swift in Sources */,
 				FBB7C5622C95BD340027B971 /* PlaySet.swift in Sources */,
 				FBB7C55A2C95BCED0027B971 /* Level.swift in Sources */,
@@ -950,7 +941,6 @@
 				FBB7C55E2C95BD160027B971 /* TableMatrix.swift in Sources */,
 				FBB7C5522C95BCB10027B971 /* main.swift in Sources */,
 				FBB7C55D2C95BD080027B971 /* Difficulty.swift in Sources */,
-				FBA85B202CBC7FD000D7E42D /* AsymmetryAvoider.swift in Sources */,
 				FBB7C5562C95BCB70027B971 /* BigSquareIterator.swift in Sources */,
 				FB2A23242DD1488700E0CA49 /* PatternEliminator.swift in Sources */,
 				FB2A23212DD1487E00E0CA49 /* DangerousCellFinder.swift in Sources */,
@@ -1009,7 +999,6 @@
 				FB7BC71F28803EC500E8C5F1 /* GameSquareView.swift in Sources */,
 				FB2A23272DD1489400E0CA49 /* PuzzleGenerator.swift in Sources */,
 				FB77D00528FC989100D7E17F /* SelectDifficultyView.swift in Sources */,
-				FBA85B212CBC7FD000D7E42D /* AsymmetryAvoider.swift in Sources */,
 				FBCF08CC28B25F7B00ABA471 /* LevelAnalytics.swift in Sources */,
 				FBA2390D288CA616006AE3A4 /* Level.swift in Sources */,
 				FBF5C3A52899D5A600F5FADA /* Int+Extensions.swift in Sources */,
@@ -1021,7 +1010,6 @@
 				FBDB28B72884B33C00A372E7 /* Coordinate.swift in Sources */,
 				FB10394628EE042B00F96174 /* Configuration.swift in Sources */,
 				FB1596E628B2BC5000CD0417 /* CellLevelAnalytics.swift in Sources */,
-				FB9A3BE12DCE580E00FD9680 /* RandomCellPicker.swift in Sources */,
 				FB496CCE2901AB3E0047548B /* StatisticsView.swift in Sources */,
 				FB9978D02891C908001F308C /* PickLevelView.swift in Sources */,
 				FB7BC72328815E9000E8C5F1 /* NumberPickerView.swift in Sources */,
