@@ -18,6 +18,10 @@ class SudokuPuzzleManager: BigSquareIterator {
     private var dangerousCellFinder: DangerousCellFinder
     private var patternEliminator: PatternEliminator
     
+    // Retry configuration
+    private var stuckThreshold: Int = 200
+    private var maxBacktrackSteps: Int = 5
+    
     init(table: TableMatrix, cellsToRemove: Set<Coordinate> = []) {
         self.table = table
         self.cellsToRemove = cellsToRemove
@@ -36,6 +40,18 @@ class SudokuPuzzleManager: BigSquareIterator {
         safetyAnalyzer = CellSafetyAnalyzer(table: table, cellsToRemove: newCells)
         dangerousCellFinder = DangerousCellFinder(table: table, cellsToRemove: newCells)
         patternEliminator.updateCellsToRemove(newCells)
+    }
+    
+    /// Configure retry mechanism parameters
+    /// - Parameters:
+    ///   - stuckThreshold: Number of attempts before considering the process stuck
+    ///   - maxBacktrackSteps: Maximum number of cells to remove when backtracking
+    func configureRetryMechanism(stuckThreshold: Int, maxBacktrackSteps: Int) {
+        self.stuckThreshold = stuckThreshold
+        self.maxBacktrackSteps = maxBacktrackSteps
+        
+        // Configure the puzzleGenerator with the new threshold
+        puzzleGenerator.configureRetryMechanism(threshold: stuckThreshold)
     }
     
     // MARK: - Verification Methods
@@ -79,6 +95,30 @@ class SudokuPuzzleManager: BigSquareIterator {
     /// Generates an extreme difficulty puzzle with minimal hints
     func generateExtremePuzzle(targetHints: Int = 22, maxIterations: Int = 50, timeLimit: TimeInterval = 60) -> Set<Coordinate>? {
         return puzzleGenerator.generateExtremePuzzle(targetHints: targetHints, maxIterations: maxIterations, timeLimit: timeLimit)
+    }
+    
+    /// Handle a stuck situation by backtracking
+    /// - Returns: true if backtracking was successful, false otherwise
+    func handleStuckSituation() -> Bool {
+        if cellsToRemove.isEmpty {
+            return false
+        }
+        
+        print("Handling stuck situation by backtracking...")
+        
+        // Remove a few cells to try a different path
+        let backtrackAmount = min(maxBacktrackSteps, cellsToRemove.count / 10 + 1)
+        let cellsToBacktrack = Array(cellsToRemove).shuffled().prefix(backtrackAmount)
+        
+        var newCellsToRemove = cellsToRemove
+        for cell in cellsToBacktrack {
+            newCellsToRemove.remove(cell)
+        }
+        
+        updateCellsToRemove(newCellsToRemove)
+        print("Backtracked from \(cellsToRemove.count + backtrackAmount) to \(cellsToRemove.count) cells")
+        
+        return true
     }
     
     // MARK: - Pattern Methods

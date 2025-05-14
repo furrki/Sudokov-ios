@@ -34,11 +34,12 @@ func generateLevels(depth: Int, name: String) {
         tableBuilder = TableBuilder(depth: depth)
         let cellsToHide = tableBuilder.cellsToHide
         levels.append(Level(table: tableBuilder.tableState, cellsToHide: cellsToHide))
+        print("Generated \(levels.count) levels")
     }
     
     writeToFile(name: "\(name).data", levels: levels)
 }
 
-generateLevels(depth: easyDepth, name: "easy")
-generateLevels(depth: mediumDepth, name: "medium")
-generateLevels(depth: hardDepth, name: "hard")
+//generateLevels(depth: easyDepth, name: "easy")
+// generateLevels(depth: mediumDepth, name: "medium")
+ generateLevels(depth: hardDepth, name: "hard")

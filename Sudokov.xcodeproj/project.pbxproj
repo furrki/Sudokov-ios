@@ -21,9 +21,6 @@
 		FB125AC928FD964D00810211 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = FB125AC828FD964D00810211 /* SwiftUICharts */; };
 		FB1596E628B2BC5000CD0417 /* CellLevelAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1596E528B2BC5000CD0417 /* CellLevelAnalytics.swift */; };
 		FB1C80022C7B505400F9E797 /* BigSquareIteratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C80012C7B505400F9E797 /* BigSquareIteratorTests.swift */; };
-		FB27B4242CBFAFE800C9B957 /* easy.data in Resources */ = {isa = PBXBuildFile; fileRef = FB27B4212CBFAFE800C9B957 /* easy.data */; };
-		FB27B4252CBFAFE800C9B957 /* hard.data in Resources */ = {isa = PBXBuildFile; fileRef = FB27B4222CBFAFE800C9B957 /* hard.data */; };
-		FB27B4262CBFAFE800C9B957 /* medium.data in Resources */ = {isa = PBXBuildFile; fileRef = FB27B4232CBFAFE800C9B957 /* medium.data */; };
 		FB2A231E2DD1487600E0CA49 /* CellSafetyAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A231D2DD1487600E0CA49 /* CellSafetyAnalyzer.swift */; };
 		FB2A231F2DD1487600E0CA49 /* CellSafetyAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A231D2DD1487600E0CA49 /* CellSafetyAnalyzer.swift */; };
 		FB2A23212DD1487E00E0CA49 /* DangerousCellFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A23202DD1487E00E0CA49 /* DangerousCellFinder.swift */; };
@@ -34,6 +31,9 @@
 		FB2A23282DD1489400E0CA49 /* PuzzleGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A23262DD1489400E0CA49 /* PuzzleGenerator.swift */; };
 		FB2A232A2DD148A100E0CA49 /* SudokuPuzzleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A23292DD148A100E0CA49 /* SudokuPuzzleManager.swift */; };
 		FB2A232B2DD148A100E0CA49 /* SudokuPuzzleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2A23292DD148A100E0CA49 /* SudokuPuzzleManager.swift */; };
+		FB2A232F2DD4B51300E0CA49 /* medium.data in Resources */ = {isa = PBXBuildFile; fileRef = FB2A232E2DD4B51300E0CA49 /* medium.data */; };
+		FB2A23302DD4B51300E0CA49 /* hard.data in Resources */ = {isa = PBXBuildFile; fileRef = FB2A232D2DD4B51300E0CA49 /* hard.data */; };
+		FB2A23312DD4B51300E0CA49 /* easy.data in Resources */ = {isa = PBXBuildFile; fileRef = FB2A232C2DD4B51300E0CA49 /* easy.data */; };
 		FB3627862C94FA82001DB778 /* NakedPairsFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3627852C94FA82001DB778 /* NakedPairsFinder.swift */; };
 		FB3C9715287F0FEA002104F0 /* TableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9714287F0FEA002104F0 /* TableBuilder.swift */; };
 		FB3C9717287F1008002104F0 /* TableMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C9716287F1008002104F0 /* TableMatrix.swift */; };
@@ -170,14 +170,14 @@
 		FB125AC528FD8D8400810211 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		FB1596E528B2BC5000CD0417 /* CellLevelAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellLevelAnalytics.swift; sourceTree = "<group>"; };
 		FB1C80012C7B505400F9E797 /* BigSquareIteratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigSquareIteratorTests.swift; sourceTree = "<group>"; };
-		FB27B4212CBFAFE800C9B957 /* easy.data */ = {isa = PBXFileReference; lastKnownFileType = text; path = easy.data; sourceTree = "<group>"; };
-		FB27B4222CBFAFE800C9B957 /* hard.data */ = {isa = PBXFileReference; lastKnownFileType = text; path = hard.data; sourceTree = "<group>"; };
-		FB27B4232CBFAFE800C9B957 /* medium.data */ = {isa = PBXFileReference; lastKnownFileType = text; path = medium.data; sourceTree = "<group>"; };
 		FB2A231D2DD1487600E0CA49 /* CellSafetyAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellSafetyAnalyzer.swift; sourceTree = "<group>"; };
 		FB2A23202DD1487E00E0CA49 /* DangerousCellFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerousCellFinder.swift; sourceTree = "<group>"; };
 		FB2A23232DD1488700E0CA49 /* PatternEliminator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternEliminator.swift; sourceTree = "<group>"; };
 		FB2A23262DD1489400E0CA49 /* PuzzleGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleGenerator.swift; sourceTree = "<group>"; };
 		FB2A23292DD148A100E0CA49 /* SudokuPuzzleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuPuzzleManager.swift; sourceTree = "<group>"; };
+		FB2A232C2DD4B51300E0CA49 /* easy.data */ = {isa = PBXFileReference; lastKnownFileType = text; path = easy.data; sourceTree = "<group>"; };
+		FB2A232D2DD4B51300E0CA49 /* hard.data */ = {isa = PBXFileReference; lastKnownFileType = text; path = hard.data; sourceTree = "<group>"; };
+		FB2A232E2DD4B51300E0CA49 /* medium.data */ = {isa = PBXFileReference; lastKnownFileType = text; path = medium.data; sourceTree = "<group>"; };
 		FB3627852C94FA82001DB778 /* NakedPairsFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NakedPairsFinder.swift; sourceTree = "<group>"; };
 		FB3C9714287F0FEA002104F0 /* TableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBuilder.swift; sourceTree = "<group>"; };
 		FB3C9716287F1008002104F0 /* TableMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableMatrix.swift; sourceTree = "<group>"; };
@@ -392,9 +392,9 @@
 		FBA23901288CA401006AE3A4 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
-				FB27B4212CBFAFE800C9B957 /* easy.data */,
-				FB27B4222CBFAFE800C9B957 /* hard.data */,
-				FB27B4232CBFAFE800C9B957 /* medium.data */,
+				FB2A232C2DD4B51300E0CA49 /* easy.data */,
+				FB2A232D2DD4B51300E0CA49 /* hard.data */,
+				FB2A232E2DD4B51300E0CA49 /* medium.data */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -761,12 +761,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB2A232F2DD4B51300E0CA49 /* medium.data in Resources */,
+				FB2A23302DD4B51300E0CA49 /* hard.data in Resources */,
+				FB2A23312DD4B51300E0CA49 /* easy.data in Resources */,
 				FBBAAC3928B0370D0090E24A /* GoogleService-Info.plist in Resources */,
 				FB3C971B28802F39002104F0 /* Colors.xcassets in Resources */,
 				FBBDE99B285522140078A73E /* Preview Assets.xcassets in Resources */,
-				FB27B4242CBFAFE800C9B957 /* easy.data in Resources */,
-				FB27B4252CBFAFE800C9B957 /* hard.data in Resources */,
-				FB27B4262CBFAFE800C9B957 /* medium.data in Resources */,
 				FBBDE998285522140078A73E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,10 +16,22 @@ class PuzzleGenerator: BigSquareIterator {
     private let verifier: UniqueSolutionVerifier
     private var safetyAnalyzer: CellSafetyAnalyzer
     
+    // Added to track progress and detect when we're stuck
+    private var stuckCounter = 0
+    private var lastProgressCount = 0
+    private var maxStuckThreshold = 200
+    
     init(table: TableMatrix) {
         self.table = table
         self.verifier = UniqueSolutionVerifier(table: table)
         self.safetyAnalyzer = CellSafetyAnalyzer(table: table, cellsToRemove: cellsToRemove)
+    }
+    
+    /// Configure the retry mechanism parameters
+    /// - Parameters:
+    ///   - threshold: Number of attempts before considering the process stuck
+    func configureRetryMechanism(threshold: Int) {
+        self.maxStuckThreshold = threshold
     }
     
     /// Generate a puzzle with specified difficulty (number of cells to hide)
@@ -32,6 +44,8 @@ class PuzzleGenerator: BigSquareIterator {
         cellsToRemove.removeAll()
         knownSafeCells.removeAll()
         knownUnsafeCells.removeAll()
+        stuckCounter = 0
+        lastProgressCount = 0
         
         // Precompute dangerous pairs to avoid them
         precomputeDangerousPairs()
@@ -47,11 +61,38 @@ class PuzzleGenerator: BigSquareIterator {
                 cellsToRemove.insert(cell)
                 updateSafetyAnalyzer()
                 
+                // Reset tracking variables when making progress
+                stuckCounter = 0
+                lastProgressCount = cellsToRemove.count
+                
                 // Reset unsafe cells periodically to avoid getting stuck
                 if cellsToRemove.count % 10 == 0 {
                     knownUnsafeCells.removeAll()
                 }
             } else {
+                // Check if we're stuck
+                if lastProgressCount == cellsToRemove.count {
+                    stuckCounter += 1
+                } else {
+                    stuckCounter = 0
+                    lastProgressCount = cellsToRemove.count
+                }
+                
+                // If we're stuck for too long, try backtracking
+                if stuckCounter >= maxStuckThreshold && cellsToRemove.count > 0 {
+                    print("Stuck at \(cellsToRemove.count) cells, backtracking...")
+                    
+                    // Backtrack by removing a few cells
+                    backtrack(steps: min(3, cellsToRemove.count / 10 + 1))
+                    updateSafetyAnalyzer()
+                    stuckCounter = 0
+                    
+                    // Also clear some unsafe cells to try new paths
+                    knownUnsafeCells = Set(knownUnsafeCells.shuffled().prefix(knownUnsafeCells.count / 2))
+                    
+                    continue
+                }
+                
                 // If we can't find a safe cell, start over
                 attempts += 1
                 if attempts >= maxAttempts {
@@ -68,6 +109,8 @@ class PuzzleGenerator: BigSquareIterator {
                 
                 knownSafeCells.removeAll()
                 knownUnsafeCells.removeAll()
+                stuckCounter = 0
+                lastProgressCount = cellsToRemove.count
                 updateSafetyAnalyzer()
             }
         }

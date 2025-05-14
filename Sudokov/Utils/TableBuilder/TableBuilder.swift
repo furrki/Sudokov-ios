@@ -26,6 +26,11 @@ class TableBuilder: ObservableObject {
     private(set) var cellsToHide = [Coordinate]()
     private(set) var riskyCellGroups = [[Coordinate]]()
     
+    // Added to track progress and detect when we're stuck
+    private var lastProgressCount = 0
+    private var stuckCounter = 0
+    private var maxStuckThreshold = 500
+    
     // MARK: - Methods
     init(tableState: TableMatrix? = nil, depth: Int? = nil) {
         self.depth = depth
@@ -37,6 +42,13 @@ class TableBuilder: ObservableObject {
             
             makeLevel()
         }
+    }
+    
+    /// Configure the retry mechanism parameters
+    /// - Parameters:
+    ///   - threshold: Number of attempts before considering the process stuck
+    func configureRetryMechanism(threshold: Int) {
+        self.maxStuckThreshold = threshold
     }
     
     func generateLevel() {
@@ -171,6 +183,10 @@ class TableBuilder: ObservableObject {
         let triesTreshold = 5000
         var tries = 0
         
+        // Reset progress tracking variables
+        lastProgressCount = 0
+        stuckCounter = 0
+        
         while cellsToHide.count < cellsToHideCount {
             // Create verifier with current state
             let uniqueSolutionVerifier = UniqueSolutionVerifier(table: tableState, cellsToRemove: cellsToHide)
@@ -180,6 +196,8 @@ class TableBuilder: ObservableObject {
                 if let cell = uniqueSolutionVerifier.findSafeCellInBatches() {
                     cellsToHide.insert(cell)
                     tries = 0
+                    stuckCounter = 0 // Reset stuck counter when making progress
+                    lastProgressCount = cellsToHide.count
                     print("Cells to hide: \(cellsToHide.count)")
                     continue
                 }
@@ -189,10 +207,35 @@ class TableBuilder: ObservableObject {
             if let cell = uniqueSolutionVerifier.selectRandomSafeCell() {
                 cellsToHide.insert(cell)
                 tries = 0
+                stuckCounter = 0 // Reset stuck counter when making progress
+                lastProgressCount = cellsToHide.count
                 print("Cells to hide: \(cellsToHide.count)")
             } else {
                 // If we can't find a safe cell, increment try counter
                 tries += 1
+                
+                // Check if we're stuck at the same count for too long
+                if lastProgressCount == cellsToHide.count {
+                    stuckCounter += 1
+                } else {
+                    stuckCounter = 0
+                    lastProgressCount = cellsToHide.count
+                }
+                
+                // If we're stuck for too long, try backtracking
+                if stuckCounter >= maxStuckThreshold && cellsToHide.count > 0 {
+                    print("Stuck at \(cellsToHide.count) cells, backtracking...")
+                    
+                    // Remove a few cells from our set to try a different path
+                    let backtrackAmount = min(5, cellsToHide.count / 10 + 1)
+                    let cellsToRemove = Array(cellsToHide).shuffled().prefix(backtrackAmount)
+                    for cell in cellsToRemove {
+                        cellsToHide.remove(cell)
+                    }
+                    
+                    stuckCounter = 0
+                    print("Backtracked to \(cellsToHide.count) cells")
+                }
             }
             
             // If we've tried too many times without success, start over
@@ -202,6 +245,8 @@ class TableBuilder: ObservableObject {
                 riskyCellGroups = getConflictableCellGroups(tableState: tableState)
                 cellsToHide = Set<Coordinate>()
                 tries = 0
+                stuckCounter = 0
+                lastProgressCount = 0
             }
         }
         
