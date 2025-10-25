@@ -13,7 +13,7 @@ enum GameConfiguration {
     static let easyDepth = 50
     static let mediumDepth = 35
     static let hardDepth = 29
-    static let minimumDepth = 25
+    static let minimumDepth = 18
     static let defaultPickDepth = 34
 }
 

@@ -28,36 +28,13 @@ class UniqueSolutionVerifier {
     func hasUniqueSolution() -> Bool {
         // Create a copy of the table with cells removed
         var puzzleWithRemovedCells = table
-        
-        // Remove cells
         for cell in cellsToRemove {
             puzzleWithRemovedCells[cell.row][cell.col] = 0
         }
-        
-        // First solution found
-        var firstSolution: TableMatrix? = nil
-        
-        // Try to find multiple solutions
-        if findSolution(tableState: &puzzleWithRemovedCells, isFindingFirst: true) {
-            // Save the first solution
-            firstSolution = puzzleWithRemovedCells
-            
-            // Reset the table to try finding a second solution
-            puzzleWithRemovedCells = table
-            for cell in cellsToRemove {
-                puzzleWithRemovedCells[cell.row][cell.col] = 0
-            }
-            
-            // If we find a second solution that's different, return false
-            if findSolution(tableState: &puzzleWithRemovedCells, isFindingFirst: false, firstSolution: firstSolution) {
-                return false
-            }
-            
-            return true
-        }
-        
-        // No solution found
-        return false
+
+        // Count solutions up to 2; unique if exactly 1
+        let count = SolutionCounter.countSolutions(grid: puzzleWithRemovedCells, limit: 2)
+        return count == 1
     }
     
     /// Finds a safe cell to remove that maintains unique solution
@@ -152,53 +129,6 @@ class UniqueSolutionVerifier {
         return box1Row == box2Row && box1Col == box2Col
     }
     
-    /// Generate a puzzle with specified difficulty (number of cells to hide)
-    /// - Parameters:
-    ///   - difficulty: Number of cells to hide (higher = harder)
-    ///   - maxAttempts: Maximum attempts before giving up
-    /// - Returns: Set of coordinates to hide, or nil if failed
-    func generatePuzzle(difficulty: Int, maxAttempts: Int = 10) -> Set<Coordinate>? {
-        // Reset state
-        cellsToRemove.removeAll()
-        knownSafeCells.removeAll()
-        knownUnsafeCells.removeAll()
-        
-        // Precompute dangerous pairs to avoid them
-        precomputeDangerousPairs()
-        
-        // Keep track of attempts
-        var attempts = 0
-        
-        while cellsToRemove.count < difficulty {
-            if let cell = findSafeCellInBatches() {
-                cellsToRemove.insert(cell)
-                
-                // Reset unsafe cells periodically to avoid getting stuck
-                if cellsToRemove.count % 10 == 0 {
-                    knownUnsafeCells.removeAll()
-                }
-            } else {
-                // If we can't find a safe cell, start over
-                attempts += 1
-                if attempts >= maxAttempts {
-                    return nil
-                }
-                
-                // Start with a smaller set of removed cells
-                let currentCount = cellsToRemove.count
-                let keepCount = max(currentCount - 5, 0)
-                if keepCount < currentCount {
-                    let cellsToKeep = Array(cellsToRemove).shuffled().prefix(keepCount)
-                    cellsToRemove = Set(cellsToKeep)
-                }
-                
-                knownSafeCells.removeAll()
-                knownUnsafeCells.removeAll()
-            }
-        }
-        
-        return cellsToRemove
-    }
     
     /// Precompute some dangerous pairs to avoid them during generation
     private func precomputeDangerousPairs() {
@@ -276,62 +206,6 @@ class UniqueSolutionVerifier {
         return nil
     }
     
-    /// Identifies dangerous cell groups that would create multiple solutions if removed together
-    /// - Returns: Array of cell groups that would lead to multiple solutions
-    func findDangerousCellGroups(maxGroupSize: Int = 3) -> [[Coordinate]] {
-        var dangerousGroups = [[Coordinate]]()
-        let availableCells = getAllAvailableCells()
-        
-        // Check pairs of cells
-        if maxGroupSize >= 2 {
-            for i in 0..<availableCells.count {
-                for j in (i+1)..<availableCells.count {
-                    let pair = [availableCells[i], availableCells[j]]
-                    
-                    // Save current state
-                    let currentCellsToRemove = cellsToRemove
-                    
-                    // Add this pair to removal set
-                    cellsToRemove.formUnion(pair)
-                    
-                    // Check if removing these cells creates multiple solutions
-                    if !hasUniqueSolution() {
-                        dangerousGroups.append(pair)
-                    }
-                    
-                    // Restore original removal set
-                    cellsToRemove = currentCellsToRemove
-                }
-            }
-        }
-        
-        // Check triplets of cells
-        if maxGroupSize >= 3 {
-            for i in 0..<availableCells.count {
-                for j in (i+1)..<availableCells.count {
-                    for k in (j+1)..<availableCells.count {
-                        let triplet = [availableCells[i], availableCells[j], availableCells[k]]
-                        
-                        // Save current state
-                        let currentCellsToRemove = cellsToRemove
-                        
-                        // Add this triplet to removal set
-                        cellsToRemove.formUnion(triplet)
-                        
-                        // Check if removing these cells creates multiple solutions
-                        if !hasUniqueSolution() {
-                            dangerousGroups.append(triplet)
-                        }
-                        
-                        // Restore original removal set
-                        cellsToRemove = currentCellsToRemove
-                    }
-                }
-            }
-        }
-        
-        return dangerousGroups
-    }
     
     /// Selects a random cell to remove while ensuring the solution remains unique
     /// - Parameter preferredCells: Optional list of cells to prioritize for removal
@@ -445,115 +319,6 @@ class UniqueSolutionVerifier {
         return availableCells
     }
     
-    /// Recursive backtracking function to find solutions
-    /// - Parameters:
-    ///   - tableState: Current state of the puzzle
-    ///   - isFindingFirst: Whether we're looking for the first solution
-    ///   - firstSolution: First solution (if any) to compare against when finding the second solution
-    /// - Returns: True if a solution is found
-    private func findSolution(tableState: inout TableMatrix, isFindingFirst: Bool, firstSolution: TableMatrix? = nil) -> Bool {
-        // Find an empty cell
-        if let emptyCell = findEmptyCell(in: tableState) {
-            let row = emptyCell.row
-            let col = emptyCell.col
-            
-            // Try each possible digit
-            for num in 1...9 {
-                if isValidPlacement(tableState: tableState, row: row, col: col, num: num) {
-                    // Place the number
-                    tableState[row][col] = num
-                    
-                    // Recursively attempt to fill the rest of the board
-                    if findSolution(tableState: &tableState, isFindingFirst: isFindingFirst, firstSolution: firstSolution) {
-                        // If we're finding the second solution and it's different from the first
-                        if !isFindingFirst, let first = firstSolution, !isSameSolution(tableState, first) {
-                            return true
-                        }
-                        
-                        // If we're finding the first solution, we found one
-                        if isFindingFirst {
-                            return true
-                        }
-                    }
-                    
-                    // Undo the choice - backtrack
-                    tableState[row][col] = 0
-                }
-            }
-            
-            return false
-        }
-        
-        // No empty cells found means we've filled the grid - solution found
-        return true
-    }
-    
-    /// Finds an empty cell (with value 0) in the table
-    /// - Parameter tableState: Current state of the puzzle
-    /// - Returns: Coordinate of an empty cell, or nil if none exists
-    private func findEmptyCell(in tableState: TableMatrix) -> Coordinate? {
-        for row in 0..<9 {
-            for col in 0..<9 {
-                if tableState[row][col] == 0 {
-                    return Coordinate(row: row, col: col)
-                }
-            }
-        }
-        return nil
-    }
-    
-    /// Checks if placing a number in a given position is valid
-    /// - Parameters:
-    ///   - tableState: Current state of the puzzle
-    ///   - row: Row index
-    ///   - col: Column index
-    ///   - num: Number to check
-    /// - Returns: True if the placement is valid
-    private func isValidPlacement(tableState: TableMatrix, row: Int, col: Int, num: Int) -> Bool {
-        // Check row
-        for c in 0..<9 {
-            if tableState[row][c] == num {
-                return false
-            }
-        }
-        
-        // Check column
-        for r in 0..<9 {
-            if tableState[r][col] == num {
-                return false
-            }
-        }
-        
-        // Check 3x3 box
-        let boxRow = (row / 3) * 3
-        let boxCol = (col / 3) * 3
-        
-        for r in boxRow..<(boxRow + 3) {
-            for c in boxCol..<(boxCol + 3) {
-                if tableState[r][c] == num {
-                    return false
-                }
-            }
-        }
-        
-        return true
-    }
-    
-    /// Checks if two solutions are the same
-    /// - Parameters:
-    ///   - solution1: First solution
-    ///   - solution2: Second solution
-    /// - Returns: True if the solutions are identical
-    private func isSameSolution(_ solution1: TableMatrix, _ solution2: TableMatrix) -> Bool {
-        for row in 0..<9 {
-            for col in 0..<9 {
-                if solution1[row][col] != solution2[row][col] {
-                    return false
-                }
-            }
-        }
-        return true
-    }
     
     /// Generates an extreme difficulty puzzle with minimal hints (17-24 hints)
     /// - Parameters:
@@ -578,11 +343,17 @@ class UniqueSolutionVerifier {
         let targetCellsToHide = 81 - targetHints
         let initialCellsToHide = 81 - initialHints
         
-        // Generate a valid puzzle with more hints as a starting point
-        if let initialCells = generatePuzzle(difficulty: initialCellsToHide) {
-            cellsToRemove = initialCells
-        } else {
-            return nil
+        // Start with a simple seed by removing some cells randomly
+        cellsToRemove.removeAll()
+        let availableCells = getAllAvailableCells()
+        
+        // Add initial cells to remove (safer approach)
+        let shuffledCells = availableCells.shuffled()
+        for cell in shuffledCells.prefix(min(initialCellsToHide, shuffledCells.count)) {
+            cellsToRemove.insert(cell)
+            if !hasUniqueSolution() {
+                cellsToRemove.remove(cell) // Remove if it breaks uniqueness
+            }
         }
         
         // Save best result so far
@@ -704,10 +475,6 @@ class UniqueSolutionVerifier {
     /// Try advanced elimination techniques for extreme puzzles
     /// - Returns: true if successful in removing more cells
     private func tryAdvancedElimination() -> Bool {
-        // Try patterns of cells that might work together
-        if tryPatternBasedElimination() {
-            return true
-        }
         
         // Try temporarily removing groups of cells
         let availableCells = getAllAvailableCells().filter { !knownUnsafeCells.contains($0) }
@@ -749,86 +516,6 @@ class UniqueSolutionVerifier {
         return false
     }
     
-    /// Try to eliminate cells based on common sudoku patterns
-    private func tryPatternBasedElimination() -> Bool {
-        // Try to isolate a region or line
-        let regions = [
-            // Try vertical regions (columns)
-            getColumnCells(0, 1, 2),
-            getColumnCells(3, 4, 5),
-            getColumnCells(6, 7, 8),
-            
-            // Try horizontal regions (rows)
-            getRowCells(0, 1, 2),
-            getRowCells(3, 4, 5),
-            getRowCells(6, 7, 8),
-            
-            // Try 3x3 boxes
-            getBoxCells(0, 0),
-            getBoxCells(0, 3),
-            getBoxCells(0, 6),
-            getBoxCells(3, 0),
-            getBoxCells(3, 3),
-            getBoxCells(3, 6),
-            getBoxCells(6, 0),
-            getBoxCells(6, 3),
-            getBoxCells(6, 6)
-        ]
-        
-        for region in regions {
-            let availableCellsInRegion = region.filter { !cellsToRemove.contains($0) }
-            if availableCellsInRegion.count > 0 && availableCellsInRegion.count <= 4 {
-                // Try to remove all but one cell in this region
-                let currentCellsToRemove = cellsToRemove
-                
-                for cell in availableCellsInRegion.dropLast(1) {
-                    cellsToRemove.insert(cell)
-                }
-                
-                if hasUniqueSolution() {
-                    return true
-                }
-                
-                // Restore original state
-                cellsToRemove = currentCellsToRemove
-            }
-        }
-        
-        return false
-    }
-    
-    /// Get cells in a column range
-    private func getColumnCells(_ col1: Int, _ col2: Int, _ col3: Int) -> [Coordinate] {
-        var cells = [Coordinate]()
-        for row in 0..<9 {
-            cells.append(Coordinate(row: row, col: col1))
-            cells.append(Coordinate(row: row, col: col2))
-            cells.append(Coordinate(row: row, col: col3))
-        }
-        return cells
-    }
-    
-    /// Get cells in a row range
-    private func getRowCells(_ row1: Int, _ row2: Int, _ row3: Int) -> [Coordinate] {
-        var cells = [Coordinate]()
-        for col in 0..<9 {
-            cells.append(Coordinate(row: row1, col: col))
-            cells.append(Coordinate(row: row2, col: col))
-            cells.append(Coordinate(row: row3, col: col))
-        }
-        return cells
-    }
-    
-    /// Get cells in a 3x3 box
-    private func getBoxCells(_ startRow: Int, _ startCol: Int) -> [Coordinate] {
-        var cells = [Coordinate]()
-        for row in startRow..<(startRow + 3) {
-            for col in startCol..<(startCol + 3) {
-                cells.append(Coordinate(row: row, col: col))
-            }
-        }
-        return cells
-    }
     
     /// Backtrack by removing a few cells from the set to try a different path
     private func backtrack(steps: Int) {

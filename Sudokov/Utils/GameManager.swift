@@ -79,8 +79,6 @@ class GameManager: ObservableObject {
 
         return LevelAnalytics(level: -1, difficulty: level?.difficulty ?? .medium)
     }
-//    @Published var conflictIndex = 0
-//    var conflictableCellGroups = [[Coordinate]]()
 
     // MARK: - Methods
     init(level: Level,
@@ -119,8 +117,6 @@ class GameManager: ObservableObject {
         }
         
         addBinders()
-//        conflictableCellGroups = tableBuilder.getConflictableCellGroups(tableState: solution)
-//        conflicts = conflictableCellGroups[conflictIndex]
     }
 
     init(levelInfo: LevelInfo,
@@ -154,8 +150,6 @@ class GameManager: ObservableObject {
 
         addBinders()
         objectWillChange.send()
-//        conflictableCellGroups = tableBuilder.getConflictableCellGroups(tableState: solution)
-//        conflicts = conflictableCellGroups[conflictIndex]
     }
 
     func saveState() {
@@ -243,7 +237,7 @@ class GameManager: ObservableObject {
         }
 
         let isAlerting = conflicts.contains(Coordinate(row: i, col: j)) || unmatches.contains(Coordinate(row: i, col: j))
-        return GameSquareViewModel(selectionType: self.selectionType(row: i, col: j),
+        return GameSquareViewModel(selectionType: self.selectionType(row: i, col: j), 
                                    contentType: self.contentType(row: i, col: j),
                                    isAlerting: isAlerting,
                                    content: self.tableState[i][j],
@@ -255,12 +249,6 @@ class GameManager: ObservableObject {
     }
 
     func switchFillContentMode() {
-//        conflictIndex += 1
-//        if conflictIndex == conflictableCellGroups.count {
-//            conflictIndex = 0
-//        }
-//        conflicts = conflictableCellGroups[conflictIndex]
-//        return
         guard isGameActive else {
             return
         }

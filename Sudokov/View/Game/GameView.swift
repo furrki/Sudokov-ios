@@ -92,7 +92,7 @@ struct GameView: View {
                     Spacer()
 
                     AdView()
-                        .frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
+                        .frame(width: AdSizeBanner.size.width, height: AdSizeBanner.size.height)
                 }
                 .onAppear {
                     gameManager.saveState()

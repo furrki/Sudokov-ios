@@ -13,8 +13,8 @@ struct ContentView: View {
     var body: some View {
         HomeView()
             .onAppear {
-                FirebaseApp.configure()
-                GADMobileAds.sharedInstance().start(completionHandler: nil)
+//                FirebaseApp.configure()
+//                MobileAds.shared.start(completionHandler: nil)
             }
     }
 }

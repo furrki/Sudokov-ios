@@ -10,9 +10,9 @@ import SwiftUI
 import UIKit
 
 struct AdView: UIViewRepresentable {
-    @State private var banner: GADBannerView = GADBannerView(adSize: GADAdSizeBanner)
+    @State private var banner: BannerView = BannerView(adSize: AdSizeBanner)
 
-    func makeUIView(context: UIViewRepresentableContext<AdView>) -> GADBannerView {
+    func makeUIView(context: UIViewRepresentableContext<AdView>) -> BannerView {
         #if DEBUG
         banner.adUnitID = KeysConfiguration.testBannerAdId
         #else
@@ -31,11 +31,11 @@ struct AdView: UIViewRepresentable {
         
         let viewWidth = frame.size.width
 
-        banner.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
-        banner.load(GADRequest())
+        banner.adSize = currentOrientationAnchoredAdaptiveBanner(width: viewWidth)
+        banner.load(Request())
         return banner
     }
 
-    func updateUIView(_ uiView: GADBannerView, context: UIViewRepresentableContext<AdView>) {
+    func updateUIView(_ uiView: BannerView, context: UIViewRepresentableContext<AdView>) {
     }
 }
