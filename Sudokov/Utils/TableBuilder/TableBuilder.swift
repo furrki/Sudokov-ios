@@ -154,29 +154,23 @@ class TableBuilder: ObservableObject {
     func makeLevel() {
         var attempts = 0
         let maxAttempts = 5
-        
+
         repeat {
             generateLevel()
             riskyCellGroups = getConflictableCellGroups(tableState: tableState)
             makeCellsToRemove()
-            var hasSwordfish = iterateSwordFishCheck()
-            
-            while hasSwordfish {
-                hasSwordfish = iterateSwordFishCheck()
-                makeCellsToRemove()
-            }
-            
+
             attempts += 1
-            
+
             // Validate puzzle quality
             if validatePuzzleQuality() {
                 break
             } else if attempts < maxAttempts {
                 print("Puzzle quality insufficient, regenerating... (attempt \(attempts + 1)/\(maxAttempts))")
             }
-            
+
         } while attempts < maxAttempts
-        
+
         if attempts >= maxAttempts {
             print("Warning: Generated puzzle may not meet quality standards after \(maxAttempts) attempts")
         }
@@ -200,83 +194,97 @@ class TableBuilder: ObservableObject {
             puzzleToSolve[cell.row][cell.col] = 0
         }
 
-        // Validate puzzle actually requires techniques beyond brute force
-        let techniques = analyzeSolvingPath(puzzle: puzzleToSolve)
+        // Analyze solving path with technique counts
+        let (techniques, techniqueCounts, totalMoves) = analyzeSolvingPathWithCounts(puzzle: puzzleToSolve)
 
         let expectedDifficulty = Difficulty.getDifficulty(depth: targetDepth)
+
+        // Calculate percentage of trivial moves (naked singles)
+        let nakedSingleCount = techniqueCounts["Naked Single"] ?? 0
+        let trivialPercentage = totalMoves > 0 ? Double(nakedSingleCount) / Double(totalMoves) : 0
+
         switch expectedDifficulty {
         case .basic, .easy:
-            // Easy puzzles should be solvable with basic techniques
+            // Easy puzzles: straightforward solving, can use basic techniques
+            // Just ensure it's solvable with singles (don't force specific percentage)
             return techniques.contains("Naked Single") || techniques.contains("Hidden Single")
         case .medium:
-            // Medium requires at least hidden singles or naked pairs
-            return techniques.contains("Hidden Single") || techniques.contains("Naked Pair")
+            // Medium: max 40% naked singles, must have hidden singles or pairs
+            return trivialPercentage <= 0.4 &&
+                   (techniques.contains("Hidden Single") || techniques.contains("Naked Pair"))
         case .hard:
-            // Hard requires intermediate techniques
-            return techniques.contains("Pointing Pairs") || techniques.contains("Naked Pair")
+            // Hard: max 25% naked singles, requires intermediate techniques
+            guard trivialPercentage <= 0.25 else { return false }
+            return techniques.contains("Pointing Pairs") ||
+                   techniques.contains("Naked Pair") ||
+                   (techniqueCounts["Hidden Single"] ?? 0) >= 5
         case .hardcore:
-            // Hardcore requires advanced techniques or logical deduction chains
-            return techniques.contains("X-Wing") || techniques.contains("Swordfish") ||
-                   (!techniques.contains("Naked Single") && techniques.count >= 3)
+            // Hardcore: max 15% naked singles, must have advanced techniques
+            guard trivialPercentage <= 0.15 else { return false }
+            return techniques.contains("X-Wing") ||
+                   techniques.contains("Swordfish") ||
+                   techniques.count >= 4
         }
     }
 
-    /// Analyzes the actual solving path to determine required techniques
-    private func analyzeSolvingPath(puzzle: TableMatrix) -> Set<String> {
+    /// Analyzes the actual solving path and counts technique usage
+    /// Only counts a technique as "required" if no easier technique was available at that step
+    private func analyzeSolvingPathWithCounts(puzzle: TableMatrix) -> (Set<String>, [String: Int], Int) {
         var workingPuzzle = puzzle
         var candidates = generateCandidates(for: workingPuzzle)
         var techniques = Set<String>()
+        var techniqueCounts: [String: Int] = [:]
+        var totalMoves = 0
         let maxIterations = 100
         var iterations = 0
 
         while !isPuzzleComplete(workingPuzzle) && iterations < maxIterations {
             iterations += 1
             var progressMade = false
+            var techniqueUsed: String?
 
-            // Try naked single
+            // Try techniques in order, track which one is actually needed
+
+            // Level 1: Naked single
             if let (row, col, num) = findNakedSingle(puzzle: workingPuzzle, candidates: candidates) {
                 workingPuzzle[row][col] = num
                 candidates = generateCandidates(for: workingPuzzle)
-                techniques.insert("Naked Single")
+                techniqueUsed = "Naked Single"
                 progressMade = true
-                continue
             }
-
-            // Try hidden single
-            if let (row, col, num) = findHiddenSingle(puzzle: workingPuzzle, candidates: candidates) {
+            // Level 2: Hidden single (only if no naked single)
+            else if let (row, col, num) = findHiddenSingle(puzzle: workingPuzzle, candidates: candidates) {
                 workingPuzzle[row][col] = num
                 candidates = generateCandidates(for: workingPuzzle)
-                techniques.insert("Hidden Single")
+                techniqueUsed = "Hidden Single"
                 progressMade = true
-                continue
+            }
+            // Level 3: Naked pairs (only if no singles)
+            else if eliminateNakedPairs(candidates: &candidates) {
+                techniqueUsed = "Naked Pair"
+                progressMade = true
+            }
+            // Level 4: Pointing pairs (only if no simpler technique)
+            else if eliminatePointingPairs(puzzle: workingPuzzle, candidates: &candidates) {
+                techniqueUsed = "Pointing Pairs"
+                progressMade = true
+            }
+            // Level 5: X-Wing (only if nothing simpler works)
+            else if eliminateXWing(candidates: &candidates) {
+                techniqueUsed = "X-Wing"
+                progressMade = true
+            }
+            // Level 6: Swordfish (only if nothing simpler works)
+            else if eliminateSwordfish(candidates: &candidates) {
+                techniqueUsed = "Swordfish"
+                progressMade = true
             }
 
-            // Try naked pairs
-            if eliminateNakedPairs(candidates: &candidates) {
-                techniques.insert("Naked Pair")
-                progressMade = true
-                continue
-            }
-
-            // Try pointing pairs
-            if eliminatePointingPairs(puzzle: workingPuzzle, candidates: &candidates) {
-                techniques.insert("Pointing Pairs")
-                progressMade = true
-                continue
-            }
-
-            // Try X-Wing
-            if eliminateXWing(candidates: &candidates) {
-                techniques.insert("X-Wing")
-                progressMade = true
-                continue
-            }
-
-            // Try Swordfish
-            if eliminateSwordfish(candidates: &candidates) {
-                techniques.insert("Swordfish")
-                progressMade = true
-                continue
+            // Record the technique that was actually needed
+            if let technique = techniqueUsed {
+                techniques.insert(technique)
+                techniqueCounts[technique, default: 0] += 1
+                totalMoves += 1
             }
 
             if !progressMade {
@@ -284,7 +292,7 @@ class TableBuilder: ObservableObject {
             }
         }
 
-        return techniques
+        return (techniques, techniqueCounts, totalMoves)
     }
                                                                 
     private func makeCellsToRemove() {
@@ -317,84 +325,51 @@ class TableBuilder: ObservableObject {
             print("Extreme generation failed, continuing with enhanced standard method")
         }
 
-        // Enhanced standard generation method with wave-based approach
+        // Simplified generation: progressive removal with smart backtracking
         var cellsToHide = Set<Coordinate>()
-        let maxWaves = visibleCells <= 30 ? 15 : 10
-        var wavesWithoutProgress = 0
-        let maxWavesWithoutProgress = 3
+        var attemptsSinceProgress = 0
+        let maxAttemptsWithoutProgress = 200
 
-        // Reset progress tracking variables
-        lastProgressCount = 0
-        stuckCounter = 0
+        print("Generating puzzle: 0/\(cellsToHideCount) cells hidden")
 
-        for wave in 0..<maxWaves {
-            if cellsToHide.count >= cellsToHideCount {
-                break
-            }
-
-            let cellsBeforeWave = cellsToHide.count
-            let remainingToHide = cellsToHideCount - cellsToHide.count
-            let targetForWave = min(remainingToHide, max(5, remainingToHide / (maxWaves - wave)))
-
-            print("Wave \(wave + 1): Target \(targetForWave) more cells (total: \(cellsToHide.count + targetForWave)/\(cellsToHideCount))")
-
-            // Create fresh verifier for this wave
+        while cellsToHide.count < cellsToHideCount && attemptsSinceProgress < maxAttemptsWithoutProgress {
             let uniqueSolutionVerifier = UniqueSolutionVerifier(table: tableState, cellsToRemove: cellsToHide)
 
-            var waveAttempts = 0
-            let maxWaveAttempts = targetForWave * 50
+            // Try to find safe cell
+            if let cell = uniqueSolutionVerifier.findSafeCellInBatches() ?? uniqueSolutionVerifier.findSafeCellToRemove() {
+                cellsToHide.insert(cell)
+                attemptsSinceProgress = 0
 
-            while cellsToHide.count < cellsBeforeWave + targetForWave && waveAttempts < maxWaveAttempts {
-                // Try batch processing first
-                if let cell = uniqueSolutionVerifier.findSafeCellInBatches() {
-                    cellsToHide.insert(cell)
-                    waveAttempts = 0
-                    continue
+                if cellsToHide.count % 5 == 0 {
+                    print("Progress: \(cellsToHide.count)/\(cellsToHideCount) cells hidden")
                 }
-
-                // If batch fails, try individual selection
-                if let cell = uniqueSolutionVerifier.findSafeCellToRemove() {
-                    cellsToHide.insert(cell)
-                    waveAttempts = 0
-                    continue
-                }
-
-                waveAttempts += 1
+                continue
             }
 
-            let cellsAddedThisWave = cellsToHide.count - cellsBeforeWave
-            print("Wave \(wave + 1) completed: Added \(cellsAddedThisWave) cells")
+            attemptsSinceProgress += 1
 
-            if cellsAddedThisWave == 0 {
-                wavesWithoutProgress += 1
-                if wavesWithoutProgress >= maxWavesWithoutProgress {
-                    print("No progress for \(maxWavesWithoutProgress) waves, attempting smart backtrack...")
+            // Smart backtrack if stuck
+            if attemptsSinceProgress >= 100 && cellsToHide.count > 10 {
+                print("Stuck at \(cellsToHide.count) cells, smart backtracking...")
 
-                    // Smart backtracking: remove cells with highest risk scores
-                    if cellsToHide.count > 10 {
-                        let verifier = UniqueSolutionVerifier(table: tableState, cellsToRemove: cellsToHide)
-                        var testPuzzle = tableState
-                        for c in cellsToHide {
-                            testPuzzle[c.row][c.col] = 0
-                        }
-
-                        // Find cells with lowest constraint (likely causing issues)
-                        let cellsWithScores = cellsToHide.map { cell -> (Coordinate, Int) in
-                            let available = availableNumbers(tableState: testPuzzle, row: cell.row, col: cell.col)
-                            return (cell, available.count)
-                        }.sorted { $0.1 > $1.1 } // Sort by most candidates (least constrained)
-
-                        let backtrackAmount = min(5, cellsToHide.count / 10)
-                        for i in 0..<backtrackAmount {
-                            cellsToHide.remove(cellsWithScores[i].0)
-                        }
-
-                        print("Smart backtrack: Removed \(backtrackAmount) problematic cells, now at \(cellsToHide.count)")
-                        wavesWithoutProgress = 0
-                    }
+                var testPuzzle = tableState
+                for c in cellsToHide {
+                    testPuzzle[c.row][c.col] = 0
                 }
-            } else {
-                wavesWithoutProgress = 0
+
+                // Remove least-constrained cells (most candidates = causing problems)
+                let cellsWithScores = cellsToHide.map { cell -> (Coordinate, Int) in
+                    let available = availableNumbers(tableState: testPuzzle, row: cell.row, col: cell.col)
+                    return (cell, available.count)
+                }.sorted { $0.1 > $1.1 }
+
+                let backtrackAmount = min(5, cellsToHide.count / 10)
+                for i in 0..<backtrackAmount {
+                    cellsToHide.remove(cellsWithScores[i].0)
+                }
+
+                print("Backtracked to \(cellsToHide.count) cells")
+                attemptsSinceProgress = 0
             }
         }
 
@@ -417,103 +392,21 @@ class TableBuilder: ObservableObject {
         }
 
         self.cellsToHide = Array(cellsToHide)
-        let actualDifficulty = assessPuzzleDifficulty()
-        print("Generated puzzle with \(81 - cellsToHide.count) hints (Difficulty: \(actualDifficulty))")
-        print("Unique solution: \(UniqueSolutionVerifier(table: tableState, cellsToRemove: Set(cellsToHide)).hasUniqueSolution())")
-    }
-    
-    
-    private func iterateSwordFishCheck() -> Bool {
-        var hasSwordFish = false
-        let swordfishCoordinates = SwordFishFinder(table: table, cellsPlannedForRemoval: self.cellsToHide).findAll()
-        for swordfishCoordinate in swordfishCoordinates {
-            if !riskyCellGroups.contains(swordfishCoordinate) {
-                riskyCellGroups.append(swordfishCoordinate)
-                hasSwordFish = true
-                cellsToHide.removeAll {
-                    $0 == swordfishCoordinate.first!
-                }
-            }
-        }
-        
-        return hasSwordFish
-    }
-    
-    // MARK: - Difficulty Assessment
-    
-    private func assessPuzzleDifficulty() -> String {
-        // Create puzzle for solving
+
+        // Use the validation logic to get difficulty assessment
         var puzzleToSolve = tableState
         for cell in cellsToHide {
             puzzleToSolve[cell.row][cell.col] = 0
         }
-        
-        return analyzeSolvingTechniques(puzzle: puzzleToSolve)
+        let (techniques, _, _) = analyzeSolvingPathWithCounts(puzzle: puzzleToSolve)
+        let difficultyLabel = determineDifficultyLabel(from: techniques)
+
+        print("Generated puzzle with \(81 - cellsToHide.count) hints (Difficulty: \(difficultyLabel))")
+        print("Unique solution: \(UniqueSolutionVerifier(table: tableState, cellsToRemove: Set(cellsToHide)).hasUniqueSolution())")
     }
-    
-    /// Analyzes what solving techniques are actually required to solve the puzzle
-    private func analyzeSolvingTechniques(puzzle: TableMatrix) -> String {
-        var workingPuzzle = puzzle
-        var candidates = generateCandidates(for: workingPuzzle)
-        
-        var techniques = [String]()
-        let maxIterations = 100
-        var iterations = 0
-        
-        while !isPuzzleComplete(workingPuzzle) && iterations < maxIterations {
-            iterations += 1
-            var progressMade = false
-            
-            // Try basic techniques first
-            if let (row, col, num) = findNakedSingle(puzzle: workingPuzzle, candidates: candidates) {
-                workingPuzzle[row][col] = num
-                candidates = generateCandidates(for: workingPuzzle)
-                if !techniques.contains("Naked Single") { techniques.append("Naked Single") }
-                progressMade = true
-                continue
-            }
-            
-            if let (row, col, num) = findHiddenSingle(puzzle: workingPuzzle, candidates: candidates) {
-                workingPuzzle[row][col] = num
-                candidates = generateCandidates(for: workingPuzzle)
-                if !techniques.contains("Hidden Single") { techniques.append("Hidden Single") }
-                progressMade = true
-                continue
-            }
-            
-            // Try intermediate techniques
-            if eliminateNakedPairs(candidates: &candidates) {
-                if !techniques.contains("Naked Pair") { techniques.append("Naked Pair") }
-                progressMade = true
-                continue
-            }
-            
-            if eliminatePointingPairs(puzzle: workingPuzzle, candidates: &candidates) {
-                if !techniques.contains("Pointing Pairs") { techniques.append("Pointing Pairs") }
-                progressMade = true
-                continue
-            }
-            
-            // Try advanced techniques
-            if eliminateXWing(candidates: &candidates) {
-                if !techniques.contains("X-Wing") { techniques.append("X-Wing") }
-                progressMade = true
-                continue
-            }
-            
-            if eliminateSwordfish(candidates: &candidates) {
-                if !techniques.contains("Swordfish") { techniques.append("Swordfish") }
-                progressMade = true
-                continue
-            }
-            
-            // If no progress, break to avoid infinite loop
-            if !progressMade {
-                break
-            }
-        }
-        
-        // Determine difficulty based on techniques required
+
+    /// Determines difficulty label based on techniques used
+    private func determineDifficultyLabel(from techniques: Set<String>) -> String {
         if techniques.contains("Swordfish") || techniques.contains("X-Wing") {
             return "Hard"
         } else if techniques.contains("Pointing Pairs") || techniques.contains("Naked Pair") {
