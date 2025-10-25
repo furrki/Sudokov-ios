@@ -184,58 +184,126 @@ class TableBuilder: ObservableObject {
     
     private func validatePuzzleQuality() -> Bool {
         guard let targetDepth = depth else { return true }
-        
+
         let actualHints = 81 - cellsToHide.count
         let hintDifference = abs(actualHints - targetDepth)
-        
+
         // Accept puzzle if hints are within reasonable range
         let acceptableRange = targetDepth <= 25 ? 3 : 5
         if hintDifference > acceptableRange {
             return false
         }
-        
-        // Check for minimum puzzle complexity
+
+        // Check for minimum puzzle complexity by simulating solving
         var puzzleToSolve = tableState
         for cell in cellsToHide {
             puzzleToSolve[cell.row][cell.col] = 0
         }
-        
-        let nakedSingles = countNakedSingles(in: puzzleToSolve)
-        let totalEmptyCells = cellsToHide.count
-        
-        // Reject if puzzle has too many easy moves (naked singles) relative to difficulty
+
+        // Validate puzzle actually requires techniques beyond brute force
+        let techniques = analyzeSolvingPath(puzzle: puzzleToSolve)
+
         let expectedDifficulty = Difficulty.getDifficulty(depth: targetDepth)
         switch expectedDifficulty {
-        case .basic:
-            return nakedSingles >= totalEmptyCells * 6 / 10 // 60%+ easy moves OK
-        case .easy:
-            return nakedSingles >= totalEmptyCells * 4 / 10 // 40%+ easy moves OK
+        case .basic, .easy:
+            // Easy puzzles should be solvable with basic techniques
+            return techniques.contains("Naked Single") || techniques.contains("Hidden Single")
         case .medium:
-            return nakedSingles <= totalEmptyCells * 3 / 10 // Max 30% easy moves
+            // Medium requires at least hidden singles or naked pairs
+            return techniques.contains("Hidden Single") || techniques.contains("Naked Pair")
         case .hard:
-            return nakedSingles <= totalEmptyCells * 2 / 10 // Max 20% easy moves
+            // Hard requires intermediate techniques
+            return techniques.contains("Pointing Pairs") || techniques.contains("Naked Pair")
         case .hardcore:
-            return nakedSingles <= totalEmptyCells * 1 / 10 // Max 10% easy moves
+            // Hardcore requires advanced techniques or logical deduction chains
+            return techniques.contains("X-Wing") || techniques.contains("Swordfish") ||
+                   (!techniques.contains("Naked Single") && techniques.count >= 3)
         }
+    }
+
+    /// Analyzes the actual solving path to determine required techniques
+    private func analyzeSolvingPath(puzzle: TableMatrix) -> Set<String> {
+        var workingPuzzle = puzzle
+        var candidates = generateCandidates(for: workingPuzzle)
+        var techniques = Set<String>()
+        let maxIterations = 100
+        var iterations = 0
+
+        while !isPuzzleComplete(workingPuzzle) && iterations < maxIterations {
+            iterations += 1
+            var progressMade = false
+
+            // Try naked single
+            if let (row, col, num) = findNakedSingle(puzzle: workingPuzzle, candidates: candidates) {
+                workingPuzzle[row][col] = num
+                candidates = generateCandidates(for: workingPuzzle)
+                techniques.insert("Naked Single")
+                progressMade = true
+                continue
+            }
+
+            // Try hidden single
+            if let (row, col, num) = findHiddenSingle(puzzle: workingPuzzle, candidates: candidates) {
+                workingPuzzle[row][col] = num
+                candidates = generateCandidates(for: workingPuzzle)
+                techniques.insert("Hidden Single")
+                progressMade = true
+                continue
+            }
+
+            // Try naked pairs
+            if eliminateNakedPairs(candidates: &candidates) {
+                techniques.insert("Naked Pair")
+                progressMade = true
+                continue
+            }
+
+            // Try pointing pairs
+            if eliminatePointingPairs(puzzle: workingPuzzle, candidates: &candidates) {
+                techniques.insert("Pointing Pairs")
+                progressMade = true
+                continue
+            }
+
+            // Try X-Wing
+            if eliminateXWing(candidates: &candidates) {
+                techniques.insert("X-Wing")
+                progressMade = true
+                continue
+            }
+
+            // Try Swordfish
+            if eliminateSwordfish(candidates: &candidates) {
+                techniques.insert("Swordfish")
+                progressMade = true
+                continue
+            }
+
+            if !progressMade {
+                break
+            }
+        }
+
+        return techniques
     }
                                                                 
     private func makeCellsToRemove() {
         guard let depth = depth else {
             return
         }
-        
+
         // Number of cells to remain visible
         let visibleCells = depth
         // Number of cells to hide
         let cellsToHideCount = 81 - visibleCells
-        
+
         // For very hard puzzles (20-30 hints), use the extreme generator
         if visibleCells <= 30 {
             let uniqueSolutionVerifier = UniqueSolutionVerifier(table: tableState)
-            
+
             // Try to generate an extreme puzzle with the requested number of hints
             if let cellsToHideSet = uniqueSolutionVerifier.generateExtremePuzzle(
-                targetHints: visibleCells, 
+                targetHints: visibleCells,
                 maxIterations: 200,
                 timeLimit: 180
             ) {
@@ -244,95 +312,114 @@ class TableBuilder: ObservableObject {
                 print("Unique solution: \(UniqueSolutionVerifier(table: tableState, cellsToRemove: cellsToHideSet).hasUniqueSolution())")
                 return
             }
-            
+
             // If extreme generation failed, continue with standard method but with more attempts
             print("Extreme generation failed, continuing with enhanced standard method")
         }
-        
-        // Enhanced standard generation method
+
+        // Enhanced standard generation method with wave-based approach
         var cellsToHide = Set<Coordinate>()
-        let maxAttempts = visibleCells <= 30 ? 10000 : 5000 // More attempts for harder puzzles
-        var attempts = 0
-        
+        let maxWaves = visibleCells <= 30 ? 15 : 10
+        var wavesWithoutProgress = 0
+        let maxWavesWithoutProgress = 3
+
         // Reset progress tracking variables
         lastProgressCount = 0
         stuckCounter = 0
-        
-        while cellsToHide.count < cellsToHideCount && attempts < maxAttempts {
-            // Create verifier with current state
+
+        for wave in 0..<maxWaves {
+            if cellsToHide.count >= cellsToHideCount {
+                break
+            }
+
+            let cellsBeforeWave = cellsToHide.count
+            let remainingToHide = cellsToHideCount - cellsToHide.count
+            let targetForWave = min(remainingToHide, max(5, remainingToHide / (maxWaves - wave)))
+
+            print("Wave \(wave + 1): Target \(targetForWave) more cells (total: \(cellsToHide.count + targetForWave)/\(cellsToHideCount))")
+
+            // Create fresh verifier for this wave
             let uniqueSolutionVerifier = UniqueSolutionVerifier(table: tableState, cellsToRemove: cellsToHide)
-            
-            // Use batch processing for better efficiency
-            if let cell = uniqueSolutionVerifier.findSafeCellInBatches() {
-                cellsToHide.insert(cell)
-                attempts = 0
-                stuckCounter = 0
-                lastProgressCount = cellsToHide.count
-                
-                // Print progress less frequently for performance
-                if cellsToHide.count % 5 == 0 {
-                    print("Cells to hide: \(cellsToHide.count)/\(cellsToHideCount)")
+
+            var waveAttempts = 0
+            let maxWaveAttempts = targetForWave * 50
+
+            while cellsToHide.count < cellsBeforeWave + targetForWave && waveAttempts < maxWaveAttempts {
+                // Try batch processing first
+                if let cell = uniqueSolutionVerifier.findSafeCellInBatches() {
+                    cellsToHide.insert(cell)
+                    waveAttempts = 0
+                    continue
                 }
-                continue
+
+                // If batch fails, try individual selection
+                if let cell = uniqueSolutionVerifier.findSafeCellToRemove() {
+                    cellsToHide.insert(cell)
+                    waveAttempts = 0
+                    continue
+                }
+
+                waveAttempts += 1
             }
-            
-            // If batch processing fails, try individual cell selection
-            if let cell = uniqueSolutionVerifier.selectRandomSafeCell() {
-                cellsToHide.insert(cell)
-                attempts = 0
-                stuckCounter = 0
-                lastProgressCount = cellsToHide.count
-                continue
-            }
-            
-            // Handle being stuck
-            attempts += 1
-            
-            if lastProgressCount == cellsToHide.count {
-                stuckCounter += 1
+
+            let cellsAddedThisWave = cellsToHide.count - cellsBeforeWave
+            print("Wave \(wave + 1) completed: Added \(cellsAddedThisWave) cells")
+
+            if cellsAddedThisWave == 0 {
+                wavesWithoutProgress += 1
+                if wavesWithoutProgress >= maxWavesWithoutProgress {
+                    print("No progress for \(maxWavesWithoutProgress) waves, attempting smart backtrack...")
+
+                    // Smart backtracking: remove cells with highest risk scores
+                    if cellsToHide.count > 10 {
+                        let verifier = UniqueSolutionVerifier(table: tableState, cellsToRemove: cellsToHide)
+                        var testPuzzle = tableState
+                        for c in cellsToHide {
+                            testPuzzle[c.row][c.col] = 0
+                        }
+
+                        // Find cells with lowest constraint (likely causing issues)
+                        let cellsWithScores = cellsToHide.map { cell -> (Coordinate, Int) in
+                            let available = availableNumbers(tableState: testPuzzle, row: cell.row, col: cell.col)
+                            return (cell, available.count)
+                        }.sorted { $0.1 > $1.1 } // Sort by most candidates (least constrained)
+
+                        let backtrackAmount = min(5, cellsToHide.count / 10)
+                        for i in 0..<backtrackAmount {
+                            cellsToHide.remove(cellsWithScores[i].0)
+                        }
+
+                        print("Smart backtrack: Removed \(backtrackAmount) problematic cells, now at \(cellsToHide.count)")
+                        wavesWithoutProgress = 0
+                    }
+                }
             } else {
-                stuckCounter = 0
-                lastProgressCount = cellsToHide.count
-            }
-            
-            // Progressive backtracking strategy
-            if stuckCounter >= maxStuckThreshold && cellsToHide.count > 10 {
-                print("Stuck at \(cellsToHide.count) cells, backtracking...")
-                
-                // More aggressive backtracking for harder puzzles
-                let backtrackAmount = visibleCells <= 30 ? 
-                    min(8, cellsToHide.count / 8 + 2) : 
-                    min(5, cellsToHide.count / 10 + 1)
-                
-                let cellsToBacktrack = Array(cellsToHide).shuffled().prefix(backtrackAmount)
-                for cell in cellsToBacktrack {
-                    cellsToHide.remove(cell)
-                }
-                
-                stuckCounter = 0
-                attempts = 0 // Reset attempts after backtracking
-                print("Backtracked to \(cellsToHide.count) cells")
+                wavesWithoutProgress = 0
             }
         }
-        
-        // If we couldn't reach the target, accept what we have if it's reasonable
+
+        // Final acceptance logic
         if cellsToHide.count < cellsToHideCount {
             let achievedHints = 81 - cellsToHide.count
-            if achievedHints >= visibleCells - 5 { // Accept if within 5 hints of target
-                print("Settling for \(achievedHints) hints (target was \(visibleCells))")
-            } else {
-                print("Failed to generate sufficient difficulty, regenerating...")
+            let difference = visibleCells - achievedHints
+
+            if difference <= 3 {
+                print("Close enough: \(achievedHints) hints (target: \(visibleCells))")
+            } else if cellsToHide.count < cellsToHideCount / 2 {
+                print("Far from target, regenerating...")
                 generateLevel()
                 riskyCellGroups = getConflictableCellGroups(tableState: tableState)
                 makeCellsToRemove()
                 return
+            } else {
+                print("Accepting: \(achievedHints) hints (target: \(visibleCells))")
             }
         }
-        
+
         self.cellsToHide = Array(cellsToHide)
         let actualDifficulty = assessPuzzleDifficulty()
-        print("Generated puzzle with \(visibleCells) hints (Actual difficulty: \(actualDifficulty))")
-        print("Unique solution: \(UniqueSolutionVerifier(table: tableState, cellsToRemove: cellsToHide).hasUniqueSolution())")
+        print("Generated puzzle with \(81 - cellsToHide.count) hints (Difficulty: \(actualDifficulty))")
+        print("Unique solution: \(UniqueSolutionVerifier(table: tableState, cellsToRemove: Set(cellsToHide)).hasUniqueSolution())")
     }
     
     

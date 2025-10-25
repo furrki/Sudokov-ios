@@ -146,12 +146,7 @@
 		0004DCA2CEE1E4DE792930C0 /* Pods_Sudokov_SudokovUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sudokov_SudokovUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9DEB6C2FD81A5636656284 /* Pods-Sudokov.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sudokov.debug.xcconfig"; path = "Target Support Files/Pods-Sudokov/Pods-Sudokov.debug.xcconfig"; sourceTree = "<group>"; };
 		6C8C06BFD23D9868FBD41750 /* Pods-SudokovTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudokovTests.debug.xcconfig"; path = "Target Support Files/Pods-SudokovTests/Pods-SudokovTests.debug.xcconfig"; sourceTree = "<group>"; };
-		9E8CB2712E69C23E0017C5E8 /* CellSafetyAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellSafetyAnalyzer.swift; sourceTree = "<group>"; };
-		9E8CB2722E69C23E0017C5E8 /* DangerousCellFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerousCellFinder.swift; sourceTree = "<group>"; };
-		9E8CB2732E69C23E0017C5E8 /* PatternEliminator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternEliminator.swift; sourceTree = "<group>"; };
-		9E8CB2742E69C23E0017C5E8 /* PuzzleGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleGenerator.swift; sourceTree = "<group>"; };
 		9E8CB2752E69C23E0017C5E8 /* UniqueSolutionVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueSolutionVerifier.swift; sourceTree = "<group>"; };
-		9E8F783D2E69C1D300475A6A /* SudokuPuzzleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuPuzzleManager.swift; sourceTree = "<group>"; };
 		9EEEC2AC2E69B83400330C87 /* SolutionCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionCounter.swift; sourceTree = "<group>"; };
 		BF6C1CEA8E6EF5FA1518234A /* Pods-Sudokov-SudokovUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sudokov-SudokovUITests.release.xcconfig"; path = "Target Support Files/Pods-Sudokov-SudokovUITests/Pods-Sudokov-SudokovUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C3E97FEEDA6DA6E1A5A8BE8A /* Pods-SudokovTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudokovTests.release.xcconfig"; path = "Target Support Files/Pods-SudokovTests/Pods-SudokovTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -322,10 +317,6 @@
 				FB3C9714287F0FEA002104F0 /* TableBuilder.swift */,
 				FBB7C5472C95BC7B0027B971 /* BigSquareIterator.swift */,
 				FBB7C5462C95BC7B0027B971 /* SwordFishFinder.swift */,
-				9E8CB2712E69C23E0017C5E8 /* CellSafetyAnalyzer.swift */,
-				9E8CB2722E69C23E0017C5E8 /* DangerousCellFinder.swift */,
-				9E8CB2732E69C23E0017C5E8 /* PatternEliminator.swift */,
-				9E8CB2742E69C23E0017C5E8 /* PuzzleGenerator.swift */,
 				9E8CB2752E69C23E0017C5E8 /* UniqueSolutionVerifier.swift */,
 				FB3627852C94FA82001DB778 /* NakedPairsFinder.swift */,
 				9EEEC2AC2E69B83400330C87 /* SolutionCounter.swift */,
@@ -513,7 +504,6 @@
 				FB3C9718287F11B1002104F0 /* GameManager.swift */,
 				FBDB28AE288365B000A372E7 /* FeatureFlags.swift */,
 				FBA2390E288CA68F006AE3A4 /* LocalLevelManager.swift */,
-				9E8F783D2E69C1D300475A6A /* SudokuPuzzleManager.swift */,
 				FBBBE58E288DA7F500AC809A /* DependencyManager.swift */,
 				FBBBE590288DA96F00AC809A /* Coordinator.swift */,
 				FB897487288F31DD00D7C982 /* StorageManager.swift */,
@@ -969,11 +959,7 @@
 				FBB7C5612C95BD2C0027B971 /* FeatureFlags.swift in Sources */,
 				9EEEC2AE2E69B83400330C87 /* SolutionCounter.swift in Sources */,
 				FBB7C5642C95BD400027B971 /* LevelState.swift in Sources */,
-				9E8CB27B2E69C23E0017C5E8 /* DangerousCellFinder.swift in Sources */,
-				9E8CB27C2E69C23E0017C5E8 /* PuzzleGenerator.swift in Sources */,
-				9E8CB27D2E69C23E0017C5E8 /* PatternEliminator.swift in Sources */,
 				9E8CB27E2E69C23E0017C5E8 /* UniqueSolutionVerifier.swift in Sources */,
-				9E8CB27F2E69C23E0017C5E8 /* CellSafetyAnalyzer.swift in Sources */,
 				FBB7C55C2C95BCFB0027B971 /* TemplateLevel.swift in Sources */,
 				FBB7C5582C95BCBB0027B971 /* SwordFishFinder.swift in Sources */,
 				FBB7C55E2C95BD160027B971 /* TableMatrix.swift in Sources */,
@@ -1029,11 +1015,7 @@
 				DCC3040F2897F4CE00EEB26E /* LevelState.swift in Sources */,
 				FB7BC71F28803EC500E8C5F1 /* GameSquareView.swift in Sources */,
 				FB77D00528FC989100D7E17F /* SelectDifficultyView.swift in Sources */,
-				9E8CB2762E69C23E0017C5E8 /* DangerousCellFinder.swift in Sources */,
-				9E8CB2772E69C23E0017C5E8 /* PuzzleGenerator.swift in Sources */,
-				9E8CB2782E69C23E0017C5E8 /* PatternEliminator.swift in Sources */,
 				9E8CB2792E69C23E0017C5E8 /* UniqueSolutionVerifier.swift in Sources */,
-				9E8CB27A2E69C23E0017C5E8 /* CellSafetyAnalyzer.swift in Sources */,
 				FBCF08CC28B25F7B00ABA471 /* LevelAnalytics.swift in Sources */,
 				FBA2390D288CA616006AE3A4 /* Level.swift in Sources */,
 				FBF5C3A52899D5A600F5FADA /* Int+Extensions.swift in Sources */,

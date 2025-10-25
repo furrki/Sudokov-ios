@@ -10,14 +10,10 @@ import Foundation
 class UniqueSolutionVerifier {
     var table: TableMatrix
     var cellsToRemove: Set<Coordinate> = []
-    
-    // Cache for cells that have been verified as safe
-    private var knownSafeCells = Set<Coordinate>()
-    // Cache for cells that have been verified as unsafe
+
+    // Cache for cells that have been verified as unsafe in current state
     private var knownUnsafeCells = Set<Coordinate>()
-    // Cache for dangerous pairs
-    private var dangerousPairs = [[Coordinate]]()
-    
+
     init(table: TableMatrix, cellsToRemove: Set<Coordinate> = []) {
         self.table = table
         self.cellsToRemove = cellsToRemove
@@ -40,169 +36,83 @@ class UniqueSolutionVerifier {
     /// Finds a safe cell to remove that maintains unique solution
     /// - Returns: A coordinate that can be safely removed, or nil if none found
     func findSafeCellToRemove() -> Coordinate? {
-        // First try cells that we already know are safe
-        if let safeCell = knownSafeCells.first {
-            knownSafeCells.remove(safeCell)
-            return safeCell
-        }
-        
         // Get all cells that are not already planned for removal
         let availableCells = getAllAvailableCells().filter { !knownUnsafeCells.contains($0) }
-        
+
         // Try cells in order of their risk score (lowest risk first)
         let scoredCells = availableCells.map { ($0, calculateRiskScore(for: $0)) }
                                         .sorted { $0.1 < $1.1 }
-        
+
         for (cell, _) in scoredCells {
-            // Skip cells that are part of known dangerous pairs with already removed cells
-            if isPartOfDangerousPair(cell) {
-                continue
-            }
-            
             // Add this cell to the removal set
             let currentCellsToRemove = cellsToRemove
             cellsToRemove.insert(cell)
-            
+
             // Check if the solution remains unique
             if hasUniqueSolution() {
-                // Remember other low-risk cells as potentially safe
-                if let potentialSafeCells = findPotentialSafeCells(basedOn: cell, maxCount: 5) {
-                    knownSafeCells.formUnion(potentialSafeCells)
-                }
                 return cell
             }
-            
+
             // Restore original removal set
             cellsToRemove = currentCellsToRemove
-            
-            // Remember this cell is unsafe
+
+            // Remember this cell is unsafe in current state
             knownUnsafeCells.insert(cell)
         }
-        
+
         return nil
     }
-    
-    /// Check if a cell is part of a dangerous pair with already removed cells
-    private func isPartOfDangerousPair(_ cell: Coordinate) -> Bool {
-        for pair in dangerousPairs {
-            if pair.contains(cell) && pair.contains(where: { cellsToRemove.contains($0) }) {
-                return true
-            }
-        }
-        return false
-    }
-    
-    /// Find cells that are likely to be safe based on a known safe cell
-    private func findPotentialSafeCells(basedOn safeCell: Coordinate, maxCount: Int) -> Set<Coordinate>? {
-        let value = table[safeCell.row][safeCell.col]
-        let availableCells = getAllAvailableCells().filter { 
-            !knownUnsafeCells.contains($0) && 
-            self.table[$0.row][$0.col] == value &&
-            !isInSameUnitAs(safeCell, other: $0)
-        }
-        
-        // Limit the number of potential safe cells
-        if !availableCells.isEmpty {
-            return Set(availableCells.shuffled().prefix(maxCount))
-        }
-        return nil
-    }
-    
+
     /// Check if two cells are in the same unit (row, column, or box)
     private func isInSameUnitAs(_ cell1: Coordinate, other cell2: Coordinate) -> Bool {
         // Same row
         if cell1.row == cell2.row {
             return true
         }
-        
+
         // Same column
         if cell1.col == cell2.col {
             return true
         }
-        
+
         // Same box
         let box1Row = cell1.row / 3
         let box1Col = cell1.col / 3
         let box2Row = cell2.row / 3
         let box2Col = cell2.col / 3
-        
+
         return box1Row == box2Row && box1Col == box2Col
-    }
-    
-    
-    /// Precompute some dangerous pairs to avoid them during generation
-    private func precomputeDangerousPairs() {
-        // Sample a subset of cells to find dangerous pairs
-        let sampleSize = min(30, getAllAvailableCells().count)
-        let sampleCells = getAllAvailableCells().shuffled().prefix(sampleSize)
-        
-        dangerousPairs = []
-        
-        // Check all pairs in the sample
-        for i in sampleCells.indices {
-            for j in sampleCells.indices.dropFirst(i + 1) {
-                let cell1 = sampleCells[i]
-                let cell2 = sampleCells[j]
-                
-                // Skip cells in the same unit as they're less likely to form dangerous pairs
-                if isInSameUnitAs(cell1, other: cell2) {
-                    continue
-                }
-                
-                // Test if removing both cells creates multiple solutions
-                let currentCellsToRemove = cellsToRemove
-                cellsToRemove.insert(cell1)
-                cellsToRemove.insert(cell2)
-                
-                if !hasUniqueSolution() {
-                    dangerousPairs.append([cell1, cell2])
-                }
-                
-                // Restore original removal set
-                cellsToRemove = currentCellsToRemove
-            }
-        }
     }
     
     /// Try to find safe cells in batches to speed up the process
     public func findSafeCellInBatches() -> Coordinate? {
-        // If we have known safe cells, use them
-        if let safeCell = knownSafeCells.first {
-            knownSafeCells.remove(safeCell)
-            return safeCell
-        }
-        
         // Get cells not already planned for removal or known to be unsafe
         let availableCells = getAllAvailableCells().filter { !knownUnsafeCells.contains($0) }
         if availableCells.isEmpty {
             return nil
         }
-        
+
         // Score cells by risk
         let scoredCells = availableCells.map { ($0, calculateRiskScore(for: $0)) }
                                         .sorted { $0.1 < $1.1 }
-        
+
         // Take a batch of the lowest risk cells
-        let batchSize = min(5, scoredCells.count)
+        let batchSize = min(8, scoredCells.count)
         let batch = scoredCells.prefix(batchSize).map { $0.0 }
-        
+
         // Try each cell in the batch
         for cell in batch {
-            if isPartOfDangerousPair(cell) {
-                continue
-            }
-            
             let currentCellsToRemove = cellsToRemove
             cellsToRemove.insert(cell)
-            
+
             if hasUniqueSolution() {
                 return cell
             }
-            
+
             cellsToRemove = currentCellsToRemove
             knownUnsafeCells.insert(cell)
         }
-        
+
         return nil
     }
     
@@ -260,36 +170,96 @@ class UniqueSolutionVerifier {
         let row = cell.row
         let col = cell.col
         let value = table[row][col]
-        
-        // Count how many times this value appears in the puzzle
-        let valueFrequency = countValueFrequency(value)
-        
-        // Count cells already removed in same row, column and 3x3 box
-        let rowRemovals = cellsToRemove.filter { $0.row == row }.count
-        let colRemovals = cellsToRemove.filter { $0.col == col }.count
-        
+
+        // Create test puzzle with this cell removed
+        var testPuzzle = table
+        for c in cellsToRemove {
+            testPuzzle[c.row][c.col] = 0
+        }
+        testPuzzle[row][col] = 0
+
+        // Count constraint strength: how many ways can this cell be filled?
+        var constraintCount = 0
+
+        // Check row constraints
+        let rowValues = Set(testPuzzle[row].filter { $0 != 0 })
+        constraintCount += rowValues.count
+
+        // Check column constraints
+        var colValues = Set<Int>()
+        for r in 0..<9 {
+            if testPuzzle[r][col] != 0 {
+                colValues.insert(testPuzzle[r][col])
+            }
+        }
+        constraintCount += colValues.count
+
+        // Check box constraints
         let boxRow = (row / 3) * 3
         let boxCol = (col / 3) * 3
-        let boxRemovals = cellsToRemove.filter { 
-            $0.row >= boxRow && $0.row < boxRow + 3 && 
-            $0.col >= boxCol && $0.col < boxCol + 3 
-        }.count
-        
-        // Calculate risk based on these factors
-        // Higher weights for factors that contribute more to non-uniqueness
-        let valueWeight = 2
-        let rowWeight = 3
-        let colWeight = 3
-        let boxWeight = 4
-        
-        // Add penalty for cells that are part of dangerous pairs
-        let pairPenalty = isPartOfDangerousPair(cell) ? 15 : 0
-        
-        return (9 - valueFrequency) * valueWeight + 
-               rowRemovals * rowWeight + 
-               colRemovals * colWeight + 
-               boxRemovals * boxWeight +
-               pairPenalty
+        var boxValues = Set<Int>()
+        for r in boxRow..<boxRow+3 {
+            for c in boxCol..<boxCol+3 {
+                if testPuzzle[r][c] != 0 {
+                    boxValues.insert(testPuzzle[r][c])
+                }
+            }
+        }
+        constraintCount += boxValues.count
+
+        // Calculate available candidates for this cell
+        let allConstraints = rowValues.union(colValues).union(boxValues)
+        let candidateCount = 9 - allConstraints.count
+
+        // Risk factors:
+        // 1. More candidates = higher risk (less constrained)
+        let candidateRisk = candidateCount * 10
+
+        // 2. Weaker constraints = higher risk
+        let constraintRisk = (27 - constraintCount) * 3
+
+        // 3. If this is the only occurrence of this value in a unit, very risky
+        let uniquenessRisk = isOnlyOccurrenceInAnyUnit(cell: cell) ? 50 : 0
+
+        return candidateRisk + constraintRisk + uniquenessRisk
+    }
+
+    /// Check if this cell contains a value that appears only once in any of its units
+    private func isOnlyOccurrenceInAnyUnit(cell: Coordinate) -> Bool {
+        let value = table[cell.row][cell.col]
+
+        // Check row
+        var rowCount = 0
+        for c in 0..<9 {
+            if table[cell.row][c] == value && !cellsToRemove.contains(Coordinate(row: cell.row, col: c)) {
+                rowCount += 1
+            }
+        }
+        if rowCount == 1 { return true }
+
+        // Check column
+        var colCount = 0
+        for r in 0..<9 {
+            if table[r][cell.col] == value && !cellsToRemove.contains(Coordinate(row: r, col: cell.col)) {
+                colCount += 1
+            }
+        }
+        if colCount == 1 { return true }
+
+        // Check box
+        let boxRow = (cell.row / 3) * 3
+        let boxCol = (cell.col / 3) * 3
+        var boxCount = 0
+        for r in boxRow..<boxRow+3 {
+            for c in boxCol..<boxCol+3 {
+                if table[r][c] == value && !cellsToRemove.contains(Coordinate(row: r, col: c)) {
+                    boxCount += 1
+                }
+            }
+        }
+        if boxCount == 1 { return true }
+
+        return false
     }
     
     /// Counts how many times a value appears in the puzzle
@@ -335,7 +305,6 @@ class UniqueSolutionVerifier {
         
         // Reset state
         cellsToRemove.removeAll()
-        knownSafeCells.removeAll()
         knownUnsafeCells.removeAll()
         
         // Start with a simpler puzzle
