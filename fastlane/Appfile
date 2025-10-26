@@ -1,9 +1,13 @@
-app_identifier("com.furrki.Sudokov") # The bundle identifier of your app
-apple_id("furrki@furrki.com") # Your Apple Developer Portal username
+app_identifier("com.furrki.Sudokov")
+apple_id("furrki@furrki.com")
 
+itc_team_id("119963759")
+team_id("TU6A9VFP8M")
 
-# For more information about the Appfile, see:
-#     https://docs.fastlane.tools/advanced/#appfile
-
-itc_team_id("119963759") # App Store Connect Team ID
-team_id("TU6A9VFP8M") # Developer Portal Team ID
+# Use App Store Connect API Key for authentication
+# 1. Go to: https://appstoreconnect.apple.com/access/integrations/api
+# 2. Create new key with "App Manager" access
+# 3. Download AuthKey_XXXXXXXXXX.p8 to fastlane/ directory
+# 4. Add to ~/.zshrc:
+# export APP_STORE_CONNECT_API_KEY_ID="XXXXXXXXXX"
+# export APP_STORE_CONNECT_API_KEY_ISSUER_ID="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"

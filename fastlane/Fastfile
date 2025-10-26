@@ -16,6 +16,46 @@
 default_platform(:ios)
 
 platform :ios do
+  desc "Increment version and upload to TestFlight"
+  lane :beta do
+    setup_ci if ENV['CI']
+
+    api_key = app_store_connect_api_key(
+      key_id: ENV["APP_STORE_CONNECT_API_KEY_ID"],
+      issuer_id: ENV["APP_STORE_CONNECT_API_KEY_ISSUER_ID"],
+      key_filepath: "./fastlane/AuthKey_#{ENV['APP_STORE_CONNECT_API_KEY_ID']}.p8",
+      in_house: false
+    )
+
+    get_certificates(api_key: api_key)
+    get_provisioning_profile(api_key: api_key)
+    increment_build_number(xcodeproj: "Sudokov.xcodeproj")
+    build_app(
+      workspace: "Sudokov.xcworkspace",
+      scheme: "Sudokov",
+      export_method: "app-store"
+    )
+    upload_to_testflight(
+      api_key: api_key,
+      skip_submission: true,
+      skip_waiting_for_build_processing: true
+    )
+  end
+
+  desc "Increment build number"
+  lane :bump do
+    increment_build_number(xcodeproj: "Sudokov.xcodeproj")
+  end
+
+  desc "Increment version number"
+  lane :bump_version do |options|
+    type = options[:type] || "patch"
+    increment_version_number(
+      xcodeproj: "Sudokov.xcodeproj",
+      bump_type: type
+    )
+  end
+
   desc "Uploads the ipa to AppStoreConnect"
   lane :upload_ipa do
     build_app(workspace: "Sudokov.xcworkspace", scheme: "Sudokov")
