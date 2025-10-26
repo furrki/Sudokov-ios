@@ -79,6 +79,11 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+fastlane/AuthKey_*.p8
+*.mobileprovision
+*.cer
+*.certSigningRequest
+*.p12
 
 # Code Injection
 #
