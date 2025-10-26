@@ -18,18 +18,23 @@ class TableBuilder: ObservableObject {
     var table: TableMatrix {
         return tableState
     }
-    
+
     @Published private(set) var tableState: TableMatrix
     @Published var index = 0
-    
+    @Published var generationProgress: Double = 0.0
+    @Published var generationMessage: String = ""
+
     private(set) var depth: Int?
     private(set) var cellsToHide = [Coordinate]()
     private(set) var riskyCellGroups = [[Coordinate]]()
-    
+
     // Added to track progress and detect when we're stuck
     private var lastProgressCount = 0
     private var stuckCounter = 0
     private var maxStuckThreshold = 500
+
+    // Progress callback
+    var onProgress: ((Double, String) -> Void)?
     
     // MARK: - Methods
     init(tableState: TableMatrix? = nil, depth: Int? = nil) {
@@ -47,12 +52,16 @@ class TableBuilder: ObservableObject {
     
     func generateLevel() {
         tableState = Array(repeating: Array(repeating: 0, count: 9), count: 9)
-        
+
+        updateProgress(0.1, "Generating base puzzle...")
+
         // Use more efficient backtracking with proper recursion
         if !fillBoardBacktrack() {
             // If generation fails, try again with different seed
             generateLevel()
         }
+
+        updateProgress(0.2, "Base puzzle ready")
     }
     
     private func fillBoardBacktrack() -> Bool {
@@ -154,6 +163,7 @@ class TableBuilder: ObservableObject {
     func makeLevel() {
         var attempts = 0
         let maxAttempts = 5
+        var bestPuzzle: (TableMatrix, [Coordinate], Double)?
 
         repeat {
             generateLevel()
@@ -162,18 +172,55 @@ class TableBuilder: ObservableObject {
 
             attempts += 1
 
+            // Track best puzzle found so far
+            if bestPuzzle == nil {
+                bestPuzzle = (tableState, cellsToHide, calculatePuzzleScore())
+            } else if let best = bestPuzzle {
+                let currentScore = calculatePuzzleScore()
+                if currentScore > best.2 {
+                    bestPuzzle = (tableState, cellsToHide, currentScore)
+                }
+            }
+
             // Validate puzzle quality
             if validatePuzzleQuality() {
+                updateProgress(1.0, "Quality check passed!")
                 break
             } else if attempts < maxAttempts {
+                updateProgress(0.15 + (0.05 * Double(attempts)), "Quality check failed, retrying...")
                 print("Puzzle quality insufficient, regenerating... (attempt \(attempts + 1)/\(maxAttempts))")
             }
 
         } while attempts < maxAttempts
 
+        // Fallback to best puzzle if all attempts failed
         if attempts >= maxAttempts {
-            print("Warning: Generated puzzle may not meet quality standards after \(maxAttempts) attempts")
+            if let best = bestPuzzle {
+                print("Using best puzzle found (score: \(best.2)) after \(maxAttempts) attempts")
+                updateProgress(0.95, "Accepting best puzzle...")
+                tableState = best.0
+                cellsToHide = best.1
+            } else {
+                print("Warning: No valid puzzle generated, using last attempt")
+            }
         }
+    }
+
+    /// Calculate a simple quality score (higher is better)
+    private func calculatePuzzleScore() -> Double {
+        guard let targetDepth = depth else { return 0 }
+
+        let actualHints = 81 - cellsToHide.count
+        let hintDifference = abs(actualHints - targetDepth)
+
+        // Closer to target = higher score
+        let hintScore = max(0, 10.0 - Double(hintDifference))
+
+        // Check uniqueness
+        let hasUnique = UniqueSolutionVerifier(table: tableState, cellsToRemove: Set(cellsToHide)).hasUniqueSolution()
+        let uniqueScore = hasUnique ? 10.0 : 0.0
+
+        return hintScore + uniqueScore
     }
     
     private func validatePuzzleQuality() -> Bool {
@@ -330,7 +377,7 @@ class TableBuilder: ObservableObject {
         var attemptsSinceProgress = 0
         let maxAttemptsWithoutProgress = 200
 
-        print("Generating puzzle: 0/\(cellsToHideCount) cells hidden")
+        updateProgress(0.3, "Removing cells: 0/\(cellsToHideCount)")
 
         while cellsToHide.count < cellsToHideCount && attemptsSinceProgress < maxAttemptsWithoutProgress {
             let uniqueSolutionVerifier = UniqueSolutionVerifier(table: tableState, cellsToRemove: cellsToHide)
@@ -341,7 +388,8 @@ class TableBuilder: ObservableObject {
                 attemptsSinceProgress = 0
 
                 if cellsToHide.count % 5 == 0 {
-                    print("Progress: \(cellsToHide.count)/\(cellsToHideCount) cells hidden")
+                    let progress = 0.3 + (0.6 * Double(cellsToHide.count) / Double(cellsToHideCount))
+                    updateProgress(progress, "Removing cells: \(cellsToHide.count)/\(cellsToHideCount)")
                 }
                 continue
             }
@@ -398,11 +446,23 @@ class TableBuilder: ObservableObject {
         for cell in cellsToHide {
             puzzleToSolve[cell.row][cell.col] = 0
         }
+        updateProgress(0.9, "Analyzing difficulty...")
+
         let (techniques, _, _) = analyzeSolvingPathWithCounts(puzzle: puzzleToSolve)
         let difficultyLabel = determineDifficultyLabel(from: techniques)
 
+        updateProgress(1.0, "Complete!")
+
         print("Generated puzzle with \(81 - cellsToHide.count) hints (Difficulty: \(difficultyLabel))")
         print("Unique solution: \(UniqueSolutionVerifier(table: tableState, cellsToRemove: Set(cellsToHide)).hasUniqueSolution())")
+    }
+
+    private func updateProgress(_ progress: Double, _ message: String) {
+        DispatchQueue.main.async {
+            self.generationProgress = progress
+            self.generationMessage = message
+            self.onProgress?(progress, message)
+        }
     }
 
     /// Determines difficulty label based on techniques used

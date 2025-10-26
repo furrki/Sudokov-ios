@@ -60,7 +60,6 @@ struct HomeView: View {
                 if let gameManager = gameManager {
                     GameView(gameManager: gameManager)
                         .environmentObject(coordinator)
-                        .transition(.moveAndScale)
                 }
             case .selectLevel:
                 if let difficulty = difficulty {
@@ -133,20 +132,73 @@ struct HomeView: View {
                 }
             case .selectGenerateDifficulty:
                 SelectDifficultyView { difficulty in
-                    let tableBuilder = TableBuilder(depth: difficulty)
-                    let level = Level(
-                        table: tableBuilder.table,
-                        cellsToHide: Array(tableBuilder.cellsToHide)
-                    )
+                    // Show loading immediately
+                    coordinator.currentScreen = .generating
 
-                    gameManager = GameManager(level: level,
-                                              templateLevel: nil)
+                    // Start generation on background thread
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        let tableBuilder = TableBuilder(depth: difficulty)
 
-                    analyticsManager.logEvent(.customGameGenerate,
-                                              parameters: CustomGameAnalytics(difficulty: difficulty))
-                    coordinator.currentScreen = .game
+                        // Store tableBuilder for progress tracking
+                        DispatchQueue.main.async {
+                            coordinator.generatingTableBuilder = tableBuilder
+                        }
+
+                        // Create game as soon as generation completes
+                        let level = Level(
+                            table: tableBuilder.table,
+                            cellsToHide: Array(tableBuilder.cellsToHide)
+                        )
+
+                        let newGameManager = GameManager(level: level, templateLevel: nil)
+
+                        analyticsManager.logEvent(.customGameGenerate,
+                                                  parameters: CustomGameAnalytics(difficulty: difficulty))
+
+                        // Transition to game on main thread
+                        DispatchQueue.main.async {
+                            gameManager = newGameManager
+                            coordinator.currentScreen = .game
+                        }
+                    }
                 }
                 .environmentObject(coordinator)
+            case .generating:
+                GeometryReader { geometry in
+                    VStack(alignment: .center, spacing: 20) {
+                        LoadingGameInfoView()
+                            .environmentObject(coordinator)
+                            .padding(.top, 20)
+
+                        LoadingTableView(geometry: geometry)
+
+                        // Progress info in place of controls
+                        VStack(spacing: 12) {
+                            if let tableBuilder = coordinator.generatingTableBuilder {
+                                Text(tableBuilder.generationMessage)
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundColor(Color(R.color.levelSquareText.name))
+                                    .multilineTextAlignment(.center)
+
+                                ProgressView(value: tableBuilder.generationProgress)
+                                    .tint(Color(R.color.button.name))
+                                    .frame(width: 280)
+                            } else {
+                                ProgressView()
+                                    .tint(Color(R.color.button.name))
+                            }
+                        }
+                        .padding(.horizontal, 20)
+
+                        // Empty space for NumberPickerView
+                        Color.clear
+                            .frame(height: 60)
+
+                        Spacer()
+
+                        AdView()
+                    }
+                }
             }
         }
         .onAppear {

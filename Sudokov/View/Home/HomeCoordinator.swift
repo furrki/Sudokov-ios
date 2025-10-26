@@ -10,10 +10,13 @@ import Combine
 
 class HomeCoordinator: Coordinator, ObservableObject {
     @Published var currentScreen: Screen?
+    @Published var generatingTableBuilder: TableBuilder?
+    @Published var selectedDifficulty: Int?
 
     enum Screen: String, Hashable, CaseIterable {
         case game
         case selectLevel
         case selectGenerateDifficulty
+        case generating
     }
 }

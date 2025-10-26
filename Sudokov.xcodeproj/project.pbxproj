@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D6A1FA4ECA3C72611197224 /* LoadingGameInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD9529D8ABEFF88140AFCA /* LoadingGameInfoView.swift */; };
 		66C096F51089F92C0E3E624E /* Pods_Sudokov_SudokovUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0004DCA2CEE1E4DE792930C0 /* Pods_Sudokov_SudokovUITests.framework */; };
 		6F59AAB5E2E2D83BD9AC35C3 /* Pods_Sudokov.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF7AF98213C87136B41A8D32 /* Pods_Sudokov.framework */; };
 		9E8CB2792E69C23E0017C5E8 /* UniqueSolutionVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8CB2752E69C23E0017C5E8 /* UniqueSolutionVerifier.swift */; };
 		9E8CB27E2E69C23E0017C5E8 /* UniqueSolutionVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8CB2752E69C23E0017C5E8 /* UniqueSolutionVerifier.swift */; };
 		9EEEC2AD2E69B83400330C87 /* SolutionCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEEC2AC2E69B83400330C87 /* SolutionCounter.swift */; };
 		9EEEC2AE2E69B83400330C87 /* SolutionCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEEC2AC2E69B83400330C87 /* SolutionCounter.swift */; };
+		C405B01040BFA6F9FD7F983B /* LoadingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B7389F606A18926E2F1F83 /* LoadingTableView.swift */; };
 		CFCA58BD3E1F2FBFFD749322 /* Pods_SudokovTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE249D45209134A61B456B7D /* Pods_SudokovTests.framework */; };
 		DCC3040F2897F4CE00EEB26E /* LevelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3040E2897F4CE00EEB26E /* LevelState.swift */; };
 		FB0DC6B0288F05B500E02521 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0DC6AF288F05B500E02521 /* Storage.swift */; };
@@ -148,6 +150,8 @@
 		6C8C06BFD23D9868FBD41750 /* Pods-SudokovTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudokovTests.debug.xcconfig"; path = "Target Support Files/Pods-SudokovTests/Pods-SudokovTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9E8CB2752E69C23E0017C5E8 /* UniqueSolutionVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueSolutionVerifier.swift; sourceTree = "<group>"; };
 		9EEEC2AC2E69B83400330C87 /* SolutionCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionCounter.swift; sourceTree = "<group>"; };
+		A5B7389F606A18926E2F1F83 /* LoadingTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoadingTableView.swift; sourceTree = "<group>"; };
+		A7FD9529D8ABEFF88140AFCA /* LoadingGameInfoView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoadingGameInfoView.swift; sourceTree = "<group>"; };
 		BF6C1CEA8E6EF5FA1518234A /* Pods-Sudokov-SudokovUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sudokov-SudokovUITests.release.xcconfig"; path = "Target Support Files/Pods-Sudokov-SudokovUITests/Pods-Sudokov-SudokovUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C3E97FEEDA6DA6E1A5A8BE8A /* Pods-SudokovTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudokovTests.release.xcconfig"; path = "Target Support Files/Pods-SudokovTests/Pods-SudokovTests.release.xcconfig"; sourceTree = "<group>"; };
 		CF7AF98213C87136B41A8D32 /* Pods_Sudokov.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sudokov.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -394,6 +398,8 @@
 			children = (
 				FBBBE594288DAA8200AC809A /* HomeCoordinator.swift */,
 				FBBDE9C0285522740078A73E /* HomeView.swift */,
+				A5B7389F606A18926E2F1F83 /* LoadingTableView.swift */,
+				A7FD9529D8ABEFF88140AFCA /* LoadingGameInfoView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -785,13 +791,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sudokov-SudokovUITests/Pods-Sudokov-SudokovUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sudokov-SudokovUITests/Pods-Sudokov-SudokovUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -806,13 +808,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sudokov/Pods-Sudokov-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sudokov/Pods-Sudokov-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -849,13 +847,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sudokov/Pods-Sudokov-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sudokov/Pods-Sudokov-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -914,13 +908,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sudokov-SudokovUITests/Pods-Sudokov-SudokovUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sudokov-SudokovUITests/Pods-Sudokov-SudokovUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -940,7 +930,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				$SRCROOT/R.generated.swift,
+				"$SRCROOT/R.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1042,6 +1032,8 @@
 				9EEEC2AD2E69B83400330C87 /* SolutionCounter.swift in Sources */,
 				FB0DC6B0288F05B500E02521 /* Storage.swift in Sources */,
 				FBA2390F288CA68F006AE3A4 /* LocalLevelManager.swift in Sources */,
+				C405B01040BFA6F9FD7F983B /* LoadingTableView.swift in Sources */,
+				2D6A1FA4ECA3C72611197224 /* LoadingGameInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
