@@ -162,7 +162,7 @@ class TableBuilder: ObservableObject {
     
     func makeLevel() {
         var attempts = 0
-        let maxAttempts = 5
+        let maxAttempts = 3
         var bestPuzzle: (TableMatrix, [Coordinate], Double)?
 
         repeat {
@@ -266,11 +266,12 @@ class TableBuilder: ObservableObject {
                    techniques.contains("Naked Pair") ||
                    (techniqueCounts["Hidden Single"] ?? 0) >= 5
         case .hardcore:
-            // Hardcore: max 15% naked singles, must have advanced techniques
-            guard trivialPercentage <= 0.15 else { return false }
+            // Hardcore: max 30% naked singles, requires advanced techniques or variety
+            guard trivialPercentage <= 0.30 else { return false }
             return techniques.contains("X-Wing") ||
                    techniques.contains("Swordfish") ||
-                   techniques.count >= 4
+                   techniques.contains("Pointing Pairs") ||
+                   techniques.count >= 3
         }
     }
 
@@ -359,12 +360,11 @@ class TableBuilder: ObservableObject {
             // Try to generate an extreme puzzle with the requested number of hints
             if let cellsToHideSet = uniqueSolutionVerifier.generateExtremePuzzle(
                 targetHints: visibleCells,
-                maxIterations: 200,
-                timeLimit: 180
+                maxIterations: 150,
+                timeLimit: 120
             ) {
                 self.cellsToHide = Array(cellsToHideSet)
                 print("Generated extreme puzzle with \(visibleCells) hints")
-                print("Unique solution: \(UniqueSolutionVerifier(table: tableState, cellsToRemove: cellsToHideSet).hasUniqueSolution())")
                 return
             }
 
@@ -453,8 +453,7 @@ class TableBuilder: ObservableObject {
 
         updateProgress(1.0, "Complete!")
 
-        print("Generated puzzle with \(81 - cellsToHide.count) hints (Difficulty: \(difficultyLabel))")
-        print("Unique solution: \(UniqueSolutionVerifier(table: tableState, cellsToRemove: Set(cellsToHide)).hasUniqueSolution())")
+        print("Generated puzzle with \(81 - cellsToHide.count) hints (Difficulty: \(difficultyLabel), Techniques: \(techniques.sorted().joined(separator: ", ")))")
     }
 
     private func updateProgress(_ progress: Double, _ message: String) {
