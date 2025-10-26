@@ -15,14 +15,12 @@ struct HomeView: View {
     private let analyticsManager = DependencyManager.analyticsManager
 
     @State var gameManager: GameManager?
-    @State var shouldShowPickDifficulty: Bool = false
+    @State var shouldShowPickDifficulty = false
     @State private var isShowingSetting = false
     @State private var isShowingStatistics = false
     @State private var isSelectingPlaySet = false
     @State private var difficulty: Difficulty?
     @ObservedObject var coordinator = HomeCoordinator()
-
-    private var bag = Set<AnyCancellable>()
 
     // MARK: - Content
 
@@ -86,47 +84,68 @@ struct HomeView: View {
 
                     Text("Sudokov")
                         .font(.system(size: 45, weight: .semibold))
-                        .confirmationDialog("How do you want to play?", isPresented: $isSelectingPlaySet, titleVisibility: .visible) {
-                            ForEach(PlaySet.allCases, id: \.self) { playSet in
-                                Button(playSet.rawValue) {
-                                    storageManager.preferredPlaySet = playSet
-                                    storageManager.featureFlagManager = FeatureFlagManager(playSet: playSet)
+                    if shouldShowPickDifficulty {
+                        VStack(spacing: 20) {
+                            Text("Pick Difficulty")
+                                .font(.system(size: 25, weight: .semibold))
 
-                                    analyticsManager.logEvent(.homePlaySet, parameters: PlaySetAnalytics(playSet: playSet))
+                            ForEach(Difficulty.preparedLevels, id: \.self) { difficulty in
+                                Button(difficulty.name) {
+                                    withAnimation {
+                                        self.difficulty = difficulty
+                                        coordinator.currentScreen = .selectLevel
+                                        shouldShowPickDifficulty = false
+                                    }
+                                }
+                                .buttonStyle(MenuButton())
+                                .font(.system(size: 15, weight: .semibold))
+                            }
+
+                            Button("Back") {
+                                withAnimation {
+                                    shouldShowPickDifficulty = false
                                 }
                             }
+                            .buttonStyle(MenuButton())
+                            .font(.system(size: 15, weight: .semibold))
                         }
-                    VStack {
-                        Button("Start game") {
-                            shouldShowPickDifficulty = true
-                        }
-                        .buttonStyle(MenuButton())
-                        .font(.system(size: 15, weight: .semibold))
                         .padding(.top, 30)
-                        .sheet(isPresented: $isShowingSetting) {
-                            SettingsView()
-                        }
+                        .transition(.opacity)
+                    } else {
+                        VStack {
+                            Button("Start game") {
+                                withAnimation {
+                                    shouldShowPickDifficulty = true
+                                }
+                            }
+                            .buttonStyle(MenuButton())
+                            .font(.system(size: 15, weight: .semibold))
+                            .padding(.top, 30)
+                            .sheet(isPresented: $isShowingSetting) {
+                                SettingsView()
+                            }
 
-                        Button("Generate a level") {
-                            coordinator.currentScreen = .selectGenerateDifficulty
-                        }
-                        .buttonStyle(MenuButton())
-                        .font(.system(size: 15, weight: .semibold))
-                        .padding(.top, 20)
-                        .sheet(isPresented: $isShowingStatistics) {
-                            StatisticsView()
+                            Button("Generate a level") {
+                                coordinator.currentScreen = .selectGenerateDifficulty
+                            }
+                            .buttonStyle(MenuButton())
+                            .font(.system(size: 15, weight: .semibold))
+                            .padding(.top, 20)
+                            .sheet(isPresented: $isShowingStatistics) {
+                                StatisticsView()
+                            }
                         }
                     }
 
                     Spacer()
                 }
-                .confirmationDialog("Pick Difficulty", isPresented: $shouldShowPickDifficulty, titleVisibility: .visible) {
-                    ForEach(Difficulty.preparedLevels, id: \.self) { difficulty in
-                        Button(difficulty.name) {
-                            withAnimation {
-                                self.difficulty = difficulty
-                                coordinator.currentScreen = .selectLevel
-                            }
+                .confirmationDialog("How do you want to play?", isPresented: $isSelectingPlaySet, titleVisibility: .visible) {
+                    ForEach(PlaySet.allCases, id: \.self) { playSet in
+                        Button(playSet.rawValue) {
+                            storageManager.preferredPlaySet = playSet
+                            storageManager.featureFlagManager = FeatureFlagManager(playSet: playSet)
+
+                            analyticsManager.logEvent(.homePlaySet, parameters: PlaySetAnalytics(playSet: playSet))
                         }
                     }
                 }
