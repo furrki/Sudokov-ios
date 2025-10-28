@@ -35,4 +35,21 @@ class PickLevelViewModel {
             level.difficulty == difficulty && getLevel(row: row, col: col) == level.visualLevel - 1
         }
     }
+
+    func isLocked(row: Int, col: Int) -> Bool {
+        let currentLevel = getLevel(row: row, col: col)
+
+        // First level (0) is always unlocked
+        if currentLevel == 0 {
+            return false
+        }
+
+        // Check if previous level is completed
+        let previousLevel = currentLevel - 1
+        let isPreviousCompleted = userFinishedLevels.contains { level in
+            level.difficulty == difficulty && previousLevel == level.visualLevel - 1
+        }
+
+        return !isPreviousCompleted
+    }
 }

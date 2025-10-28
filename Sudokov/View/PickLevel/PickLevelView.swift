@@ -46,6 +46,19 @@ struct PickLevelView: View {
         }
     }
 
+    private var accentColor: Color {
+        switch viewModel.difficulty {
+        case .easy, .basic:
+            return Color(red: 0.4, green: 0.85, blue: 0.6)
+        case .medium:
+            return Color(red: 0.95, green: 0.7, blue: 0.3)
+        case .hard:
+            return Color(red: 0.95, green: 0.4, blue: 0.4)
+        case .hardcore:
+            return Color(red: 0.5, green: 0.2, blue: 0.5)
+        }
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             BackButton {
@@ -57,33 +70,57 @@ struct PickLevelView: View {
             ScrollView {
                 VStack(spacing: 24) {
                     // Header Card
-                    VStack(spacing: 12) {
+                    VStack(spacing: 16) {
                         Text(viewModel.difficulty.name)
                             .font(.system(size: 32, weight: .bold))
                             .foregroundColor(.primary)
 
-                        // Progress
-                        HStack(spacing: 8) {
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(.green)
-                            Text("\(completedCount)/\(viewModel.levelCount)")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(.gray)
-                        }
+                        // Fancy Progress Bar
+                        VStack(spacing: 8) {
+                            HStack {
+                                HStack(spacing: 8) {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .font(.system(size: 16))
+                                        .foregroundStyle(gradient)
 
-                        // Progress Bar
-                        GeometryReader { geometry in
-                            ZStack(alignment: .leading) {
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(Color.gray.opacity(0.2))
-                                    .frame(height: 8)
+                                    Text("\(completedCount)/\(viewModel.levelCount)")
+                                        .font(.system(size: 15, weight: .semibold))
+                                        .foregroundColor(.primary)
+                                }
 
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(gradient)
-                                    .frame(width: geometry.size.width * CGFloat(completedCount) / CGFloat(viewModel.levelCount), height: 8)
+                                Spacer()
+
+                                Text("\(Int((Double(completedCount) / Double(viewModel.levelCount)) * 100))%")
+                                    .font(.system(size: 20, weight: .bold))
+                                    .foregroundStyle(gradient)
                             }
+
+                            GeometryReader { geometry in
+                                ZStack(alignment: .leading) {
+                                    // Background
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(Color.gray.opacity(0.15))
+                                        .frame(height: 16)
+
+                                    // Progress with gradient
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(gradient)
+                                        .frame(width: geometry.size.width * CGFloat(completedCount) / CGFloat(viewModel.levelCount), height: 16)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 12)
+                                                .fill(
+                                                    LinearGradient(
+                                                        colors: [Color.white.opacity(0.3), Color.clear],
+                                                        startPoint: .top,
+                                                        endPoint: .bottom
+                                                    )
+                                                )
+                                        )
+                                        .shadow(color: accentColor.opacity(0.4), radius: 4, x: 0, y: 2)
+                                }
+                            }
+                            .frame(height: 16)
                         }
-                        .frame(height: 8)
                     }
                     .padding(20)
 
@@ -106,17 +143,34 @@ struct PickLevelView: View {
 
     private func levelButton(row: Int, col: Int) -> some View {
         let isFinished = viewModel.isFinished(row: row, col: col)
+        let isLocked = viewModel.isLocked(row: row, col: col)
         let levelNumber = viewModel.getContent(row: row, col: col)
 
         return Button {
-            onSelectLevel(viewModel.getLevel(row: row, col: col))
+            if !isLocked {
+                onSelectLevel(viewModel.getLevel(row: row, col: col))
+            }
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(isFinished ? gradient : LinearGradient(colors: [Color(UIColor.secondarySystemGroupedBackground)], startPoint: .leading, endPoint: .trailing))
+                    .fill(
+                        isFinished ? gradient :
+                        isLocked ? LinearGradient(colors: [Color.gray.opacity(0.2)], startPoint: .leading, endPoint: .trailing) :
+                        LinearGradient(colors: [Color(UIColor.secondarySystemGroupedBackground)], startPoint: .leading, endPoint: .trailing)
+                    )
                     .frame(height: 56)
 
-                if isFinished {
+                if isLocked {
+                    HStack(spacing: 8) {
+                        Image(systemName: "lock.fill")
+                            .font(.system(size: 16))
+                            .foregroundColor(.gray.opacity(0.5))
+
+                        Text("\(levelNumber)")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(.gray.opacity(0.5))
+                    }
+                } else if isFinished {
                     HStack(spacing: 8) {
                         Text("\(levelNumber)")
                             .font(.system(size: 18, weight: .bold))
@@ -133,6 +187,7 @@ struct PickLevelView: View {
                 }
             }
         }
+        .disabled(isLocked)
         .buttonStyle(PlainButtonStyle())
     }
 }

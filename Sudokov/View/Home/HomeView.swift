@@ -159,14 +159,12 @@ struct HomeView: View {
 
                     Spacer()
                 }
-                .confirmationDialog("How do you want to play?", isPresented: $isSelectingPlaySet, titleVisibility: .visible) {
-                    ForEach(PlaySet.allCases, id: \.self) { playSet in
-                        Button(playSet.rawValue) {
-                            storageManager.preferredPlaySet = playSet
-                            storageManager.featureFlagManager = FeatureFlagManager(playSet: playSet)
-
-                            analyticsManager.logEvent(.homePlaySet, parameters: PlaySetAnalytics(playSet: playSet))
-                        }
+                .sheet(isPresented: $isSelectingPlaySet) {
+                    PlaySetPickerView { playSet in
+                        storageManager.preferredPlaySet = playSet
+                        storageManager.featureFlagManager = FeatureFlagManager(playSet: playSet)
+                        analyticsManager.logEvent(.homePlaySet, parameters: PlaySetAnalytics(playSet: playSet))
+                        isSelectingPlaySet = false
                     }
                 }
             case .selectGenerateDifficulty:
