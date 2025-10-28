@@ -15,6 +15,7 @@
 		9E1BAE992EAED75800A2EA5C /* hard.data in Resources */ = {isa = PBXBuildFile; fileRef = 9E1BAE952EAED75800A2EA5C /* hard.data */; };
 		9E1D19D02EB0DDC4000CE265 /* PlaySetCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1D19CE2EB0DDC4000CE265 /* PlaySetCard.swift */; };
 		9E1D19D12EB0DDC4000CE265 /* SettingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1D19CF2EB0DDC4000CE265 /* SettingCard.swift */; };
+		9E1D19D32EB0ECA7000CE265 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E1D19D22EB0ECA7000CE265 /* GoogleService-Info.plist */; };
 		9E5DBD232EB01EB600CF2902 /* DifficultyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5DBD212EB01EB600CF2902 /* DifficultyCard.swift */; };
 		9E5DBD242EB01EB600CF2902 /* DifficultyPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5DBD222EB01EB600CF2902 /* DifficultyPickerView.swift */; };
 		9E5DBD262EB0B6F900CF2902 /* HomeMenuCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5DBD252EB0B6F900CF2902 /* HomeMenuCard.swift */; };
@@ -158,6 +159,7 @@
 		9E1BAE962EAED75800A2EA5C /* medium.data */ = {isa = PBXFileReference; lastKnownFileType = text; path = medium.data; sourceTree = "<group>"; };
 		9E1D19CE2EB0DDC4000CE265 /* PlaySetCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySetCard.swift; sourceTree = "<group>"; };
 		9E1D19CF2EB0DDC4000CE265 /* SettingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCard.swift; sourceTree = "<group>"; };
+		9E1D19D22EB0ECA7000CE265 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9E5DBD212EB01EB600CF2902 /* DifficultyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyCard.swift; sourceTree = "<group>"; };
 		9E5DBD222EB01EB600CF2902 /* DifficultyPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyPickerView.swift; sourceTree = "<group>"; };
 		9E5DBD252EB0B6F900CF2902 /* HomeMenuCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMenuCard.swift; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 		FBBDE992285522100078A73E /* Sudokov */ = {
 			isa = PBXGroup;
 			children = (
+				9E1D19D22EB0ECA7000CE265 /* GoogleService-Info.plist */,
 				FBE852CC28E3A30900F4284B /* Info.plist */,
 				FBBDE9C2285522C20078A73E /* Components */,
 				FB7BC7262882BC9000E8C5F1 /* Model */,
@@ -771,6 +774,7 @@
 				9E1BAE972EAED75800A2EA5C /* easy.data in Resources */,
 				9E1BAE982EAED75800A2EA5C /* medium.data in Resources */,
 				9E1BAE992EAED75800A2EA5C /* hard.data in Resources */,
+				9E1D19D32EB0ECA7000CE265 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
