@@ -14,18 +14,21 @@ struct DifficultyPickerView: View {
     var body: some View {
         VStack(spacing: 0) {
             // Header
-            ZStack {
+            VStack(spacing: 12) {
                 HStack {
                     Button {
                         onDismiss()
                     } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 28))
-                            .foregroundColor(.gray.opacity(0.3))
+                        Image(systemName: "arrow.uturn.backward.circle")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(Color(R.color.button.name))
                     }
 
                     Spacer()
                 }
+                .padding(.horizontal, 24)
+                .padding(.top, 20)
 
                 VStack(spacing: 4) {
                     Text("Select Difficulty")
@@ -36,8 +39,7 @@ struct DifficultyPickerView: View {
                         .foregroundColor(.gray)
                 }
             }
-            .padding(.horizontal, 24)
-            .padding(.vertical, 20)
+            .padding(.bottom, 12)
 
             Divider()
 
