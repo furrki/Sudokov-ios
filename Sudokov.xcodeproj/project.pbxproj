@@ -16,6 +16,7 @@
 		9E1D19D02EB0DDC4000CE265 /* PlaySetCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1D19CE2EB0DDC4000CE265 /* PlaySetCard.swift */; };
 		9E1D19D12EB0DDC4000CE265 /* SettingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1D19CF2EB0DDC4000CE265 /* SettingCard.swift */; };
 		9E1D19D32EB0ECA7000CE265 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E1D19D22EB0ECA7000CE265 /* GoogleService-Info.plist */; };
+		9E1D19D52EB0EFE2000CE265 /* DifficultyStatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1D19D42EB0EFE2000CE265 /* DifficultyStatCard.swift */; };
 		9E5DBD232EB01EB600CF2902 /* DifficultyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5DBD212EB01EB600CF2902 /* DifficultyCard.swift */; };
 		9E5DBD242EB01EB600CF2902 /* DifficultyPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5DBD222EB01EB600CF2902 /* DifficultyPickerView.swift */; };
 		9E5DBD262EB0B6F900CF2902 /* HomeMenuCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5DBD252EB0B6F900CF2902 /* HomeMenuCard.swift */; };
@@ -160,6 +161,7 @@
 		9E1D19CE2EB0DDC4000CE265 /* PlaySetCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySetCard.swift; sourceTree = "<group>"; };
 		9E1D19CF2EB0DDC4000CE265 /* SettingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCard.swift; sourceTree = "<group>"; };
 		9E1D19D22EB0ECA7000CE265 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9E1D19D42EB0EFE2000CE265 /* DifficultyStatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyStatCard.swift; sourceTree = "<group>"; };
 		9E5DBD212EB01EB600CF2902 /* DifficultyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyCard.swift; sourceTree = "<group>"; };
 		9E5DBD222EB01EB600CF2902 /* DifficultyPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyPickerView.swift; sourceTree = "<group>"; };
 		9E5DBD252EB0B6F900CF2902 /* HomeMenuCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMenuCard.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				FB496CCD2901AB3E0047548B /* StatisticsView.swift */,
+				9E1D19D42EB0EFE2000CE265 /* DifficultyStatCard.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -1030,6 +1033,7 @@
 				FBCF08D028B2637500ABA471 /* SettingsViewModel.swift in Sources */,
 				FB89748A288F424B00D7C982 /* Transitions.swift in Sources */,
 				FBBDE994285522100078A73E /* SudokovApp.swift in Sources */,
+				9E1D19D52EB0EFE2000CE265 /* DifficultyStatCard.swift in Sources */,
 				FB0DC6B4288F072F00E02521 /* CodableStorage.swift in Sources */,
 				FB5347BA285A83F800E94F65 /* EdgeBorder.swift in Sources */,
 				FBFFF13E288F26DD0038F3D8 /* GameInfoView.swift in Sources */,

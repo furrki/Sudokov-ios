@@ -22,7 +22,7 @@ struct ControlsView: View {
                     .foregroundColor(Color(R.color.button.name))
                     .frame(maxWidth: .infinity)
             }
-            
+
             if featureFlagManager.revertButton {
                 Button {
                     gameManager.revertMove()
