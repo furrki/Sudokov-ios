@@ -73,13 +73,13 @@ struct SelectDifficultyView: View {
 
                     VStack(spacing: 12) {
                         HStack {
-                            Text("Easy")
+                            Text("Extreme")
                                 .font(.system(size: 13, weight: .medium))
                                 .foregroundColor(.gray)
 
                             Spacer()
 
-                            Text("Extreme")
+                            Text("Easy")
                                 .font(.system(size: 13, weight: .medium))
                                 .foregroundColor(.gray)
                         }

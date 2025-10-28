@@ -7,6 +7,7 @@ import SwiftUI
 
 struct DifficultyPickerView: View {
     @State private var selectedDifficulty: Difficulty?
+    private let storageManager = DependencyManager.storageManager
     let onDifficultySelected: (Difficulty) -> Void
     let onDismiss: () -> Void
 
@@ -60,6 +61,7 @@ struct DifficultyPickerView: View {
 
             Button("Continue") {
                 if let selected = selectedDifficulty {
+                    storageManager.preferredDifficulty = selected
                     onDifficultySelected(selected)
                 }
             }
@@ -71,7 +73,7 @@ struct DifficultyPickerView: View {
             .opacity(selectedDifficulty == nil ? 0.5 : 1)
         }
         .onAppear {
-            selectedDifficulty = Difficulty.preparedLevels.first
+            selectedDifficulty = storageManager.preferredDifficulty ?? Difficulty.preparedLevels.first
         }
     }
 }

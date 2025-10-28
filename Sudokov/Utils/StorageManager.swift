@@ -16,6 +16,7 @@ class StorageManager {
         static let featureFlags = "FeatureFlags"
         static let preferredPlaySet = "PreferredPlaySet"
         static let preferredDepth = "PreferredDepth"
+        static let preferredDifficulty = "PreferredDifficulty"
         static let levelStatistics = "LevelStatistics"
         static let preferredColorScheme = "PreferredColorScheme"
     }
@@ -72,6 +73,16 @@ class StorageManager {
 
         set {
             try? storage.save(newValue, for: Keys.preferredDepth)
+        }
+    }
+
+    var preferredDifficulty: Difficulty? {
+        get {
+            fetchFromFile(key: Keys.preferredDifficulty)
+        }
+
+        set {
+            try? storage.save(newValue, for: Keys.preferredDifficulty)
         }
     }
 

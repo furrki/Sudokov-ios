@@ -82,15 +82,25 @@ struct HomeView: View {
 
                     Spacer()
 
-                    VStack(spacing: 8) {
+                    VStack(spacing: 12) {
                         Text("Sudokov")
-                            .font(.system(size: 50, weight: .bold))
+                            .font(.system(size: 56, weight: .black))
+                            .foregroundStyle(
+                                LinearGradient(
+                                    colors: [
+                                        Color(red: 0.98, green: 0.5, blue: 0.3),
+                                        Color(red: 0.3, green: 0.6, blue: 0.98)
+                                    ],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
 
                         Text("Master the grid, one number at a time")
-                            .font(.system(size: 14, weight: .regular))
+                            .font(.system(size: 14, weight: .medium))
                             .foregroundColor(.gray)
                     }
-                    .padding(.bottom, 50)
+                    .padding(.bottom, 80)
 
                     VStack(spacing: 20) {
                         HomeMenuCard(
