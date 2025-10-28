@@ -13,6 +13,9 @@
 		9E1BAE972EAED75800A2EA5C /* easy.data in Resources */ = {isa = PBXBuildFile; fileRef = 9E1BAE942EAED75800A2EA5C /* easy.data */; };
 		9E1BAE982EAED75800A2EA5C /* medium.data in Resources */ = {isa = PBXBuildFile; fileRef = 9E1BAE962EAED75800A2EA5C /* medium.data */; };
 		9E1BAE992EAED75800A2EA5C /* hard.data in Resources */ = {isa = PBXBuildFile; fileRef = 9E1BAE952EAED75800A2EA5C /* hard.data */; };
+		9E5DBD232EB01EB600CF2902 /* DifficultyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5DBD212EB01EB600CF2902 /* DifficultyCard.swift */; };
+		9E5DBD242EB01EB600CF2902 /* DifficultyPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5DBD222EB01EB600CF2902 /* DifficultyPickerView.swift */; };
+		9E5DBD262EB0B6F900CF2902 /* HomeMenuCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5DBD252EB0B6F900CF2902 /* HomeMenuCard.swift */; };
 		9E8CB2792E69C23E0017C5E8 /* UniqueSolutionVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8CB2752E69C23E0017C5E8 /* UniqueSolutionVerifier.swift */; };
 		9E8CB27E2E69C23E0017C5E8 /* UniqueSolutionVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8CB2752E69C23E0017C5E8 /* UniqueSolutionVerifier.swift */; };
 		9EEEC2AD2E69B83400330C87 /* SolutionCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEEC2AC2E69B83400330C87 /* SolutionCounter.swift */; };
@@ -151,6 +154,9 @@
 		9E1BAE942EAED75800A2EA5C /* easy.data */ = {isa = PBXFileReference; lastKnownFileType = text; path = easy.data; sourceTree = "<group>"; };
 		9E1BAE952EAED75800A2EA5C /* hard.data */ = {isa = PBXFileReference; lastKnownFileType = text; path = hard.data; sourceTree = "<group>"; };
 		9E1BAE962EAED75800A2EA5C /* medium.data */ = {isa = PBXFileReference; lastKnownFileType = text; path = medium.data; sourceTree = "<group>"; };
+		9E5DBD212EB01EB600CF2902 /* DifficultyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyCard.swift; sourceTree = "<group>"; };
+		9E5DBD222EB01EB600CF2902 /* DifficultyPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyPickerView.swift; sourceTree = "<group>"; };
+		9E5DBD252EB0B6F900CF2902 /* HomeMenuCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMenuCard.swift; sourceTree = "<group>"; };
 		9E8CB2752E69C23E0017C5E8 /* UniqueSolutionVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueSolutionVerifier.swift; sourceTree = "<group>"; };
 		9EEEC2AC2E69B83400330C87 /* SolutionCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionCounter.swift; sourceTree = "<group>"; };
 		A5B7389F606A18926E2F1F83 /* LoadingTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoadingTableView.swift; sourceTree = "<group>"; };
@@ -397,7 +403,10 @@
 			isa = PBXGroup;
 			children = (
 				FBBBE594288DAA8200AC809A /* HomeCoordinator.swift */,
+				9E5DBD212EB01EB600CF2902 /* DifficultyCard.swift */,
+				9E5DBD222EB01EB600CF2902 /* DifficultyPickerView.swift */,
 				FBBDE9C0285522740078A73E /* HomeView.swift */,
+				9E5DBD252EB0B6F900CF2902 /* HomeMenuCard.swift */,
 				A5B7389F606A18926E2F1F83 /* LoadingTableView.swift */,
 				A7FD9529D8ABEFF88140AFCA /* LoadingGameInfoView.swift */,
 			);
@@ -1018,8 +1027,11 @@
 				FBB7C5682C95BD6C0027B971 /* GameMatrix.swift in Sources */,
 				FBDB28B52884B31000A372E7 /* LevelInfo.swift in Sources */,
 				FB4D359128955BE600C643A1 /* TemplateLevel.swift in Sources */,
+				9E5DBD232EB01EB600CF2902 /* DifficultyCard.swift in Sources */,
+				9E5DBD242EB01EB600CF2902 /* DifficultyPickerView.swift in Sources */,
 				DCC3040F2897F4CE00EEB26E /* LevelState.swift in Sources */,
 				FB7BC71F28803EC500E8C5F1 /* GameSquareView.swift in Sources */,
+				9E5DBD262EB0B6F900CF2902 /* HomeMenuCard.swift in Sources */,
 				FB77D00528FC989100D7E17F /* SelectDifficultyView.swift in Sources */,
 				9E8CB2792E69C23E0017C5E8 /* UniqueSolutionVerifier.swift in Sources */,
 				FBCF08CC28B25F7B00ABA471 /* LevelAnalytics.swift in Sources */,

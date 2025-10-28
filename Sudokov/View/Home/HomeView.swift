@@ -82,59 +82,69 @@ struct HomeView: View {
 
                     Spacer()
 
-                    Text("Sudokov")
-                        .font(.system(size: 45, weight: .semibold))
-                    if shouldShowPickDifficulty {
-                        VStack(spacing: 20) {
-                            Text("Pick Difficulty")
-                                .font(.system(size: 25, weight: .semibold))
+                    VStack(spacing: 8) {
+                        Text("Sudokov")
+                            .font(.system(size: 50, weight: .bold))
 
-                            ForEach(Difficulty.preparedLevels, id: \.self) { difficulty in
-                                Button(difficulty.name) {
-                                    withAnimation {
-                                        self.difficulty = difficulty
-                                        coordinator.currentScreen = .selectLevel
-                                        shouldShowPickDifficulty = false
-                                    }
+                        Text("Master the grid, one number at a time")
+                            .font(.system(size: 14, weight: .regular))
+                            .foregroundColor(.gray)
+                    }
+                    .padding(.bottom, 50)
+
+                    VStack(spacing: 20) {
+                        HomeMenuCard(
+                            icon: "gamecontroller.fill",
+                            title: "Start Game",
+                            subtitle: "Pick a level and play",
+                            action: {
+                                withAnimation {
+                                    shouldShowPickDifficulty = true
                                 }
-                                .buttonStyle(MenuButton())
-                                .font(.system(size: 15, weight: .semibold))
-                            }
+                            },
+                            gradient: LinearGradient(
+                                colors: [Color(red: 0.98, green: 0.5, blue: 0.3), Color(red: 0.95, green: 0.3, blue: 0.4)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .sheet(isPresented: $isShowingSetting) {
+                            SettingsView()
+                        }
 
-                            Button("Back") {
+                        HomeMenuCard(
+                            icon: "sparkles",
+                            title: "Generate Level",
+                            subtitle: "Create a random puzzle",
+                            action: {
+                                coordinator.currentScreen = .selectGenerateDifficulty
+                            },
+                            gradient: LinearGradient(
+                                colors: [Color(red: 0.3, green: 0.6, blue: 0.98), Color(red: 0.2, green: 0.4, blue: 0.95)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .sheet(isPresented: $isShowingStatistics) {
+                            StatisticsView()
+                        }
+                    }
+                    .padding(.horizontal, 24)
+                    .sheet(isPresented: $shouldShowPickDifficulty) {
+                        DifficultyPickerView(
+                            onDifficultySelected: { selectedDifficulty in
+                                self.difficulty = selectedDifficulty
+                                withAnimation {
+                                    coordinator.currentScreen = .selectLevel
+                                    shouldShowPickDifficulty = false
+                                }
+                            },
+                            onDismiss: {
                                 withAnimation {
                                     shouldShowPickDifficulty = false
                                 }
                             }
-                            .buttonStyle(MenuButton())
-                            .font(.system(size: 15, weight: .semibold))
-                        }
-                        .padding(.top, 30)
-                        .transition(.opacity)
-                    } else {
-                        VStack {
-                            Button("Start game") {
-                                withAnimation {
-                                    shouldShowPickDifficulty = true
-                                }
-                            }
-                            .buttonStyle(MenuButton())
-                            .font(.system(size: 15, weight: .semibold))
-                            .padding(.top, 30)
-                            .sheet(isPresented: $isShowingSetting) {
-                                SettingsView()
-                            }
-
-                            Button("Generate a level") {
-                                coordinator.currentScreen = .selectGenerateDifficulty
-                            }
-                            .buttonStyle(MenuButton())
-                            .font(.system(size: 15, weight: .semibold))
-                            .padding(.top, 20)
-                            .sheet(isPresented: $isShowingStatistics) {
-                                StatisticsView()
-                            }
-                        }
+                        )
                     }
 
                     Spacer()
